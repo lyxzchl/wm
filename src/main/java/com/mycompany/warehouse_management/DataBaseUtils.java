@@ -44,7 +44,22 @@ public class DataBaseUtils {
             // Set the table model
             table.setModel(model);
         } catch (SQLException ex) {
-            ex.printStackTrace();
+   
+            ex.printStackTrace(); // Add this line to print the stack trace of any SQL exceptions
         }
+        }
+        public static int countArticles() throws SQLException {
+        int count = 0;
+        try (Connection conn = DriverManager.getConnection(DB_URL, DB_USER, DB_PASSWORD);
+             PreparedStatement stmt = conn.prepareStatement("SELECT COUNT(*) FROM Article");
+             ResultSet rs = stmt.executeQuery()) {
+
+            if (rs.next()) {
+                count = rs.getInt(1);
+            }
+        }
+        return count;
     }
+
 }
+

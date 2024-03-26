@@ -1,5 +1,7 @@
 package com.mycompany.warehouse_management;
 
+import java.sql.SQLException;
+
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
@@ -35,7 +37,6 @@ public class AdvancedSearch extends javax.swing.JFrame {
         jRadioButton1 = new javax.swing.JRadioButton();
         jRadioButton2 = new javax.swing.JRadioButton();
         jRadioButton3 = new javax.swing.JRadioButton();
-        jRadioButton4 = new javax.swing.JRadioButton();
         jScrollPane2 = new javax.swing.JScrollPane();
         resultsTabel = new javax.swing.JTable();
         logoLabel = new javax.swing.JLabel();
@@ -44,7 +45,7 @@ public class AdvancedSearch extends javax.swing.JFrame {
         backButton = new javax.swing.JButton();
         searchLogoLabel = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
+        articleCountTextField = new javax.swing.JTextField();
 
         jMenuItem1.setText("jMenuItem1");
 
@@ -65,6 +66,8 @@ public class AdvancedSearch extends javax.swing.JFrame {
         });
 
         jRadioButton1.setBackground(new java.awt.Color(255, 255, 255));
+        buttonGroup1.add(jRadioButton1);
+        jRadioButton1.setFont(new java.awt.Font("POI Aeronaut Trial", 0, 11)); // NOI18N
         jRadioButton1.setForeground(new java.awt.Color(0, 0, 0));
         jRadioButton1.setText("ID");
         jRadioButton1.addActionListener(new java.awt.event.ActionListener() {
@@ -74,6 +77,8 @@ public class AdvancedSearch extends javax.swing.JFrame {
         });
 
         jRadioButton2.setBackground(new java.awt.Color(255, 255, 255));
+        buttonGroup1.add(jRadioButton2);
+        jRadioButton2.setFont(new java.awt.Font("POI Aeronaut Trial", 0, 11)); // NOI18N
         jRadioButton2.setForeground(new java.awt.Color(0, 0, 0));
         jRadioButton2.setText("Class");
         jRadioButton2.addActionListener(new java.awt.event.ActionListener() {
@@ -83,20 +88,13 @@ public class AdvancedSearch extends javax.swing.JFrame {
         });
 
         jRadioButton3.setBackground(new java.awt.Color(255, 255, 255));
+        buttonGroup1.add(jRadioButton3);
+        jRadioButton3.setFont(new java.awt.Font("POI Aeronaut Trial", 0, 11)); // NOI18N
         jRadioButton3.setForeground(new java.awt.Color(0, 0, 0));
         jRadioButton3.setText("Family");
         jRadioButton3.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jRadioButton3ActionPerformed(evt);
-            }
-        });
-
-        jRadioButton4.setBackground(new java.awt.Color(255, 255, 255));
-        jRadioButton4.setForeground(new java.awt.Color(0, 0, 0));
-        jRadioButton4.setText("Line");
-        jRadioButton4.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jRadioButton4ActionPerformed(evt);
             }
         });
 
@@ -123,6 +121,7 @@ public class AdvancedSearch extends javax.swing.JFrame {
         logoLabel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/output-onlinepngtools(1).png"))); // NOI18N
 
         searchButton.setBackground(new java.awt.Color(255, 255, 255));
+        searchButton.setFont(new java.awt.Font("POI Aeronaut Trial", 0, 11)); // NOI18N
         searchButton.setForeground(new java.awt.Color(0, 0, 0));
         searchButton.setText("Search!");
         searchButton.addActionListener(new java.awt.event.ActionListener() {
@@ -132,6 +131,8 @@ public class AdvancedSearch extends javax.swing.JFrame {
         });
 
         jRadioButton5.setBackground(new java.awt.Color(255, 255, 255));
+        buttonGroup1.add(jRadioButton5);
+        jRadioButton5.setFont(new java.awt.Font("POI Aeronaut Trial", 0, 11)); // NOI18N
         jRadioButton5.setForeground(new java.awt.Color(0, 0, 0));
         jRadioButton5.setText("Designation");
         jRadioButton5.addActionListener(new java.awt.event.ActionListener() {
@@ -140,9 +141,9 @@ public class AdvancedSearch extends javax.swing.JFrame {
             }
         });
 
-        backButton.setBackground(new java.awt.Color(204, 102, 0));
-        backButton.setFont(new java.awt.Font("Roboto", 0, 10)); // NOI18N
-        backButton.setForeground(new java.awt.Color(0, 51, 102));
+        backButton.setBackground(new java.awt.Color(0, 0, 0));
+        backButton.setFont(new java.awt.Font("POI Aeronaut Trial", 0, 10)); // NOI18N
+        backButton.setForeground(new java.awt.Color(255, 255, 255));
         backButton.setText("<- Back to Dashboard");
         backButton.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255, 255, 255)));
         backButton.setBorderPainted(false);
@@ -159,10 +160,15 @@ public class AdvancedSearch extends javax.swing.JFrame {
         jLabel1.setForeground(new java.awt.Color(0, 0, 0));
         jLabel1.setText("Article count: ");
 
-        jTextField1.setBackground(new java.awt.Color(255, 255, 255));
-        jTextField1.setFont(new java.awt.Font("POI Aeronaut Trial", 0, 11)); // NOI18N
-        jTextField1.setForeground(new java.awt.Color(51, 51, 51));
-        jTextField1.setText("69420");
+        articleCountTextField.setBackground(new java.awt.Color(255, 255, 255));
+        articleCountTextField.setFont(new java.awt.Font("POI Aeronaut Trial", 0, 11)); // NOI18N
+        articleCountTextField.setForeground(new java.awt.Color(51, 51, 51));
+        articleCountTextField.setText("69420");
+        articleCountTextField.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                articleCountTextFieldActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -188,8 +194,6 @@ public class AdvancedSearch extends javax.swing.JFrame {
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                         .addComponent(jRadioButton3)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                        .addComponent(jRadioButton4)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                         .addComponent(jRadioButton5))
                                     .addComponent(searchBar, javax.swing.GroupLayout.PREFERRED_SIZE, 282, javax.swing.GroupLayout.PREFERRED_SIZE))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -202,7 +206,7 @@ public class AdvancedSearch extends javax.swing.JFrame {
                                     .addGroup(jPanel1Layout.createSequentialGroup()
                                         .addComponent(jLabel1)
                                         .addGap(3, 3, 3)
-                                        .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                        .addComponent(articleCountTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE))
                                     .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 534, javax.swing.GroupLayout.PREFERRED_SIZE))))
                         .addContainerGap(27, Short.MAX_VALUE))))
         );
@@ -224,10 +228,9 @@ public class AdvancedSearch extends javax.swing.JFrame {
                                     .addComponent(jRadioButton1)
                                     .addComponent(jRadioButton2)
                                     .addComponent(jRadioButton3)
-                                    .addComponent(jRadioButton4)
                                     .addComponent(jRadioButton5)))
                             .addComponent(searchButton, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(41, 41, 41))
+                        .addGap(43, 43, 43))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                         .addComponent(logoLabel)
                         .addGap(18, 18, 18)))
@@ -235,7 +238,7 @@ public class AdvancedSearch extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(jLabel1)
-                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(articleCountTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -275,12 +278,24 @@ public class AdvancedSearch extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_jRadioButton3ActionPerformed
 
-    private void jRadioButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButton4ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jRadioButton4ActionPerformed
-
     private void searchButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_searchButtonActionPerformed
         // TODO add your handling code here:
+        DataBaseUtils.populateArticleTable(resultsTabel);
+        resultsTabel.revalidate();
+        resultsTabel.repaint();
+        try {
+        // Call the populateArticleTable method to fill the results table with data from the Article table
+        DataBaseUtils.populateArticleTable(resultsTabel);
+        
+        // Get the count of articles
+        int articleCount = DataBaseUtils.countArticles();
+        
+        // Set the count in the text field
+        articleCountTextField.setText(Integer.toString(articleCount));
+    } catch (SQLException ex) {
+        ex.printStackTrace();
+        // Handle the exception
+    }
     }//GEN-LAST:event_searchButtonActionPerformed
 
     private void jRadioButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButton5ActionPerformed
@@ -294,6 +309,10 @@ public class AdvancedSearch extends javax.swing.JFrame {
         Dashboard dash = new Dashboard();
         dash.setVisible(true);
     }//GEN-LAST:event_backButtonActionPerformed
+
+    private void articleCountTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_articleCountTextFieldActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_articleCountTextFieldActionPerformed
 
     /**
      * @param args the command line arguments
@@ -323,14 +342,13 @@ public class AdvancedSearch extends javax.swing.JFrame {
         //</editor-fold>
 
         /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new AdvancedSearch().setVisible(true);
-            }
+        java.awt.EventQueue.invokeLater(() -> {
+            new AdvancedSearch().setVisible(true);
         });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JTextField articleCountTextField;
     private javax.swing.JButton backButton;
     private javax.swing.ButtonGroup buttonGroup1;
     private javax.swing.JLabel jLabel1;
@@ -340,10 +358,8 @@ public class AdvancedSearch extends javax.swing.JFrame {
     private javax.swing.JRadioButton jRadioButton1;
     private javax.swing.JRadioButton jRadioButton2;
     private javax.swing.JRadioButton jRadioButton3;
-    private javax.swing.JRadioButton jRadioButton4;
     private javax.swing.JRadioButton jRadioButton5;
     private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JTextField jTextField1;
     private javax.swing.JLabel logoLabel;
     private javax.swing.JTable resultsTabel;
     private javax.swing.JTextField searchBar;
