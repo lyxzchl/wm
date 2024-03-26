@@ -1,4 +1,4 @@
-package com.mycompany.warehouse.manager;
+package com.mycompany.warehouse_management;
 
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license

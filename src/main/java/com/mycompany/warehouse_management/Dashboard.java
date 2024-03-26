@@ -1,4 +1,4 @@
-package com.mycompany.warehouse.manager;
+package com.mycompany.warehouse_management;
 
 import javax.swing.JOptionPane;
 import java.sql.Connection;

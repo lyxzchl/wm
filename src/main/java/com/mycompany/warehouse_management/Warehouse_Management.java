@@ -3,6 +3,7 @@
  */
 
 package com.mycompany.warehouse_management;
+import javax.swing.JFrame;
 
 /**
  *
@@ -11,6 +12,13 @@ package com.mycompany.warehouse_management;
 public class Warehouse_Management {
 
     public static void main(String[] args) {
-        System.out.println("Hello World!");
+          // Instantiate LoginInterface
+        LoginInterface loginInterface = new LoginInterface();
+        
+        // Set the default close operation
+        loginInterface.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        
+        // Set visibility to true
+        loginInterface.setVisible(true);
     }
 }
