@@ -291,7 +291,7 @@ public class AdvancedSearch extends javax.swing.JFrame {
         // TODO add your handling code here:
         dispose();
         
-        Dashboard dash = new Dashboard("lyeschl");
+        Dashboard dash = new Dashboard();
         dash.setVisible(true);
     }//GEN-LAST:event_backButtonActionPerformed
 

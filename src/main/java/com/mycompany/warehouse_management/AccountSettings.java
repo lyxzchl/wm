@@ -189,7 +189,7 @@ public class AccountSettings extends javax.swing.JFrame {
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
         // TODO add your handling code here:
         dispose();
-        Dashboard d = new Dashboard("lyeschl");
+        Dashboard d = new Dashboard();
         d.setVisible(true);
     }//GEN-LAST:event_jButton4ActionPerformed
 
