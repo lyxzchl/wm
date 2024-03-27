@@ -32,6 +32,7 @@ public class AdvancedSearch extends javax.swing.JFrame {
         buttonGroup1 = new javax.swing.ButtonGroup();
         jMenuItem1 = new javax.swing.JMenuItem();
         jMenuItem2 = new javax.swing.JMenuItem();
+        jInternalFrame1 = new javax.swing.JInternalFrame();
         jPanel1 = new javax.swing.JPanel();
         searchBar = new javax.swing.JTextField();
         jRadioButton1 = new javax.swing.JRadioButton();
@@ -42,33 +43,45 @@ public class AdvancedSearch extends javax.swing.JFrame {
         logoLabel = new javax.swing.JLabel();
         searchButton = new javax.swing.JButton();
         jRadioButton5 = new javax.swing.JRadioButton();
-        backButton = new javax.swing.JButton();
         searchLogoLabel = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
         articleCountTextField = new javax.swing.JTextField();
+        searchButton1 = new javax.swing.JButton();
 
         jMenuItem1.setText("jMenuItem1");
 
         jMenuItem2.setText("jMenuItem2");
 
+        jInternalFrame1.setVisible(true);
+
+        javax.swing.GroupLayout jInternalFrame1Layout = new javax.swing.GroupLayout(jInternalFrame1.getContentPane());
+        jInternalFrame1.getContentPane().setLayout(jInternalFrame1Layout);
+        jInternalFrame1Layout.setHorizontalGroup(
+            jInternalFrame1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 0, Short.MAX_VALUE)
+        );
+        jInternalFrame1Layout.setVerticalGroup(
+            jInternalFrame1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 0, Short.MAX_VALUE)
+        );
+
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jPanel1.setBackground(new java.awt.Color(255, 255, 255));
+        jPanel1.setBackground(new java.awt.Color(51, 51, 51));
 
-        searchBar.setBackground(new java.awt.Color(255, 255, 255));
+        searchBar.setBackground(new java.awt.Color(102, 102, 102));
         searchBar.setFont(new java.awt.Font("Roboto", 0, 11)); // NOI18N
-        searchBar.setForeground(new java.awt.Color(0, 0, 0));
-        searchBar.setText("Advanced Search");
+        searchBar.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 2, 0, new java.awt.Color(0, 51, 102)));
         searchBar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 searchBarActionPerformed(evt);
             }
         });
 
-        jRadioButton1.setBackground(new java.awt.Color(255, 255, 255));
+        jRadioButton1.setBackground(new java.awt.Color(51, 51, 51));
         buttonGroup1.add(jRadioButton1);
-        jRadioButton1.setFont(new java.awt.Font("POI Aeronaut Trial", 0, 11)); // NOI18N
-        jRadioButton1.setForeground(new java.awt.Color(0, 0, 0));
+        jRadioButton1.setFont(new java.awt.Font("POI Aeronaut Trial", 0, 12)); // NOI18N
+        jRadioButton1.setForeground(new java.awt.Color(153, 153, 153));
         jRadioButton1.setText("ID");
         jRadioButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -76,10 +89,10 @@ public class AdvancedSearch extends javax.swing.JFrame {
             }
         });
 
-        jRadioButton2.setBackground(new java.awt.Color(255, 255, 255));
+        jRadioButton2.setBackground(new java.awt.Color(51, 51, 51));
         buttonGroup1.add(jRadioButton2);
-        jRadioButton2.setFont(new java.awt.Font("POI Aeronaut Trial", 0, 11)); // NOI18N
-        jRadioButton2.setForeground(new java.awt.Color(0, 0, 0));
+        jRadioButton2.setFont(new java.awt.Font("POI Aeronaut Trial", 0, 12)); // NOI18N
+        jRadioButton2.setForeground(new java.awt.Color(153, 153, 153));
         jRadioButton2.setText("Class");
         jRadioButton2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -87,10 +100,10 @@ public class AdvancedSearch extends javax.swing.JFrame {
             }
         });
 
-        jRadioButton3.setBackground(new java.awt.Color(255, 255, 255));
+        jRadioButton3.setBackground(new java.awt.Color(51, 51, 51));
         buttonGroup1.add(jRadioButton3);
-        jRadioButton3.setFont(new java.awt.Font("POI Aeronaut Trial", 0, 11)); // NOI18N
-        jRadioButton3.setForeground(new java.awt.Color(0, 0, 0));
+        jRadioButton3.setFont(new java.awt.Font("POI Aeronaut Trial", 0, 12)); // NOI18N
+        jRadioButton3.setForeground(new java.awt.Color(153, 153, 153));
         jRadioButton3.setText("Family");
         jRadioButton3.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -98,6 +111,10 @@ public class AdvancedSearch extends javax.swing.JFrame {
             }
         });
 
+        jScrollPane2.setBackground(new java.awt.Color(255, 255, 102));
+
+        resultsTabel.setBackground(new java.awt.Color(102, 102, 102));
+        resultsTabel.setBorder(javax.swing.BorderFactory.createMatteBorder(2, 2, 2, 2, new java.awt.Color(0, 51, 102)));
         resultsTabel.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null, null, null, null, null, null},
@@ -116,24 +133,30 @@ public class AdvancedSearch extends javax.swing.JFrame {
                 "Title 1", "Title 2", "Title 3", "Title 4", "Title 5", "Title 6", "Title 7", "Title 8", "Title 9"
             }
         ));
+        resultsTabel.setGridColor(new java.awt.Color(153, 153, 153));
+        resultsTabel.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
+        resultsTabel.setShowGrid(true);
+        resultsTabel.setShowVerticalLines(false);
         jScrollPane2.setViewportView(resultsTabel);
 
         logoLabel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/output-onlinepngtools(1).png"))); // NOI18N
 
-        searchButton.setBackground(new java.awt.Color(255, 255, 255));
-        searchButton.setFont(new java.awt.Font("POI Aeronaut Trial", 0, 11)); // NOI18N
-        searchButton.setForeground(new java.awt.Color(0, 0, 0));
-        searchButton.setText("Search!");
+        searchButton.setBackground(new java.awt.Color(51, 51, 51));
+        searchButton.setFont(new java.awt.Font("POI Aeronaut Trial", 1, 12)); // NOI18N
+        searchButton.setForeground(new java.awt.Color(153, 153, 153));
+        searchButton.setText("<<Back");
+        searchButton.setBorder(javax.swing.BorderFactory.createMatteBorder(2, 2, 2, 2, new java.awt.Color(0, 51, 102)));
+        searchButton.setContentAreaFilled(false);
         searchButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 searchButtonActionPerformed(evt);
             }
         });
 
-        jRadioButton5.setBackground(new java.awt.Color(255, 255, 255));
+        jRadioButton5.setBackground(new java.awt.Color(51, 51, 51));
         buttonGroup1.add(jRadioButton5);
-        jRadioButton5.setFont(new java.awt.Font("POI Aeronaut Trial", 0, 11)); // NOI18N
-        jRadioButton5.setForeground(new java.awt.Color(0, 0, 0));
+        jRadioButton5.setFont(new java.awt.Font("POI Aeronaut Trial", 0, 12)); // NOI18N
+        jRadioButton5.setForeground(new java.awt.Color(153, 153, 153));
         jRadioButton5.setText("Designation");
         jRadioButton5.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -141,32 +164,33 @@ public class AdvancedSearch extends javax.swing.JFrame {
             }
         });
 
-        backButton.setBackground(new java.awt.Color(0, 0, 0));
-        backButton.setFont(new java.awt.Font("POI Aeronaut Trial", 0, 10)); // NOI18N
-        backButton.setForeground(new java.awt.Color(255, 255, 255));
-        backButton.setText("<- Back to Dashboard");
-        backButton.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255, 255, 255)));
-        backButton.setBorderPainted(false);
-        backButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                backButtonActionPerformed(evt);
-            }
-        });
-
         searchLogoLabel.setIcon(new javax.swing.ImageIcon("/run/media/lyeschl/ssd/main/dox/study/l3si/pfe/thesis/images/icons/search_icon.png")); // NOI18N
 
         jLabel1.setBackground(new java.awt.Color(0, 0, 0));
-        jLabel1.setFont(new java.awt.Font("POI Aeronaut Trial", 0, 14)); // NOI18N
-        jLabel1.setForeground(new java.awt.Color(0, 0, 0));
+        jLabel1.setFont(new java.awt.Font("POI Aeronaut Trial", 1, 14)); // NOI18N
+        jLabel1.setForeground(new java.awt.Color(153, 153, 153));
         jLabel1.setText("Article count: ");
 
-        articleCountTextField.setBackground(new java.awt.Color(255, 255, 255));
+        articleCountTextField.setBackground(new java.awt.Color(51, 51, 51));
         articleCountTextField.setFont(new java.awt.Font("POI Aeronaut Trial", 0, 11)); // NOI18N
-        articleCountTextField.setForeground(new java.awt.Color(51, 51, 51));
+        articleCountTextField.setForeground(new java.awt.Color(153, 153, 153));
         articleCountTextField.setText("69420");
+        articleCountTextField.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 2, 0, new java.awt.Color(0, 51, 102)));
         articleCountTextField.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 articleCountTextFieldActionPerformed(evt);
+            }
+        });
+
+        searchButton1.setBackground(new java.awt.Color(51, 51, 51));
+        searchButton1.setFont(new java.awt.Font("POI Aeronaut Trial", 0, 11)); // NOI18N
+        searchButton1.setForeground(new java.awt.Color(153, 153, 153));
+        searchButton1.setText("Search");
+        searchButton1.setBorder(javax.swing.BorderFactory.createMatteBorder(2, 2, 2, 2, new java.awt.Color(0, 51, 102)));
+        searchButton1.setContentAreaFilled(false);
+        searchButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                searchButton1ActionPerformed(evt);
             }
         });
 
@@ -176,39 +200,39 @@ public class AdvancedSearch extends javax.swing.JFrame {
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(backButton)
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                        .addGap(5, 5, 5)
+                        .addComponent(searchLogoLabel)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addGap(9, 9, 9)
-                                .addComponent(searchLogoLabel)
-                                .addGap(2, 2, 2)
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(jPanel1Layout.createSequentialGroup()
-                                        .addComponent(jRadioButton1)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                        .addComponent(jRadioButton2)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                        .addComponent(jRadioButton3)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                        .addComponent(jRadioButton5))
-                                    .addComponent(searchBar, javax.swing.GroupLayout.PREFERRED_SIZE, 282, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addComponent(jRadioButton1)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(searchButton)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(logoLabel))
+                                .addComponent(jRadioButton2)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(jRadioButton3)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(jRadioButton5))
                             .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addGap(0, 2, Short.MAX_VALUE)
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addGroup(jPanel1Layout.createSequentialGroup()
-                                        .addComponent(jLabel1)
-                                        .addGap(3, 3, 3)
-                                        .addComponent(articleCountTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 534, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                        .addContainerGap(27, Short.MAX_VALUE))))
+                                .addComponent(searchBar, javax.swing.GroupLayout.PREFERRED_SIZE, 282, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(searchButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 101, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(searchButton, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(0, 28, Short.MAX_VALUE)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 534, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addComponent(jLabel1)
+                                .addGap(18, 18, 18)
+                                .addComponent(articleCountTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                .addContainerGap(27, Short.MAX_VALUE))
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(logoLabel)
+                .addGap(14, 14, 14))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -216,29 +240,27 @@ public class AdvancedSearch extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(backButton, javax.swing.GroupLayout.PREFERRED_SIZE, 19, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(52, 52, 52)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(searchLogoLabel)
-                                    .addComponent(searchBar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                    .addComponent(jRadioButton1)
-                                    .addComponent(jRadioButton2)
-                                    .addComponent(jRadioButton3)
-                                    .addComponent(jRadioButton5)))
-                            .addComponent(searchButton, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(43, 43, 43))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                        .addComponent(logoLabel)
-                        .addGap(18, 18, 18)))
+                        .addGap(9, 9, 9)
+                        .addComponent(searchButton, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(33, 33, 33)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                .addComponent(searchBar, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(searchButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(searchLogoLabel))
+                        .addGap(23, 23, 23)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jRadioButton1)
+                            .addComponent(jRadioButton2)
+                            .addComponent(jRadioButton3)
+                            .addComponent(jRadioButton5)))
+                    .addComponent(logoLabel))
+                .addGap(49, 49, 49)
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 177, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jLabel1)
-                    .addComponent(articleCountTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(27, 27, 27)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(articleCountTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -246,17 +268,13 @@ public class AdvancedSearch extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addGap(0, 18, Short.MAX_VALUE)
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addContainerGap())
+            .addComponent(jPanel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
         pack();
@@ -302,17 +320,13 @@ public class AdvancedSearch extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_jRadioButton5ActionPerformed
 
-    private void backButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backButtonActionPerformed
-        // TODO add your handling code here:
-        dispose();
-        
-        Dashboard dash = new Dashboard();
-        dash.setVisible(true);
-    }//GEN-LAST:event_backButtonActionPerformed
-
     private void articleCountTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_articleCountTextFieldActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_articleCountTextFieldActionPerformed
+
+    private void searchButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_searchButton1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_searchButton1ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -349,8 +363,8 @@ public class AdvancedSearch extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTextField articleCountTextField;
-    private javax.swing.JButton backButton;
     private javax.swing.ButtonGroup buttonGroup1;
+    private javax.swing.JInternalFrame jInternalFrame1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JMenuItem jMenuItem2;
@@ -364,6 +378,7 @@ public class AdvancedSearch extends javax.swing.JFrame {
     private javax.swing.JTable resultsTabel;
     private javax.swing.JTextField searchBar;
     private javax.swing.JButton searchButton;
+    private javax.swing.JButton searchButton1;
     private javax.swing.JLabel searchLogoLabel;
     // End of variables declaration//GEN-END:variables
 }

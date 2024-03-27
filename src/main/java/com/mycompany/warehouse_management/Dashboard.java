@@ -61,10 +61,6 @@ public class Dashboard extends javax.swing.JFrame {
         logoPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
 
-        jPopupMenu2.setBackground(new java.awt.Color(255, 255, 255));
-        jPopupMenu2.setForeground(new java.awt.Color(0, 0, 0));
-
-        exitTicketOption.setForeground(new java.awt.Color(0, 0, 0));
         exitTicketOption.setText("Exit Ticket");
         exitTicketOption.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -72,7 +68,6 @@ public class Dashboard extends javax.swing.JFrame {
             }
         });
 
-        returnTicketOption.setForeground(new java.awt.Color(0, 0, 0));
         returnTicketOption.setText("Return Ticket");
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -174,7 +169,6 @@ public class Dashboard extends javax.swing.JFrame {
         getContentPane().add(jPanel2);
         jPanel2.setBounds(6, 12, 100, 500);
 
-        movesTable.setBackground(new java.awt.Color(255, 255, 255));
         movesTable.setForeground(new java.awt.Color(153, 204, 255));
         movesTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -202,7 +196,6 @@ public class Dashboard extends javax.swing.JFrame {
         getContentPane().add(movesLabel);
         movesLabel.setBounds(680, 60, 72, 14);
 
-        articleTable.setBackground(new java.awt.Color(255, 255, 255));
         articleTable.setForeground(new java.awt.Color(153, 204, 255));
         articleTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -286,10 +279,10 @@ public class Dashboard extends javax.swing.JFrame {
         getContentPane().add(logoPanel1);
         logoPanel1.setBounds(110, 20, 30, 30);
 
-        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/1475098-free-download-abstract-art-wallpaper-desktop-1920x1080-for-1080p.jpg"))); // NOI18N
+        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/sunset-gradient-hd-wallpaper(1).png"))); // NOI18N
         jLabel1.setText("jLabel1");
         getContentPane().add(jLabel1);
-        jLabel1.setBounds(0, 0, 860, 520);
+        jLabel1.setBounds(0, 0, 870, 530);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
