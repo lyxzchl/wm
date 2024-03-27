@@ -41,7 +41,7 @@ public class AdvancedSearch extends javax.swing.JFrame {
         jScrollPane2 = new javax.swing.JScrollPane();
         resultsTabel = new javax.swing.JTable();
         logoLabel = new javax.swing.JLabel();
-        searchButton = new javax.swing.JButton();
+        backButton = new javax.swing.JButton();
         jRadioButton5 = new javax.swing.JRadioButton();
         searchLogoLabel = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
@@ -141,15 +141,15 @@ public class AdvancedSearch extends javax.swing.JFrame {
 
         logoLabel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/output-onlinepngtools(1).png"))); // NOI18N
 
-        searchButton.setBackground(new java.awt.Color(51, 51, 51));
-        searchButton.setFont(new java.awt.Font("POI Aeronaut Trial", 1, 12)); // NOI18N
-        searchButton.setForeground(new java.awt.Color(153, 153, 153));
-        searchButton.setText("<<Back");
-        searchButton.setBorder(javax.swing.BorderFactory.createMatteBorder(2, 2, 2, 2, new java.awt.Color(0, 51, 102)));
-        searchButton.setContentAreaFilled(false);
-        searchButton.addActionListener(new java.awt.event.ActionListener() {
+        backButton.setBackground(new java.awt.Color(51, 51, 51));
+        backButton.setFont(new java.awt.Font("POI Aeronaut Trial", 1, 12)); // NOI18N
+        backButton.setForeground(new java.awt.Color(153, 153, 153));
+        backButton.setText("<<Back");
+        backButton.setBorder(javax.swing.BorderFactory.createMatteBorder(2, 2, 2, 2, new java.awt.Color(0, 51, 102)));
+        backButton.setContentAreaFilled(false);
+        backButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                searchButtonActionPerformed(evt);
+                backButtonActionPerformed(evt);
             }
         });
 
@@ -218,7 +218,7 @@ public class AdvancedSearch extends javax.swing.JFrame {
                                 .addComponent(searchBar, javax.swing.GroupLayout.PREFERRED_SIZE, 282, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addComponent(searchButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 101, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(searchButton, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(backButton, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(0, 0, Short.MAX_VALUE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(0, 28, Short.MAX_VALUE)
@@ -241,7 +241,7 @@ public class AdvancedSearch extends javax.swing.JFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(9, 9, 9)
-                        .addComponent(searchButton, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(backButton, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(33, 33, 33)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -296,26 +296,6 @@ public class AdvancedSearch extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_jRadioButton3ActionPerformed
 
-    private void searchButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_searchButtonActionPerformed
-        // TODO add your handling code here:
-        DataBaseUtils.populateArticleTable(resultsTabel);
-        resultsTabel.revalidate();
-        resultsTabel.repaint();
-        try {
-        // Call the populateArticleTable method to fill the results table with data from the Article table
-        DataBaseUtils.populateArticleTable(resultsTabel);
-        
-        // Get the count of articles
-        int articleCount = DataBaseUtils.countArticles();
-        
-        // Set the count in the text field
-        articleCountTextField.setText(Integer.toString(articleCount));
-    } catch (SQLException ex) {
-        ex.printStackTrace();
-        // Handle the exception
-    }
-    }//GEN-LAST:event_searchButtonActionPerformed
-
     private void jRadioButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButton5ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jRadioButton5ActionPerformed
@@ -327,6 +307,14 @@ public class AdvancedSearch extends javax.swing.JFrame {
     private void searchButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_searchButton1ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_searchButton1ActionPerformed
+
+    private void backButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backButtonActionPerformed
+        // TODO add your handling code here:
+        dispose();
+        
+        Dashboard db = new Dashboard();
+        db.setVisible(true);
+    }//GEN-LAST:event_backButtonActionPerformed
 
     /**
      * @param args the command line arguments
@@ -363,6 +351,7 @@ public class AdvancedSearch extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTextField articleCountTextField;
+    private javax.swing.JButton backButton;
     private javax.swing.ButtonGroup buttonGroup1;
     private javax.swing.JInternalFrame jInternalFrame1;
     private javax.swing.JLabel jLabel1;
@@ -377,7 +366,6 @@ public class AdvancedSearch extends javax.swing.JFrame {
     private javax.swing.JLabel logoLabel;
     private javax.swing.JTable resultsTabel;
     private javax.swing.JTextField searchBar;
-    private javax.swing.JButton searchButton;
     private javax.swing.JButton searchButton1;
     private javax.swing.JLabel searchLogoLabel;
     // End of variables declaration//GEN-END:variables

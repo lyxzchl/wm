@@ -38,19 +38,21 @@ public class LoginInterface extends javax.swing.JFrame {
         passwordField = new javax.swing.JPasswordField();
         continueButton = new javax.swing.JButton();
         blockedButton = new javax.swing.JButton();
-        sloganLabel1 = new javax.swing.JLabel();
         sloganLabel2 = new javax.swing.JLabel();
         sloganLabel3 = new javax.swing.JLabel();
         logoLabel = new javax.swing.JLabel();
-        backgroundImage = new javax.swing.JLabel();
+        sloganLabel1 = new javax.swing.JLabel();
+        sloganLabel4 = new javax.swing.JLabel();
+        jLabel1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setSize(new java.awt.Dimension(600, 500));
         addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
             public void mouseMoved(java.awt.event.MouseEvent evt) {
                 formMouseMoved(evt);
             }
         });
-        getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        getContentPane().setLayout(null);
 
         loginPanel.setBackground(new java.awt.Color(51, 51, 51));
         loginPanel.setForeground(new java.awt.Color(204, 204, 204));
@@ -65,6 +67,7 @@ public class LoginInterface extends javax.swing.JFrame {
 
         usernameText.setBackground(new java.awt.Color(51, 51, 51));
         usernameText.setForeground(new java.awt.Color(153, 153, 153));
+        usernameText.setText("gdt");
         usernameText.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 2, 0, new java.awt.Color(0, 51, 102)));
 
         passwordLabel.setFont(new java.awt.Font("POI Aeronaut Trial", 0, 14)); // NOI18N
@@ -149,29 +152,41 @@ public class LoginInterface extends javax.swing.JFrame {
                 .addGap(32, 32, 32))
         );
 
-        getContentPane().add(loginPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 10, -1, -1));
-
-        sloganLabel1.setFont(new java.awt.Font("URW Gothic", 1, 24)); // NOI18N
-        sloganLabel1.setForeground(new java.awt.Color(255, 255, 255));
-        sloganLabel1.setText("Warehouse Management App");
-        getContentPane().add(sloganLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(6, 6, 363, 45));
+        getContentPane().add(loginPanel);
+        loginPanel.setBounds(470, 30, 220, 290);
 
         sloganLabel2.setFont(new java.awt.Font("URW Gothic", 1, 24)); // NOI18N
         sloganLabel2.setForeground(new java.awt.Color(255, 255, 255));
         sloganLabel2.setText("Effortless Exits,");
-        getContentPane().add(sloganLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(135, 63, -1, -1));
+        getContentPane().add(sloganLabel2);
+        sloganLabel2.setBounds(80, 110, 162, 30);
 
         sloganLabel3.setFont(new java.awt.Font("URW Gothic", 1, 24)); // NOI18N
         sloganLabel3.setForeground(new java.awt.Color(255, 255, 255));
         sloganLabel3.setText("Seemless Returns.");
-        getContentPane().add(sloganLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(164, 99, -1, -1));
+        getContentPane().add(sloganLabel3);
+        sloganLabel3.setBounds(180, 150, 205, 30);
 
         logoLabel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/output-onlinepngtools(1).png"))); // NOI18N
-        getContentPane().add(logoLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 240, 50, -1));
+        getContentPane().add(logoLabel);
+        logoLabel.setBounds(10, 310, 50, 65);
 
-        backgroundImage.setIcon(new javax.swing.ImageIcon(getClass().getResource("/1475098-free-download-abstract-art-wallpaper-desktop-1920x1080-for-1080p.jpg"))); // NOI18N
-        backgroundImage.setText("jLabel7");
-        getContentPane().add(backgroundImage, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 680, 310));
+        sloganLabel1.setFont(new java.awt.Font("URW Gothic", 1, 24)); // NOI18N
+        sloganLabel1.setForeground(new java.awt.Color(255, 255, 255));
+        sloganLabel1.setText("#########");
+        getContentPane().add(sloganLabel1);
+        sloganLabel1.setBounds(230, 50, 363, 45);
+
+        sloganLabel4.setFont(new java.awt.Font("URW Gothic", 1, 24)); // NOI18N
+        sloganLabel4.setForeground(new java.awt.Color(255, 255, 255));
+        sloganLabel4.setText("Warehouse Management App");
+        getContentPane().add(sloganLabel4);
+        sloganLabel4.setBounds(10, 20, 363, 45);
+
+        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/sunset-gradient-hd-wallpaper(1).png"))); // NOI18N
+        jLabel1.setText("jLabel1");
+        getContentPane().add(jLabel1);
+        jLabel1.setBounds(0, 0, 710, 390);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -234,9 +249,9 @@ public class LoginInterface extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JLabel backgroundImage;
     private javax.swing.JButton blockedButton;
     private javax.swing.JButton continueButton;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel loginLabel;
     private javax.swing.JPanel loginPanel;
     private javax.swing.JLabel logoLabel;
@@ -245,6 +260,7 @@ public class LoginInterface extends javax.swing.JFrame {
     private javax.swing.JLabel sloganLabel1;
     private javax.swing.JLabel sloganLabel2;
     private javax.swing.JLabel sloganLabel3;
+    private javax.swing.JLabel sloganLabel4;
     private javax.swing.JLabel usernameLabel;
     private javax.swing.JTextField usernameText;
     // End of variables declaration//GEN-END:variables
