@@ -1,5 +1,6 @@
 package com.mycompany.warehouse_management;
 
+import java.sql.SQLException;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
@@ -44,8 +45,8 @@ public class Dashboard extends javax.swing.JFrame {
         accountSettingsButton = new javax.swing.JToggleButton();
         helpButton = new javax.swing.JToggleButton();
         advancedSearchButton = new javax.swing.JToggleButton();
-        advancedSearchButton1 = new javax.swing.JToggleButton();
-        advancedSearchButton2 = new javax.swing.JToggleButton();
+        exitTicketButton = new javax.swing.JToggleButton();
+        returnTicketButton = new javax.swing.JToggleButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         movesTable = new javax.swing.JTable();
         movesLabel = new javax.swing.JLabel();
@@ -110,27 +111,27 @@ public class Dashboard extends javax.swing.JFrame {
             }
         });
 
-        advancedSearchButton1.setBackground(new java.awt.Color(51, 51, 51));
-        advancedSearchButton1.setFont(new java.awt.Font("POI Aeronaut Trial", 1, 14)); // NOI18N
-        advancedSearchButton1.setForeground(new java.awt.Color(153, 153, 153));
-        advancedSearchButton1.setText("Create Exit Ticket");
-        advancedSearchButton1.setBorder(javax.swing.BorderFactory.createMatteBorder(2, 2, 2, 2, new java.awt.Color(0, 51, 102)));
-        advancedSearchButton1.setContentAreaFilled(false);
-        advancedSearchButton1.addActionListener(new java.awt.event.ActionListener() {
+        exitTicketButton.setBackground(new java.awt.Color(51, 51, 51));
+        exitTicketButton.setFont(new java.awt.Font("POI Aeronaut Trial", 1, 14)); // NOI18N
+        exitTicketButton.setForeground(new java.awt.Color(153, 153, 153));
+        exitTicketButton.setText("Create Exit Ticket");
+        exitTicketButton.setBorder(javax.swing.BorderFactory.createMatteBorder(2, 2, 2, 2, new java.awt.Color(0, 51, 102)));
+        exitTicketButton.setContentAreaFilled(false);
+        exitTicketButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                advancedSearchButton1ActionPerformed(evt);
+                exitTicketButtonActionPerformed(evt);
             }
         });
 
-        advancedSearchButton2.setBackground(new java.awt.Color(51, 51, 51));
-        advancedSearchButton2.setFont(new java.awt.Font("POI Aeronaut Trial", 1, 14)); // NOI18N
-        advancedSearchButton2.setForeground(new java.awt.Color(153, 153, 153));
-        advancedSearchButton2.setText("Create Return Ticket");
-        advancedSearchButton2.setBorder(javax.swing.BorderFactory.createMatteBorder(2, 2, 2, 2, new java.awt.Color(0, 51, 102)));
-        advancedSearchButton2.setContentAreaFilled(false);
-        advancedSearchButton2.addActionListener(new java.awt.event.ActionListener() {
+        returnTicketButton.setBackground(new java.awt.Color(51, 51, 51));
+        returnTicketButton.setFont(new java.awt.Font("POI Aeronaut Trial", 1, 14)); // NOI18N
+        returnTicketButton.setForeground(new java.awt.Color(153, 153, 153));
+        returnTicketButton.setText("Create Return Ticket");
+        returnTicketButton.setBorder(javax.swing.BorderFactory.createMatteBorder(2, 2, 2, 2, new java.awt.Color(0, 51, 102)));
+        returnTicketButton.setContentAreaFilled(false);
+        returnTicketButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                advancedSearchButton2ActionPerformed(evt);
+                returnTicketButtonActionPerformed(evt);
             }
         });
 
@@ -145,8 +146,8 @@ public class Dashboard extends javax.swing.JFrame {
                     .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                         .addComponent(accountSettingsButton, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 127, Short.MAX_VALUE)
                         .addComponent(helpButton, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addComponent(advancedSearchButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(advancedSearchButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(exitTicketButton, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(returnTicketButton, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(14, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
@@ -155,9 +156,9 @@ public class Dashboard extends javax.swing.JFrame {
                 .addGap(25, 25, 25)
                 .addComponent(advancedSearchButton, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(advancedSearchButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(exitTicketButton, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(advancedSearchButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(returnTicketButton, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 200, Short.MAX_VALUE)
                 .addComponent(accountSettingsButton, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
@@ -186,7 +187,7 @@ public class Dashboard extends javax.swing.JFrame {
         jScrollPane1.setViewportView(movesTable);
 
         getContentPane().add(jScrollPane1);
-        jScrollPane1.setBounds(20, 150, 170, 92);
+        jScrollPane1.setBounds(20, 150, 270, 100);
 
         movesLabel.setBackground(new java.awt.Color(255, 255, 255));
         movesLabel.setFont(new java.awt.Font("POI Aeronaut Trial", 1, 14)); // NOI18N
@@ -210,10 +211,15 @@ public class Dashboard extends javax.swing.JFrame {
         articleTable.setGridColor(new java.awt.Color(51, 102, 255));
         articleTable.setSelectionBackground(new java.awt.Color(102, 153, 255));
         articleTable.setSelectionForeground(new java.awt.Color(102, 102, 255));
+        articleTable.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                articleTableMouseClicked(evt);
+            }
+        });
         jScrollPane3.setViewportView(articleTable);
 
         getContentPane().add(jScrollPane3);
-        jScrollPane3.setBounds(20, 280, 170, 92);
+        jScrollPane3.setBounds(20, 280, 280, 110);
 
         jLabel3.setFont(new java.awt.Font("POI Aeronaut Trial", 1, 14)); // NOI18N
         jLabel3.setForeground(new java.awt.Color(255, 255, 255));
@@ -274,7 +280,7 @@ public class Dashboard extends javax.swing.JFrame {
     private void exitTicketOptionMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_exitTicketOptionMouseClicked
         // TODO add your handling code here:
         dispose();
-        ExitTicketInterface eti = new ExitTicketInterface();
+        ExitTicket eti = new ExitTicket();
         eti.setVisible(true);
     }//GEN-LAST:event_exitTicketOptionMouseClicked
 
@@ -306,13 +312,34 @@ public class Dashboard extends javax.swing.JFrame {
         as.setVisible(true);
     }//GEN-LAST:event_accountSettingsButtonActionPerformed
 
-    private void advancedSearchButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_advancedSearchButton1ActionPerformed
+    private void exitTicketButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_exitTicketButtonActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_advancedSearchButton1ActionPerformed
+        dispose();
+        ExitTicket et = new ExitTicket();
+        et.setVisible(true);
+    }//GEN-LAST:event_exitTicketButtonActionPerformed
 
-    private void advancedSearchButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_advancedSearchButton2ActionPerformed
+    private void returnTicketButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_returnTicketButtonActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_advancedSearchButton2ActionPerformed
+        dispose();
+        ReturnTicket rt = new ReturnTicket();
+        rt.setVisible(true);
+    }//GEN-LAST:event_returnTicketButtonActionPerformed
+
+    private void articleTableMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_articleTableMouseClicked
+        // TODO add your handling code here:
+        DataBaseUtils.populateArticleTable(articleTable);
+        articleTable.revalidate();
+        articleTable.repaint();
+        // Call the populateArticleTable method to fill the results table with data from the Article table
+        DataBaseUtils.populateArticleTable(articleTable);
+
+//        // Get the count of articles
+//        int articleCount = DataBaseUtils.countArticles();
+//
+//        // Set the count in the text field
+//        articleCountTextField.setText(Integer.toString(articleCount));
+    }//GEN-LAST:event_articleTableMouseClicked
 
     /**
      * @param args the command line arguments
@@ -353,11 +380,10 @@ public class Dashboard extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JToggleButton accountSettingsButton;
     private javax.swing.JToggleButton advancedSearchButton;
-    private javax.swing.JToggleButton advancedSearchButton1;
-    private javax.swing.JToggleButton advancedSearchButton2;
     private javax.swing.JTable articleTable;
     private javax.swing.JLabel dashboardLabel;
     private javax.swing.JLabel dashboardLogo;
+    private javax.swing.JToggleButton exitTicketButton;
     private javax.swing.JMenuItem exitTicketOption;
     private javax.swing.JToggleButton helpButton;
     private javax.swing.JLabel jLabel1;
@@ -370,6 +396,7 @@ public class Dashboard extends javax.swing.JFrame {
     private javax.swing.JLabel movesLabel;
     private javax.swing.JTable movesTable;
     private javax.swing.JToggleButton newMove;
+    private javax.swing.JToggleButton returnTicketButton;
     private javax.swing.JMenuItem returnTicketOption;
     private javax.swing.JLabel welcomeLabel;
     // End of variables declaration//GEN-END:variables

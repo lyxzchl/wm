@@ -72,8 +72,8 @@
                           <Component id="accountSettingsButton" alignment="0" pref="127" max="32767" attributes="0"/>
                           <Component id="helpButton" alignment="0" max="32767" attributes="0"/>
                       </Group>
-                      <Component id="advancedSearchButton1" alignment="0" min="-2" pref="130" max="-2" attributes="0"/>
-                      <Component id="advancedSearchButton2" alignment="0" min="-2" pref="130" max="-2" attributes="0"/>
+                      <Component id="exitTicketButton" alignment="0" min="-2" pref="130" max="-2" attributes="0"/>
+                      <Component id="returnTicketButton" alignment="0" min="-2" pref="130" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace pref="14" max="32767" attributes="0"/>
               </Group>
@@ -85,9 +85,9 @@
                   <EmptySpace min="-2" pref="25" max="-2" attributes="0"/>
                   <Component id="advancedSearchButton" min="-2" pref="31" max="-2" attributes="0"/>
                   <EmptySpace max="-2" attributes="0"/>
-                  <Component id="advancedSearchButton1" min="-2" pref="31" max="-2" attributes="0"/>
+                  <Component id="exitTicketButton" min="-2" pref="31" max="-2" attributes="0"/>
                   <EmptySpace max="-2" attributes="0"/>
-                  <Component id="advancedSearchButton2" min="-2" pref="31" max="-2" attributes="0"/>
+                  <Component id="returnTicketButton" min="-2" pref="31" max="-2" attributes="0"/>
                   <EmptySpace pref="200" max="32767" attributes="0"/>
                   <Component id="accountSettingsButton" min="-2" pref="29" max="-2" attributes="0"/>
                   <EmptySpace type="separate" max="-2" attributes="0"/>
@@ -173,7 +173,7 @@
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="advancedSearchButtonActionPerformed"/>
           </Events>
         </Component>
-        <Component class="javax.swing.JToggleButton" name="advancedSearchButton1">
+        <Component class="javax.swing.JToggleButton" name="exitTicketButton">
           <Properties>
             <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
               <Color blue="33" green="33" red="33" type="rgb"/>
@@ -195,10 +195,10 @@
             <Property name="contentAreaFilled" type="boolean" value="false"/>
           </Properties>
           <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="advancedSearchButton1ActionPerformed"/>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="exitTicketButtonActionPerformed"/>
           </Events>
         </Component>
-        <Component class="javax.swing.JToggleButton" name="advancedSearchButton2">
+        <Component class="javax.swing.JToggleButton" name="returnTicketButton">
           <Properties>
             <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
               <Color blue="33" green="33" red="33" type="rgb"/>
@@ -220,7 +220,7 @@
             <Property name="contentAreaFilled" type="boolean" value="false"/>
           </Properties>
           <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="advancedSearchButton2ActionPerformed"/>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="returnTicketButtonActionPerformed"/>
           </Events>
         </Component>
       </SubComponents>
@@ -231,7 +231,7 @@
       </AuxValues>
       <Constraints>
         <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-          <AbsoluteConstraints x="20" y="150" width="170" height="92"/>
+          <AbsoluteConstraints x="20" y="150" width="270" height="100"/>
         </Constraint>
       </Constraints>
 
@@ -288,7 +288,7 @@
       </AuxValues>
       <Constraints>
         <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-          <AbsoluteConstraints x="20" y="280" width="170" height="92"/>
+          <AbsoluteConstraints x="20" y="280" width="280" height="110"/>
         </Constraint>
       </Constraints>
 
@@ -317,6 +317,9 @@
               <Color blue="ff" green="66" red="66" type="rgb"/>
             </Property>
           </Properties>
+          <Events>
+            <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="articleTableMouseClicked"/>
+          </Events>
         </Component>
       </SubComponents>
     </Container>

@@ -35,14 +35,14 @@ public class AdvancedSearch extends javax.swing.JFrame {
         jInternalFrame1 = new javax.swing.JInternalFrame();
         jPanel1 = new javax.swing.JPanel();
         searchBar = new javax.swing.JTextField();
-        jRadioButton1 = new javax.swing.JRadioButton();
-        jRadioButton2 = new javax.swing.JRadioButton();
-        jRadioButton3 = new javax.swing.JRadioButton();
+        idRadio = new javax.swing.JRadioButton();
+        classRadio = new javax.swing.JRadioButton();
+        familyRadio = new javax.swing.JRadioButton();
         jScrollPane2 = new javax.swing.JScrollPane();
         resultsTabel = new javax.swing.JTable();
         logoLabel = new javax.swing.JLabel();
         backButton = new javax.swing.JButton();
-        jRadioButton5 = new javax.swing.JRadioButton();
+        desigRadio = new javax.swing.JRadioButton();
         searchLogoLabel = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
         articleCountTextField = new javax.swing.JTextField();
@@ -78,36 +78,36 @@ public class AdvancedSearch extends javax.swing.JFrame {
             }
         });
 
-        jRadioButton1.setBackground(new java.awt.Color(51, 51, 51));
-        buttonGroup1.add(jRadioButton1);
-        jRadioButton1.setFont(new java.awt.Font("POI Aeronaut Trial", 0, 12)); // NOI18N
-        jRadioButton1.setForeground(new java.awt.Color(153, 153, 153));
-        jRadioButton1.setText("ID");
-        jRadioButton1.addActionListener(new java.awt.event.ActionListener() {
+        idRadio.setBackground(new java.awt.Color(51, 51, 51));
+        buttonGroup1.add(idRadio);
+        idRadio.setFont(new java.awt.Font("POI Aeronaut Trial", 0, 12)); // NOI18N
+        idRadio.setForeground(new java.awt.Color(153, 153, 153));
+        idRadio.setText("ID");
+        idRadio.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jRadioButton1ActionPerformed(evt);
+                idRadioActionPerformed(evt);
             }
         });
 
-        jRadioButton2.setBackground(new java.awt.Color(51, 51, 51));
-        buttonGroup1.add(jRadioButton2);
-        jRadioButton2.setFont(new java.awt.Font("POI Aeronaut Trial", 0, 12)); // NOI18N
-        jRadioButton2.setForeground(new java.awt.Color(153, 153, 153));
-        jRadioButton2.setText("Class");
-        jRadioButton2.addActionListener(new java.awt.event.ActionListener() {
+        classRadio.setBackground(new java.awt.Color(51, 51, 51));
+        buttonGroup1.add(classRadio);
+        classRadio.setFont(new java.awt.Font("POI Aeronaut Trial", 0, 12)); // NOI18N
+        classRadio.setForeground(new java.awt.Color(153, 153, 153));
+        classRadio.setText("Class");
+        classRadio.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jRadioButton2ActionPerformed(evt);
+                classRadioActionPerformed(evt);
             }
         });
 
-        jRadioButton3.setBackground(new java.awt.Color(51, 51, 51));
-        buttonGroup1.add(jRadioButton3);
-        jRadioButton3.setFont(new java.awt.Font("POI Aeronaut Trial", 0, 12)); // NOI18N
-        jRadioButton3.setForeground(new java.awt.Color(153, 153, 153));
-        jRadioButton3.setText("Family");
-        jRadioButton3.addActionListener(new java.awt.event.ActionListener() {
+        familyRadio.setBackground(new java.awt.Color(51, 51, 51));
+        buttonGroup1.add(familyRadio);
+        familyRadio.setFont(new java.awt.Font("POI Aeronaut Trial", 0, 12)); // NOI18N
+        familyRadio.setForeground(new java.awt.Color(153, 153, 153));
+        familyRadio.setText("Family");
+        familyRadio.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jRadioButton3ActionPerformed(evt);
+                familyRadioActionPerformed(evt);
             }
         });
 
@@ -153,14 +153,14 @@ public class AdvancedSearch extends javax.swing.JFrame {
             }
         });
 
-        jRadioButton5.setBackground(new java.awt.Color(51, 51, 51));
-        buttonGroup1.add(jRadioButton5);
-        jRadioButton5.setFont(new java.awt.Font("POI Aeronaut Trial", 0, 12)); // NOI18N
-        jRadioButton5.setForeground(new java.awt.Color(153, 153, 153));
-        jRadioButton5.setText("Designation");
-        jRadioButton5.addActionListener(new java.awt.event.ActionListener() {
+        desigRadio.setBackground(new java.awt.Color(51, 51, 51));
+        buttonGroup1.add(desigRadio);
+        desigRadio.setFont(new java.awt.Font("POI Aeronaut Trial", 0, 12)); // NOI18N
+        desigRadio.setForeground(new java.awt.Color(153, 153, 153));
+        desigRadio.setText("Designation");
+        desigRadio.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jRadioButton5ActionPerformed(evt);
+                desigRadioActionPerformed(evt);
             }
         });
 
@@ -207,13 +207,13 @@ public class AdvancedSearch extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(jRadioButton1)
+                                .addComponent(idRadio)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(jRadioButton2)
+                                .addComponent(classRadio)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(jRadioButton3)
+                                .addComponent(familyRadio)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(jRadioButton5))
+                                .addComponent(desigRadio))
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addComponent(searchBar, javax.swing.GroupLayout.PREFERRED_SIZE, 282, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -250,10 +250,10 @@ public class AdvancedSearch extends javax.swing.JFrame {
                             .addComponent(searchLogoLabel))
                         .addGap(23, 23, 23)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jRadioButton1)
-                            .addComponent(jRadioButton2)
-                            .addComponent(jRadioButton3)
-                            .addComponent(jRadioButton5)))
+                            .addComponent(idRadio)
+                            .addComponent(classRadio)
+                            .addComponent(familyRadio)
+                            .addComponent(desigRadio)))
                     .addComponent(logoLabel))
                 .addGap(49, 49, 49)
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 177, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -284,21 +284,21 @@ public class AdvancedSearch extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_searchBarActionPerformed
 
-    private void jRadioButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButton1ActionPerformed
+    private void idRadioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_idRadioActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jRadioButton1ActionPerformed
+    }//GEN-LAST:event_idRadioActionPerformed
 
-    private void jRadioButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButton2ActionPerformed
+    private void classRadioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_classRadioActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jRadioButton2ActionPerformed
+    }//GEN-LAST:event_classRadioActionPerformed
 
-    private void jRadioButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButton3ActionPerformed
+    private void familyRadioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_familyRadioActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jRadioButton3ActionPerformed
+    }//GEN-LAST:event_familyRadioActionPerformed
 
-    private void jRadioButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButton5ActionPerformed
+    private void desigRadioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_desigRadioActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jRadioButton5ActionPerformed
+    }//GEN-LAST:event_desigRadioActionPerformed
 
     private void articleCountTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_articleCountTextFieldActionPerformed
         // TODO add your handling code here:
@@ -306,6 +306,22 @@ public class AdvancedSearch extends javax.swing.JFrame {
 
     private void searchButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_searchButton1ActionPerformed
         // TODO add your handling code here:
+        DataBaseUtils.populateArticleTable(resultsTabel);
+        resultsTabel.revalidate();
+        resultsTabel.repaint();
+        try {
+        // Call the populateArticleTable method to fill the results table with data from the Article table
+        DataBaseUtils.populateArticleTable(resultsTabel);
+
+        // Get the count of articles
+        int articleCount = DataBaseUtils.countArticles();
+
+        // Set the count in the text field
+        articleCountTextField.setText(Integer.toString(articleCount));
+    } catch (SQLException ex) {
+        ex.printStackTrace();
+        // Handle the exception
+    }
     }//GEN-LAST:event_searchButton1ActionPerformed
 
     private void backButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backButtonActionPerformed
@@ -353,15 +369,15 @@ public class AdvancedSearch extends javax.swing.JFrame {
     private javax.swing.JTextField articleCountTextField;
     private javax.swing.JButton backButton;
     private javax.swing.ButtonGroup buttonGroup1;
+    private javax.swing.JRadioButton classRadio;
+    private javax.swing.JRadioButton desigRadio;
+    private javax.swing.JRadioButton familyRadio;
+    private javax.swing.JRadioButton idRadio;
     private javax.swing.JInternalFrame jInternalFrame1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JMenuItem jMenuItem2;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JRadioButton jRadioButton1;
-    private javax.swing.JRadioButton jRadioButton2;
-    private javax.swing.JRadioButton jRadioButton3;
-    private javax.swing.JRadioButton jRadioButton5;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JLabel logoLabel;
     private javax.swing.JTable resultsTabel;
