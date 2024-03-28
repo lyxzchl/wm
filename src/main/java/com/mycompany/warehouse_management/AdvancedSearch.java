@@ -1,6 +1,8 @@
 package com.mycompany.warehouse_management;
 
 import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
@@ -44,7 +46,7 @@ public class AdvancedSearch extends javax.swing.JFrame {
         backButton = new javax.swing.JButton();
         desigRadio = new javax.swing.JRadioButton();
         searchLogoLabel = new javax.swing.JLabel();
-        jLabel1 = new javax.swing.JLabel();
+        articleCount = new javax.swing.JLabel();
         articleCountTextField = new javax.swing.JTextField();
         searchButton1 = new javax.swing.JButton();
 
@@ -166,10 +168,10 @@ public class AdvancedSearch extends javax.swing.JFrame {
 
         searchLogoLabel.setIcon(new javax.swing.ImageIcon("/run/media/lyeschl/ssd/main/dox/study/l3si/pfe/thesis/images/icons/search_icon.png")); // NOI18N
 
-        jLabel1.setBackground(new java.awt.Color(0, 0, 0));
-        jLabel1.setFont(new java.awt.Font("POI Aeronaut Trial", 1, 14)); // NOI18N
-        jLabel1.setForeground(new java.awt.Color(153, 153, 153));
-        jLabel1.setText("Article count: ");
+        articleCount.setBackground(new java.awt.Color(0, 0, 0));
+        articleCount.setFont(new java.awt.Font("POI Aeronaut Trial", 1, 14)); // NOI18N
+        articleCount.setForeground(new java.awt.Color(153, 153, 153));
+        articleCount.setText("Article count: ");
 
         articleCountTextField.setBackground(new java.awt.Color(51, 51, 51));
         articleCountTextField.setFont(new java.awt.Font("POI Aeronaut Trial", 0, 11)); // NOI18N
@@ -225,7 +227,7 @@ public class AdvancedSearch extends javax.swing.JFrame {
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 534, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(jLabel1)
+                                .addComponent(articleCount)
                                 .addGap(18, 18, 18)
                                 .addComponent(articleCountTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))))
                 .addContainerGap(27, Short.MAX_VALUE))
@@ -259,7 +261,7 @@ public class AdvancedSearch extends javax.swing.JFrame {
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 177, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(27, 27, 27)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(articleCount, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(articleCountTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
@@ -323,6 +325,17 @@ public class AdvancedSearch extends javax.swing.JFrame {
             resultsTabel.revalidate();
             resultsTabel.repaint();
         }
+        // Get the count of articles
+        int articleCount;
+        try {
+            articleCount = DataBaseUtils.countArticles();
+            // Set the count in the text field
+            articleCountTextField.setText(Integer.toString(articleCount));
+        } catch (SQLException ex) {
+            Logger.getLogger(AdvancedSearch.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+
     }//GEN-LAST:event_searchButton1ActionPerformed
 
     private void backButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backButtonActionPerformed
@@ -367,6 +380,7 @@ public class AdvancedSearch extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JLabel articleCount;
     private javax.swing.JTextField articleCountTextField;
     private javax.swing.JButton backButton;
     private javax.swing.ButtonGroup buttonGroup1;
@@ -375,7 +389,6 @@ public class AdvancedSearch extends javax.swing.JFrame {
     private javax.swing.JRadioButton desigRadio;
     private javax.swing.JRadioButton familyRadio;
     private javax.swing.JInternalFrame jInternalFrame1;
-    private javax.swing.JLabel jLabel1;
     private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JMenuItem jMenuItem2;
     private javax.swing.JPanel jPanel1;
