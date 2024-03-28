@@ -3,7 +3,8 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
 package com.mycompany.warehouse_management;
-
+import java.awt.Dimension;
+import java.awt.Toolkit;
 import java.awt.FontFormatException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -19,6 +20,15 @@ public class LoginInterface extends javax.swing.JFrame {
      */
     public LoginInterface() {
         initComponents();
+        Toolkit toolkit = Toolkit.getDefaultToolkit();
+        Dimension screenSize = toolkit.getScreenSize();
+        int screenWidth = screenSize.width;
+        int screenHeight = screenSize.height;
+
+        int windowWidth = (int) (screenWidth * 0.8);
+        int windowHeight = (int) (screenHeight * 0.8);
+        setSize(windowWidth, windowHeight);
+        setLocationRelativeTo(null);
     }
 
     /**

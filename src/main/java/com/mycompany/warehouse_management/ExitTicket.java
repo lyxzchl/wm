@@ -4,6 +4,10 @@
  */
 package com.mycompany.warehouse_management;
 
+import java.awt.Dimension;
+import java.awt.Toolkit;
+import java.io.IOException;
+
 /**
  *
  * @author lyeschl
@@ -15,6 +19,15 @@ public class ExitTicket extends javax.swing.JFrame {
      */
     public ExitTicket() {
         initComponents();
+        Toolkit toolkit = Toolkit.getDefaultToolkit();
+        Dimension screenSize = toolkit.getScreenSize();
+        int screenWidth = screenSize.width;
+        int screenHeight = screenSize.height;
+
+        int windowWidth = (int) (screenWidth * 0.8);
+        int windowHeight = (int) (screenHeight * 0.8);
+        setSize(windowWidth, windowHeight);
+        setLocationRelativeTo(null);
     }
 
     /**
@@ -83,6 +96,7 @@ public class ExitTicket extends javax.swing.JFrame {
         jLabel7.setForeground(new java.awt.Color(153, 153, 153));
         jLabel7.setText("Nature");
 
+        jComboBox1.setFont(new java.awt.Font("POI Aeronaut Trial", 0, 16)); // NOI18N
         jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Garantie 2 ans", "Garantie ", "Something else", " " }));
 
         jLabel6.setFont(new java.awt.Font("POI Aeronaut Trial", 1, 14)); // NOI18N
@@ -144,6 +158,11 @@ public class ExitTicket extends javax.swing.JFrame {
         printButton.setForeground(new java.awt.Color(153, 153, 153));
         printButton.setText("Print");
         printButton.setBorder(javax.swing.BorderFactory.createMatteBorder(2, 2, 2, 1, new java.awt.Color(51, 51, 51)));
+        printButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                printButtonActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -289,6 +308,18 @@ public class ExitTicket extends javax.swing.JFrame {
         Dashboard dash = new Dashboard();
         dash.setVisible(true);
     }//GEN-LAST:event_cancelButtonActionPerformed
+
+    private void printButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_printButtonActionPerformed
+        // TODO add your handling code here:
+        PDFGenerator pdfGenerator = new PDFGenerator();
+        try {
+            pdfGenerator.generatePDF("2023-04-20", "ABC123", "Maintenance", "Manager", "Wrench, Screwdriver, Pliers", "Pump 1", "PART-001", "output.pdf");            
+            System.out.println("PDF generated successfully!");
+        } catch (IOException e) {
+            System.err.println("Error generating PDF: " + e.getMessage());
+        }
+    
+    }//GEN-LAST:event_printButtonActionPerformed
 
     /**
      * @param args the command line arguments

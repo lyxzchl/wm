@@ -1,5 +1,6 @@
 package com.mycompany.warehouse_management;
-
+import java.awt.Dimension;
+import java.awt.Toolkit;
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
@@ -16,6 +17,16 @@ public class AccountSettings extends javax.swing.JFrame {
      */
     public AccountSettings() {
         initComponents();
+        Toolkit toolkit = Toolkit.getDefaultToolkit();
+        Dimension screenSize = toolkit.getScreenSize();
+        int screenWidth = screenSize.width;
+        int screenHeight = screenSize.height;
+
+        int windowWidth = (int) (screenWidth * 0.8);
+        int windowHeight = (int) (screenHeight * 0.8);
+        setSize(windowWidth, windowHeight);
+        setLocationRelativeTo(null);
+        
     }
 
     /**

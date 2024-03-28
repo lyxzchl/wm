@@ -1,5 +1,7 @@
 package com.mycompany.warehouse_management;
 
+import java.awt.Dimension;
+import java.awt.Toolkit;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -16,10 +18,19 @@ import java.util.logging.Logger;
 public class AdvancedSearch extends javax.swing.JFrame {
 
     /**
-     * Crpubliceates new form AdvancedSearch
+     * Creates new form AdvancedSearch
      */
     public AdvancedSearch() {
         initComponents();
+        Toolkit toolkit = Toolkit.getDefaultToolkit();
+        Dimension screenSize = toolkit.getScreenSize();
+        int screenWidth = screenSize.width;
+        int screenHeight = screenSize.height;
+
+        int windowWidth = (int) (screenWidth * 0.8);
+        int windowHeight = (int) (screenHeight * 0.8);
+        setSize(windowWidth, windowHeight);
+        setLocationRelativeTo(null);
     }
 
     /**
@@ -80,11 +91,13 @@ public class AdvancedSearch extends javax.swing.JFrame {
         );
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        getContentPane().setLayout(null);
 
         jPanel1.setBackground(new java.awt.Color(51, 51, 51));
 
         searchBar.setBackground(new java.awt.Color(102, 102, 102));
-        searchBar.setFont(new java.awt.Font("Roboto", 0, 11)); // NOI18N
+        searchBar.setFont(new java.awt.Font("Roboto", 0, 13)); // NOI18N
+        searchBar.setForeground(new java.awt.Color(255, 255, 255));
         searchBar.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 2, 0, new java.awt.Color(0, 51, 102)));
         searchBar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -450,18 +463,8 @@ public class AdvancedSearch extends javax.swing.JFrame {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(0, 18, Short.MAX_VALUE)
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-        );
+        getContentPane().add(jPanel1);
+        jPanel1.setBounds(18, 0, 589, 431);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
