@@ -15,10 +15,12 @@ public class DataBaseUtils {
     private static final String DB_USER = "lyeschl";
     private static final String DB_PASSWORD = "lyessou1213";
 
-    public static void populateArticleTable(JTable table) {
+    public static void populateArticleTable(JTable table, String searchColumn, String searchValue) {
         try (Connection conn = DriverManager.getConnection(DB_URL, DB_USER, DB_PASSWORD);
-             Statement stmt = conn.createStatement();
-             ResultSet rs = stmt.executeQuery("SELECT * FROM Article")) {
+             PreparedStatement stmt = conn.prepareStatement("SELECT * FROM Article WHERE " + searchColumn + " LIKE ?")) {
+
+            stmt.setString(1, "%" + searchValue + "%");
+            ResultSet rs = stmt.executeQuery();
 
             // Get the metadata of the result set
             ResultSetMetaData metaData = rs.getMetaData();
@@ -47,7 +49,7 @@ public class DataBaseUtils {
    
             ex.printStackTrace(); // Add this line to print the stack trace of any SQL exceptions
         }
-        }
+}
         public static int countArticles() throws SQLException {
         int count = 0;
         try (Connection conn = DriverManager.getConnection(DB_URL, DB_USER, DB_PASSWORD);

@@ -328,17 +328,6 @@ public class Dashboard extends javax.swing.JFrame {
 
     private void articleTableMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_articleTableMouseClicked
         // TODO add your handling code here:
-        DataBaseUtils.populateArticleTable(articleTable);
-        articleTable.revalidate();
-        articleTable.repaint();
-        // Call the populateArticleTable method to fill the results table with data from the Article table
-        DataBaseUtils.populateArticleTable(articleTable);
-
-//        // Get the count of articles
-//        int articleCount = DataBaseUtils.countArticles();
-//
-//        // Set the count in the text field
-//        articleCountTextField.setText(Integer.toString(articleCount));
     }//GEN-LAST:event_articleTableMouseClicked
 
     /**

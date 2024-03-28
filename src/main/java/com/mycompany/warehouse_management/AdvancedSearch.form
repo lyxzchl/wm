@@ -87,7 +87,7 @@
                           <EmptySpace max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="0" attributes="0">
                               <Group type="102" alignment="0" attributes="0">
-                                  <Component id="idRadio" min="-2" max="-2" attributes="0"/>
+                                  <Component id="codeRadio" min="-2" max="-2" attributes="0"/>
                                   <EmptySpace type="unrelated" max="-2" attributes="0"/>
                                   <Component id="classRadio" min="-2" max="-2" attributes="0"/>
                                   <EmptySpace type="unrelated" max="-2" attributes="0"/>
@@ -143,7 +143,7 @@
                           </Group>
                           <EmptySpace min="-2" pref="23" max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="3" attributes="0">
-                              <Component id="idRadio" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="codeRadio" alignment="3" min="-2" max="-2" attributes="0"/>
                               <Component id="classRadio" alignment="3" min="-2" max="-2" attributes="0"/>
                               <Component id="familyRadio" alignment="3" min="-2" max="-2" attributes="0"/>
                               <Component id="desigRadio" alignment="3" min="-2" max="-2" attributes="0"/>
@@ -184,7 +184,7 @@
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="searchBarActionPerformed"/>
           </Events>
         </Component>
-        <Component class="javax.swing.JRadioButton" name="idRadio">
+        <Component class="javax.swing.JRadioButton" name="codeRadio">
           <Properties>
             <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
               <Color blue="33" green="33" red="33" type="rgb"/>
@@ -198,10 +198,10 @@
             <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
               <Color blue="99" green="99" red="99" type="rgb"/>
             </Property>
-            <Property name="text" type="java.lang.String" value="ID"/>
+            <Property name="text" type="java.lang.String" value="Code"/>
           </Properties>
           <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="idRadioActionPerformed"/>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="codeRadioActionPerformed"/>
           </Events>
         </Component>
         <Component class="javax.swing.JRadioButton" name="classRadio">

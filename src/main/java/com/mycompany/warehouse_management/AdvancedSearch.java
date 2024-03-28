@@ -14,7 +14,7 @@ import java.sql.SQLException;
 public class AdvancedSearch extends javax.swing.JFrame {
 
     /**
-     * Creates new form AdvancedSearch
+     * Crpubliceates new form AdvancedSearch
      */
     public AdvancedSearch() {
         initComponents();
@@ -35,7 +35,7 @@ public class AdvancedSearch extends javax.swing.JFrame {
         jInternalFrame1 = new javax.swing.JInternalFrame();
         jPanel1 = new javax.swing.JPanel();
         searchBar = new javax.swing.JTextField();
-        idRadio = new javax.swing.JRadioButton();
+        codeRadio = new javax.swing.JRadioButton();
         classRadio = new javax.swing.JRadioButton();
         familyRadio = new javax.swing.JRadioButton();
         jScrollPane2 = new javax.swing.JScrollPane();
@@ -78,14 +78,14 @@ public class AdvancedSearch extends javax.swing.JFrame {
             }
         });
 
-        idRadio.setBackground(new java.awt.Color(51, 51, 51));
-        buttonGroup1.add(idRadio);
-        idRadio.setFont(new java.awt.Font("POI Aeronaut Trial", 0, 12)); // NOI18N
-        idRadio.setForeground(new java.awt.Color(153, 153, 153));
-        idRadio.setText("ID");
-        idRadio.addActionListener(new java.awt.event.ActionListener() {
+        codeRadio.setBackground(new java.awt.Color(51, 51, 51));
+        buttonGroup1.add(codeRadio);
+        codeRadio.setFont(new java.awt.Font("POI Aeronaut Trial", 0, 12)); // NOI18N
+        codeRadio.setForeground(new java.awt.Color(153, 153, 153));
+        codeRadio.setText("Code");
+        codeRadio.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                idRadioActionPerformed(evt);
+                codeRadioActionPerformed(evt);
             }
         });
 
@@ -207,7 +207,7 @@ public class AdvancedSearch extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(idRadio)
+                                .addComponent(codeRadio)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addComponent(classRadio)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -250,7 +250,7 @@ public class AdvancedSearch extends javax.swing.JFrame {
                             .addComponent(searchLogoLabel))
                         .addGap(23, 23, 23)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(idRadio)
+                            .addComponent(codeRadio)
                             .addComponent(classRadio)
                             .addComponent(familyRadio)
                             .addComponent(desigRadio)))
@@ -284,9 +284,9 @@ public class AdvancedSearch extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_searchBarActionPerformed
 
-    private void idRadioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_idRadioActionPerformed
+    private void codeRadioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_codeRadioActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_idRadioActionPerformed
+    }//GEN-LAST:event_codeRadioActionPerformed
 
     private void classRadioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_classRadioActionPerformed
         // TODO add your handling code here:
@@ -305,23 +305,24 @@ public class AdvancedSearch extends javax.swing.JFrame {
     }//GEN-LAST:event_articleCountTextFieldActionPerformed
 
     private void searchButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_searchButton1ActionPerformed
-        // TODO add your handling code here:
-        DataBaseUtils.populateArticleTable(resultsTabel);
-        resultsTabel.revalidate();
-        resultsTabel.repaint();
-        try {
-        // Call the populateArticleTable method to fill the results table with data from the Article table
-        DataBaseUtils.populateArticleTable(resultsTabel);
+        String searchColumn = "";
+        String searchValue = searchBar.getText().trim();
 
-        // Get the count of articles
-        int articleCount = DataBaseUtils.countArticles();
+        if (codeRadio.isSelected()) {
+            searchColumn = "code_art";
+        } else if (classRadio.isSelected()) {
+            searchColumn = "code_class";
+        } else if (familyRadio.isSelected()) {
+            searchColumn = "desig_class"; // Assuming you want to search by the class description
+        } else if (desigRadio.isSelected()) {
+            searchColumn = "desig_art";
+        }
 
-        // Set the count in the text field
-        articleCountTextField.setText(Integer.toString(articleCount));
-    } catch (SQLException ex) {
-        ex.printStackTrace();
-        // Handle the exception
-    }
+        if (!searchColumn.isEmpty() && !searchValue.isEmpty()) {
+            DataBaseUtils.populateArticleTable(resultsTabel, searchColumn, searchValue);
+            resultsTabel.revalidate();
+            resultsTabel.repaint();
+        }
     }//GEN-LAST:event_searchButton1ActionPerformed
 
     private void backButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backButtonActionPerformed
@@ -370,9 +371,9 @@ public class AdvancedSearch extends javax.swing.JFrame {
     private javax.swing.JButton backButton;
     private javax.swing.ButtonGroup buttonGroup1;
     private javax.swing.JRadioButton classRadio;
+    private javax.swing.JRadioButton codeRadio;
     private javax.swing.JRadioButton desigRadio;
     private javax.swing.JRadioButton familyRadio;
-    private javax.swing.JRadioButton idRadio;
     private javax.swing.JInternalFrame jInternalFrame1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JMenuItem jMenuItem1;
