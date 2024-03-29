@@ -59,9 +59,9 @@
                                   <EmptySpace max="32767" attributes="0"/>
                                   <Group type="103" groupAlignment="0" attributes="0">
                                       <Group type="102" alignment="1" attributes="0">
-                                          <Component id="exitDateLabel" min="-2" max="-2" attributes="0"/>
+                                          <Component id="returnDateLabel" min="-2" max="-2" attributes="0"/>
                                           <EmptySpace min="-2" pref="2" max="-2" attributes="0"/>
-                                          <Component id="exitDateTextField" min="-2" pref="79" max="-2" attributes="0"/>
+                                          <Component id="returnDateTextField" min="-2" pref="79" max="-2" attributes="0"/>
                                       </Group>
                                       <Group type="102" alignment="1" attributes="0">
                                           <Component id="totalLabel" min="-2" max="-2" attributes="0"/>
@@ -71,10 +71,9 @@
                                   </Group>
                               </Group>
                               <Group type="102" alignment="1" attributes="0">
-                                  <Component id="exitCodeLabel" min="-2" max="-2" attributes="0"/>
+                                  <Component id="brsCodeLabel" min="-2" max="-2" attributes="0"/>
                                   <EmptySpace max="-2" attributes="0"/>
-                                  <Component id="exitCodeTextField" min="-2" pref="77" max="-2" attributes="0"/>
-                                  <EmptySpace max="32767" attributes="0"/>
+                                  <Component id="brsCodeTextField" min="-2" pref="77" max="-2" attributes="0"/>
                               </Group>
                           </Group>
                           <EmptySpace min="-2" pref="289" max="-2" attributes="0"/>
@@ -136,9 +135,9 @@
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Group type="102" alignment="0" attributes="0">
                           <EmptySpace pref="5" max="-2" attributes="0"/>
-                          <Component id="exitCodeLabel" min="-2" max="-2" attributes="0"/>
+                          <Component id="brsCodeLabel" min="-2" max="-2" attributes="0"/>
                       </Group>
-                      <Component id="exitCodeTextField" alignment="0" min="-2" pref="27" max="-2" attributes="0"/>
+                      <Component id="brsCodeTextField" alignment="0" min="-2" pref="27" max="-2" attributes="0"/>
                   </Group>
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Group type="102" alignment="0" attributes="0">
@@ -151,8 +150,8 @@
                       <Group type="102" alignment="0" attributes="0">
                           <EmptySpace min="-2" pref="8" max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="3" attributes="0">
-                              <Component id="exitDateLabel" alignment="3" min="-2" max="-2" attributes="0"/>
-                              <Component id="exitDateTextField" alignment="3" min="-2" pref="34" max="-2" attributes="0"/>
+                              <Component id="returnDateLabel" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="returnDateTextField" alignment="3" min="-2" pref="34" max="-2" attributes="0"/>
                           </Group>
                           <EmptySpace max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="3" attributes="0">
@@ -257,7 +256,7 @@
             <Property name="text" type="java.lang.String" value="Return Description"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JLabel" name="exitCodeLabel">
+        <Component class="javax.swing.JLabel" name="brsCodeLabel">
           <Properties>
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
               <Font name="POI Aeronaut Trial" size="14" style="0"/>
@@ -268,7 +267,7 @@
             <Property name="text" type="java.lang.String" value="BRS Code"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JTextField" name="exitCodeTextField">
+        <Component class="javax.swing.JTextField" name="brsCodeTextField">
           <Properties>
             <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
               <Color blue="66" green="66" red="66" type="rgb"/>
@@ -286,7 +285,7 @@
             </Property>
           </Properties>
           <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="exitCodeTextFieldActionPerformed"/>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="brsCodeTextFieldActionPerformed"/>
           </Events>
         </Component>
         <Component class="javax.swing.JLabel" name="warehouseCodeLabel">
@@ -321,7 +320,7 @@
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="warehouseCodeTextFieldActionPerformed"/>
           </Events>
         </Component>
-        <Component class="javax.swing.JLabel" name="exitDateLabel">
+        <Component class="javax.swing.JLabel" name="returnDateLabel">
           <Properties>
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
               <Font name="POI Aeronaut Trial" size="14" style="0"/>
@@ -332,7 +331,7 @@
             <Property name="text" type="java.lang.String" value="Return Date"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JTextField" name="exitDateTextField">
+        <Component class="javax.swing.JTextField" name="returnDateTextField">
           <Properties>
             <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
               <Color blue="66" green="66" red="66" type="rgb"/>
@@ -350,7 +349,7 @@
             </Property>
           </Properties>
           <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="exitDateTextFieldActionPerformed"/>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="returnDateTextFieldActionPerformed"/>
           </Events>
         </Component>
         <Component class="javax.swing.JLabel" name="totalLabel">

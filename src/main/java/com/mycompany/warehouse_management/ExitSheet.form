@@ -207,17 +207,19 @@
                   <EmptySpace min="-2" pref="120" max="-2" attributes="0"/>
                   <Component id="jSeparator3" min="-2" pref="10" max="-2" attributes="0"/>
                   <EmptySpace max="-2" attributes="0"/>
-                  <Group type="103" groupAlignment="3" attributes="0">
-                      <Component id="goToFirstButton" alignment="3" min="-2" pref="26" max="-2" attributes="0"/>
-                      <Group type="103" alignment="3" groupAlignment="3" attributes="0">
-                          <Component id="nextButton" alignment="3" min="-2" pref="26" max="-2" attributes="0"/>
-                          <Component id="goToLastButton" alignment="3" min="-2" pref="26" max="-2" attributes="0"/>
-                          <Component id="addButton" alignment="3" min="-2" pref="26" max="-2" attributes="0"/>
-                          <Component id="changeButton" alignment="3" min="-2" pref="26" max="-2" attributes="0"/>
-                          <Component id="cancelButton" alignment="3" min="-2" pref="26" max="-2" attributes="0"/>
+                  <Group type="103" groupAlignment="0" attributes="0">
+                      <Group type="103" alignment="0" groupAlignment="0" attributes="0">
                           <Component id="lastButton" alignment="1" max="32767" attributes="0"/>
-                          <Component id="saveButton" alignment="3" min="-2" pref="26" max="-2" attributes="0"/>
+                          <Group type="103" groupAlignment="3" attributes="0">
+                              <Component id="nextButton" alignment="3" min="-2" pref="26" max="-2" attributes="0"/>
+                              <Component id="goToLastButton" alignment="3" min="-2" pref="26" max="-2" attributes="0"/>
+                              <Component id="addButton" alignment="3" min="-2" pref="26" max="-2" attributes="0"/>
+                              <Component id="changeButton" alignment="3" min="-2" pref="26" max="-2" attributes="0"/>
+                              <Component id="cancelButton" alignment="3" min="-2" pref="26" max="-2" attributes="0"/>
+                              <Component id="saveButton" alignment="3" min="-2" pref="26" max="-2" attributes="0"/>
+                          </Group>
                       </Group>
+                      <Component id="goToFirstButton" min="-2" pref="26" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace min="-2" pref="40" max="-2" attributes="0"/>
               </Group>

@@ -4,6 +4,11 @@
  */
 package com.mycompany.warehouse_management;
 
+import java.sql.SQLException;
+import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 /**
  *
  * @author lyeschl
@@ -31,12 +36,12 @@ public class ReturnSheet extends javax.swing.JFrame {
         sheetLogo = new javax.swing.JLabel();
         returnSheetLabel = new javax.swing.JLabel();
         exitDescription = new javax.swing.JLabel();
-        exitCodeLabel = new javax.swing.JLabel();
-        exitCodeTextField = new javax.swing.JTextField();
+        brsCodeLabel = new javax.swing.JLabel();
+        brsCodeTextField = new javax.swing.JTextField();
         warehouseCodeLabel = new javax.swing.JLabel();
         warehouseCodeTextField = new javax.swing.JTextField();
-        exitDateLabel = new javax.swing.JLabel();
-        exitDateTextField = new javax.swing.JTextField();
+        returnDateLabel = new javax.swing.JLabel();
+        returnDateTextField = new javax.swing.JTextField();
         totalLabel = new javax.swing.JLabel();
         totalTextField = new javax.swing.JTextField();
         validDateLabel = new javax.swing.JLabel();
@@ -91,17 +96,17 @@ public class ReturnSheet extends javax.swing.JFrame {
         exitDescription.setForeground(new java.awt.Color(255, 255, 255));
         exitDescription.setText("Return Description");
 
-        exitCodeLabel.setFont(new java.awt.Font("POI Aeronaut Trial", 0, 14)); // NOI18N
-        exitCodeLabel.setForeground(new java.awt.Color(255, 255, 255));
-        exitCodeLabel.setText("BRS Code");
+        brsCodeLabel.setFont(new java.awt.Font("POI Aeronaut Trial", 0, 14)); // NOI18N
+        brsCodeLabel.setForeground(new java.awt.Color(255, 255, 255));
+        brsCodeLabel.setText("BRS Code");
 
-        exitCodeTextField.setBackground(new java.awt.Color(102, 102, 102));
-        exitCodeTextField.setForeground(new java.awt.Color(255, 255, 255));
-        exitCodeTextField.setText("245");
-        exitCodeTextField.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 2, 0, new java.awt.Color(0, 51, 102)));
-        exitCodeTextField.addActionListener(new java.awt.event.ActionListener() {
+        brsCodeTextField.setBackground(new java.awt.Color(102, 102, 102));
+        brsCodeTextField.setForeground(new java.awt.Color(255, 255, 255));
+        brsCodeTextField.setText("245");
+        brsCodeTextField.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 2, 0, new java.awt.Color(0, 51, 102)));
+        brsCodeTextField.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                exitCodeTextFieldActionPerformed(evt);
+                brsCodeTextFieldActionPerformed(evt);
             }
         });
 
@@ -119,17 +124,17 @@ public class ReturnSheet extends javax.swing.JFrame {
             }
         });
 
-        exitDateLabel.setFont(new java.awt.Font("POI Aeronaut Trial", 0, 14)); // NOI18N
-        exitDateLabel.setForeground(new java.awt.Color(255, 255, 255));
-        exitDateLabel.setText("Return Date");
+        returnDateLabel.setFont(new java.awt.Font("POI Aeronaut Trial", 0, 14)); // NOI18N
+        returnDateLabel.setForeground(new java.awt.Color(255, 255, 255));
+        returnDateLabel.setText("Return Date");
 
-        exitDateTextField.setBackground(new java.awt.Color(102, 102, 102));
-        exitDateTextField.setForeground(new java.awt.Color(255, 255, 255));
-        exitDateTextField.setText("245");
-        exitDateTextField.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 2, 0, new java.awt.Color(0, 51, 102)));
-        exitDateTextField.addActionListener(new java.awt.event.ActionListener() {
+        returnDateTextField.setBackground(new java.awt.Color(102, 102, 102));
+        returnDateTextField.setForeground(new java.awt.Color(255, 255, 255));
+        returnDateTextField.setText("245");
+        returnDateTextField.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 2, 0, new java.awt.Color(0, 51, 102)));
+        returnDateTextField.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                exitDateTextFieldActionPerformed(evt);
+                returnDateTextFieldActionPerformed(evt);
             }
         });
 
@@ -298,18 +303,17 @@ public class ReturnSheet extends javax.swing.JFrame {
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                                        .addComponent(exitDateLabel)
+                                        .addComponent(returnDateLabel)
                                         .addGap(2, 2, 2)
-                                        .addComponent(exitDateTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 79, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                        .addComponent(returnDateTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 79, javax.swing.GroupLayout.PREFERRED_SIZE))
                                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                                         .addComponent(totalLabel)
                                         .addGap(2, 2, 2)
                                         .addComponent(totalTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 79, javax.swing.GroupLayout.PREFERRED_SIZE))))
                             .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(exitCodeLabel)
+                                .addComponent(brsCodeLabel)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(exitCodeTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 77, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                                .addComponent(brsCodeTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 77, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addGap(289, 289, 289))))
             .addComponent(headerPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(jPanel1Layout.createSequentialGroup()
@@ -360,8 +364,8 @@ public class ReturnSheet extends javax.swing.JFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 5, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(exitCodeLabel))
-                    .addComponent(exitCodeTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(brsCodeLabel))
+                    .addComponent(brsCodeTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(91, 91, 91)
@@ -371,8 +375,8 @@ public class ReturnSheet extends javax.swing.JFrame {
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(8, 8, 8)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(exitDateLabel)
-                            .addComponent(exitDateTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(returnDateLabel)
+                            .addComponent(returnDateTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(totalLabel)
@@ -418,17 +422,17 @@ public class ReturnSheet extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void exitCodeTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_exitCodeTextFieldActionPerformed
+    private void brsCodeTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_brsCodeTextFieldActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_exitCodeTextFieldActionPerformed
+    }//GEN-LAST:event_brsCodeTextFieldActionPerformed
 
     private void warehouseCodeTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_warehouseCodeTextFieldActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_warehouseCodeTextFieldActionPerformed
 
-    private void exitDateTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_exitDateTextFieldActionPerformed
+    private void returnDateTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_returnDateTextFieldActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_exitDateTextFieldActionPerformed
+    }//GEN-LAST:event_returnDateTextFieldActionPerformed
 
     private void totalTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_totalTextFieldActionPerformed
         // TODO add your handling code here:
@@ -445,18 +449,86 @@ public class ReturnSheet extends javax.swing.JFrame {
     private void canceledToggleButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_canceledToggleButtonActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_canceledToggleButtonActionPerformed
-
+    private int currentIndex = 0;
+    private List<Return> returns;
     private void goToFirstButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_goToFirstButtonActionPerformed
         // TODO add your handling code here:
+try {
+        if (returns == null || returns.isEmpty()) {
+            // Retrieve all returns from the database
+            returns = DataBaseUtils.getAllReturns();
+        }
+
+        if (returns != null && !returns.isEmpty()) {
+            // Get the first return in the list
+            Return firstReturn = returns.get(0);
+
+            // Populate the text fields with the first return's data
+            brsCodeTextField.setText(firstReturn.getNumBrs());
+            warehouseCodeTextField.setText(firstReturn.getCodeMag());
+            returnDateTextField.setText(String.valueOf(firstReturn.getDateReint()));
+            totalTextField.setText(String.valueOf(firstReturn.getTotal()));
+            validDateTextField.setText(firstReturn.getDateValide().toString());
+            validToggleButton.setSelected(Boolean.parseBoolean(firstReturn.getValide()));
+            canceledToggleButton.setSelected(Boolean.parseBoolean(firstReturn.getAnnule()));
+        }
+    } catch (SQLException ex) {
+        ex.printStackTrace();
+    }        
     }//GEN-LAST:event_goToFirstButtonActionPerformed
 
     private void nextButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nextButtonActionPerformed
         // TODO add your handling code here:
+        if (returns == null || returns.isEmpty()) {
+            try {
+                // Retrieve all returns from the database
+                returns = DataBaseUtils.getAllReturns();
+            } catch (SQLException ex) {
+                Logger.getLogger(ReturnSheet.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            currentIndex = 0;
+        }
+        if (returns != null && !returns.isEmpty()) {
+            currentIndex++;
+            if (currentIndex >= returns.size()) {
+                currentIndex = 0; // Wrap around to the first return
+            }
 
+            // Populate the text fields with the next return's data
+            Return nextReturn = returns.get(currentIndex);
+            brsCodeTextField.setText(nextReturn.getNumBrs());
+            warehouseCodeTextField.setText(nextReturn.getCodeMag());
+            returnDateTextField.setText(String.valueOf(nextReturn.getDateReint()));
+            totalTextField.setText(String.valueOf(nextReturn.getTotal()));
+            validDateTextField.setText(nextReturn.getDateValide().toString());
+            validToggleButton.setSelected(Boolean.parseBoolean(nextReturn.getValide()));
+            canceledToggleButton.setSelected(Boolean.parseBoolean(nextReturn.getAnnule()));
+        }
     }//GEN-LAST:event_nextButtonActionPerformed
 
     private void goToLastButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_goToLastButtonActionPerformed
+    try {
+        if (returns == null || returns.isEmpty()) {
+            // Retrieve all returns from the database
+            returns = DataBaseUtils.getAllReturns();
+        }
 
+        if (returns != null && !returns.isEmpty()) {
+            // Get the last return in the list
+            Return lastReturn = returns.get(returns.size() - 1);
+
+            // Populate the text fields with the last return's data
+            brsCodeTextField.setText(lastReturn.getNumBrs());
+            warehouseCodeTextField.setText(lastReturn.getCodeMag());
+            returnDateTextField.setText(String.valueOf(lastReturn.getDateReint()));
+            totalTextField.setText(String.valueOf(lastReturn.getTotal()));
+            validDateTextField.setText(lastReturn.getDateValide().toString());
+            validToggleButton.setSelected(Boolean.parseBoolean(lastReturn.getValide()));
+            canceledToggleButton.setSelected(Boolean.parseBoolean(lastReturn.getAnnule()));
+        }
+    } catch (SQLException ex) {
+        ex.printStackTrace();
+    }
     }//GEN-LAST:event_goToLastButtonActionPerformed
 
     private void addButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addButtonActionPerformed
@@ -519,14 +591,12 @@ public class ReturnSheet extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton addButton;
+    private javax.swing.JLabel brsCodeLabel;
+    private javax.swing.JTextField brsCodeTextField;
     private javax.swing.JButton cancelButton;
     private javax.swing.JLabel canceledLabel;
     private javax.swing.JToggleButton canceledToggleButton;
     private javax.swing.JButton changeButton;
-    private javax.swing.JLabel exitCodeLabel;
-    private javax.swing.JTextField exitCodeTextField;
-    private javax.swing.JLabel exitDateLabel;
-    private javax.swing.JTextField exitDateTextField;
     private javax.swing.JLabel exitDescription;
     private javax.swing.JButton goToFirstButton;
     private javax.swing.JButton goToLastButton;
@@ -535,6 +605,8 @@ public class ReturnSheet extends javax.swing.JFrame {
     private javax.swing.JSeparator jSeparator3;
     private javax.swing.JButton lastButton;
     private javax.swing.JButton nextButton;
+    private javax.swing.JLabel returnDateLabel;
+    private javax.swing.JTextField returnDateTextField;
     private javax.swing.JLabel returnSheetLabel;
     private javax.swing.JButton saveButton;
     private javax.swing.JLabel sheetLogo;

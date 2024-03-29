@@ -173,6 +173,59 @@ public static void updateArticle(Article article) throws SQLException {
     }
 }
 
+// Logic for Exit Sheet
+public static List<Exit> getAllExits() throws SQLException {
+    List<Exit> exits = new ArrayList<>();
+
+    try (Connection connection = DriverManager.getConnection(DB_URL, DB_USER, DB_PASSWORD);
+         PreparedStatement statement = connection.prepareStatement("SELECT * FROM `Exit`")) {
+        ResultSet resultSet = statement.executeQuery();
+
+        while (resultSet.next()) {
+            Exit exit = new Exit();
+            exit.setNumSort(resultSet.getString("num_sort"));
+            exit.setNumOT(resultSet.getString("num_OT"));
+            exit.setCodeAnal(resultSet.getString("code_anal"));
+            exit.setCodeMag(resultSet.getString("code_mag"));
+            exit.setCodeUnit(resultSet.getString("code_unit"));
+            exit.setDateSort(resultSet.getDate("date_sort"));
+            exit.setTotal(resultSet.getInt("total"));
+            exit.setDateValide(resultSet.getDate("date_valide"));
+            exit.setValide(resultSet.getString("valide"));
+            exit.setAnnule(resultSet.getString("annule"));
+            exits.add(exit);
+        }
+    } catch (SQLException ex) {
+        throw ex;
+    }
+
+    return exits;
+}
+// Logic for Return Sheet
+public static List<Return> getAllReturns() throws SQLException {
+    List<Return> returns = new ArrayList<>();
+
+    try (Connection connection = DriverManager.getConnection(DB_URL, DB_USER, DB_PASSWORD);
+         PreparedStatement statement = connection.prepareStatement("SELECT * FROM `Return`")) {
+        ResultSet resultSet = statement.executeQuery();
+
+        while (resultSet.next()) {
+            Return returnObj = new Return();
+            returnObj.setNumBrs(resultSet.getString("num_brs"));
+            returnObj.setCodeMag(resultSet.getString("code_mag"));
+            returnObj.setDateReint(resultSet.getInt("date_reint"));
+            returnObj.setTotal(resultSet.getInt("total"));
+            returnObj.setDateValide(resultSet.getDate("date_valide"));
+            returnObj.setValide(resultSet.getString("valide"));
+            returnObj.setAnnule(resultSet.getString("annule"));
+            returns.add(returnObj);
+        }
+    } catch (SQLException ex) {
+        throw ex;
+    }
+
+    return returns;
+}
 
 }
 

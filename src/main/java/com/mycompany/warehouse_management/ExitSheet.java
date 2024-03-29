@@ -4,6 +4,11 @@
  */
 package com.mycompany.warehouse_management;
 
+import java.sql.SQLException;
+import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 /**
  *
  * @author lyeschl
@@ -462,16 +467,17 @@ public class ExitSheet extends javax.swing.JFrame {
                 .addGap(120, 120, 120)
                 .addComponent(jSeparator3, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(goToFirstButton, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(nextButton, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(goToLastButton, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(addButton, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(changeButton, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(cancelButton, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(lastButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(saveButton, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addComponent(lastButton, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(nextButton, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(goToLastButton, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(addButton, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(changeButton, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(cancelButton, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(saveButton, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addComponent(goToFirstButton, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(40, 40, 40))
         );
 
@@ -531,15 +537,93 @@ public class ExitSheet extends javax.swing.JFrame {
 
     private void goToFirstButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_goToFirstButtonActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_goToFirstButtonActionPerformed
+try {
+        if (exits == null || exits.isEmpty()) {
+            // Retrieve all exits from the database
+            exits = DataBaseUtils.getAllExits();
+        }
 
+        if (exits != null && !exits.isEmpty()) {
+            // Get the first exit in the list
+            Exit firstExit = exits.get(0);
+
+            // Populate the text fields with the first exit's data
+            exitCodeTextField.setText(firstExit.getNumSort());
+            otCodeTextField.setText(firstExit.getNumOT());
+            analyCodeTextField.setText(firstExit.getCodeAnal());
+            warehouseCodeTextField.setText(firstExit.getCodeMag());
+            unitCodeTextField.setText(firstExit.getCodeUnit());
+            exitDateTextField.setText(firstExit.getDateSort().toString());
+            totalTextField.setText(String.valueOf(firstExit.getTotal()));
+            validDateTextField.setText(firstExit.getDateValide().toString());
+            validToggleButton.setSelected(Boolean.parseBoolean(firstExit.getValide()));
+            canceledToggleButton.setSelected(Boolean.parseBoolean(firstExit.getAnnule()));
+        }
+    } catch (SQLException ex) {
+        ex.printStackTrace();
+    }
+    }//GEN-LAST:event_goToFirstButtonActionPerformed
+private int currentIndex = 0;
+private List<Exit> exits;
     private void nextButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nextButtonActionPerformed
         // TODO add your handling code here:
+        if (exits == null || exits.isEmpty()) {
+            try {
+                // Retrieve all exits from the database
+                exits = DataBaseUtils.getAllExits();
+            } catch (SQLException ex) {
+                Logger.getLogger(ExitSheet.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            currentIndex = 0;
+        }
+        if (exits != null && !exits.isEmpty()) {
+            currentIndex++;
+            if (currentIndex >= exits.size()) {
+                currentIndex = 0; // Wrap around to the first exit
+            }
+
+            // Populate the text fields with the next exit's data
+            Exit nextExit = exits.get(currentIndex);
+            exitCodeTextField.setText(nextExit.getNumSort());
+            otCodeTextField.setText(nextExit.getNumOT());
+            analyCodeTextField.setText(nextExit.getCodeAnal());
+            warehouseCodeTextField.setText(nextExit.getCodeMag());
+            unitCodeTextField.setText(nextExit.getCodeUnit());
+            exitDateTextField.setText(nextExit.getDateSort().toString());
+            totalTextField.setText(String.valueOf(nextExit.getTotal()));
+            validDateTextField.setText(nextExit.getDateValide().toString());
+            validToggleButton.setSelected(Boolean.parseBoolean(nextExit.getValide()));
+            canceledToggleButton.setSelected(Boolean.parseBoolean(nextExit.getAnnule()));
+        }
 
     }//GEN-LAST:event_nextButtonActionPerformed
 
     private void goToLastButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_goToLastButtonActionPerformed
+    try {
+        if (exits == null || exits.isEmpty()) {
+            // Retrieve all exits from the database
+            exits = DataBaseUtils.getAllExits();
+        }
 
+        if (exits != null && !exits.isEmpty()) {
+            // Get the last exit in the list
+            Exit lastExit = exits.get(exits.size() - 1);
+
+            // Populate the text fields with the last exit's data
+            exitCodeTextField.setText(lastExit.getNumSort());
+            otCodeTextField.setText(lastExit.getNumOT());
+            analyCodeTextField.setText(lastExit.getCodeAnal());
+            warehouseCodeTextField.setText(lastExit.getCodeMag());
+            unitCodeTextField.setText(lastExit.getCodeUnit());
+            exitDateTextField.setText(lastExit.getDateSort().toString());
+            totalTextField.setText(String.valueOf(lastExit.getTotal()));
+            validDateTextField.setText(lastExit.getDateValide().toString());
+            validToggleButton.setSelected(Boolean.parseBoolean(lastExit.getValide()));
+            canceledToggleButton.setSelected(Boolean.parseBoolean(lastExit.getAnnule()));
+        }
+    } catch (SQLException ex) {
+        ex.printStackTrace();
+    }
     }//GEN-LAST:event_goToLastButtonActionPerformed
 
     private void addButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addButtonActionPerformed
