@@ -58,6 +58,7 @@ public class Dashboard extends javax.swing.JFrame {
         advancedSearchButton = new javax.swing.JToggleButton();
         exitTicketButton = new javax.swing.JToggleButton();
         returnTicketButton = new javax.swing.JToggleButton();
+        manageArticlesButton = new javax.swing.JToggleButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         movesTable = new javax.swing.JTable();
         movesLabel = new javax.swing.JLabel();
@@ -146,6 +147,18 @@ public class Dashboard extends javax.swing.JFrame {
             }
         });
 
+        manageArticlesButton.setBackground(new java.awt.Color(51, 51, 51));
+        manageArticlesButton.setFont(new java.awt.Font("POI Aeronaut Trial", 1, 14)); // NOI18N
+        manageArticlesButton.setForeground(new java.awt.Color(153, 153, 153));
+        manageArticlesButton.setText("Manage Articles");
+        manageArticlesButton.setBorder(javax.swing.BorderFactory.createMatteBorder(2, 2, 2, 2, new java.awt.Color(0, 51, 102)));
+        manageArticlesButton.setContentAreaFilled(false);
+        manageArticlesButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                manageArticlesButtonActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
@@ -158,7 +171,8 @@ public class Dashboard extends javax.swing.JFrame {
                         .addComponent(accountSettingsButton, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 127, Short.MAX_VALUE)
                         .addComponent(helpButton, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addComponent(exitTicketButton, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(returnTicketButton, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(returnTicketButton, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(manageArticlesButton, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(14, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
@@ -167,10 +181,12 @@ public class Dashboard extends javax.swing.JFrame {
                 .addGap(25, 25, 25)
                 .addComponent(advancedSearchButton, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(manageArticlesButton, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(30, 30, 30)
                 .addComponent(exitTicketButton, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(returnTicketButton, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 200, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 139, Short.MAX_VALUE)
                 .addComponent(accountSettingsButton, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(helpButton)
@@ -341,6 +357,13 @@ public class Dashboard extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_articleTableMouseClicked
 
+    private void manageArticlesButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_manageArticlesButtonActionPerformed
+        // TODO add your handling code here:
+        dispose();
+        ArticleSheet as = new ArticleSheet();
+        as.setVisible(true);
+    }//GEN-LAST:event_manageArticlesButtonActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -393,6 +416,7 @@ public class Dashboard extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JLabel logoLabel1;
+    private javax.swing.JToggleButton manageArticlesButton;
     private javax.swing.JLabel movesLabel;
     private javax.swing.JTable movesTable;
     private javax.swing.JToggleButton newMove;
