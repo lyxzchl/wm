@@ -20,5 +20,11 @@ public class Warehouse_Management {
         
         // Set visibility to true
         loginInterface.setVisible(true);
+//        String p1 = PasswordUtils.hashPassword("admin01");
+//        String p2 = PasswordUtils.hashPassword("entry01");
+//        String p3 = PasswordUtils.hashPassword("consult01");
+//        System.out.println(p1);
+//        System.out.println(p2);
+//        System.out.println(p3);
     }
 }

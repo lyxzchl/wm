@@ -6,8 +6,10 @@ package com.mycompany.warehouse_management;
 import java.awt.Dimension;
 import java.awt.Toolkit;
 import java.awt.FontFormatException;
+import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -214,12 +216,24 @@ public class LoginInterface extends javax.swing.JFrame {
     }//GEN-LAST:event_passwordFieldActionPerformed
 
     private void continueButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_continueButtonActionPerformed
-        // TODO add your handling code here:
-        dispose();
-                        
-                // Code to open the new interface
-        Dashboard db = new Dashboard();
-        db.setVisible(true);
+        try {
+            // TODO add your handling code here:
+            boolean isAuthenticated = DataBaseUtils.authenticateUser(usernameText.getText(), passwordField.getText());
+            if (isAuthenticated) {
+                // User authentication successful
+                // Open the dashboard and close the login interface
+                Dashboard db = new Dashboard();
+                db.setVisible(true);
+                dispose();
+            } else {
+                // User authentication failed
+                // Show an error message
+                JOptionPane.showMessageDialog(this, "Invalid username or password.", "Error", JOptionPane.ERROR_MESSAGE);
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(LoginInterface.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
     }//GEN-LAST:event_continueButtonActionPerformed
 
     /**

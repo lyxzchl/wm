@@ -17,6 +17,22 @@ public class DataBaseUtils {
     private static final String DB_USER = "lyeschl";
     private static final String DB_PASSWORD = "lyessou1213";
 
+    public static boolean authenticateUser(String username, String password) throws SQLException {
+        String query = "SELECT password FROM users WHERE username = ?";
+        try (Connection conn = DriverManager.getConnection(DB_URL, DB_USER, DB_PASSWORD);
+             PreparedStatement stmt = conn.prepareStatement(query)) {
+            stmt.setString(1, username);
+            ResultSet rs = stmt.executeQuery();
+            if (rs.next()) {
+                String hashedPassword = rs.getString("password");
+                return PasswordUtils.verifyPassword(password, hashedPassword);
+            }
+            return false;
+        }
+    }
+
+
+
     public static void populateArticleTable(JTable table, String searchColumn, String searchValue) {
         try (Connection conn = DriverManager.getConnection(DB_URL, DB_USER, DB_PASSWORD);
              PreparedStatement stmt = conn.prepareStatement("SELECT * FROM Article WHERE " + searchColumn + " LIKE ?")) {
