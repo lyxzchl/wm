@@ -17,21 +17,78 @@ public class DataBaseUtils {
     private static final String DB_USER = "lyeschl";
     private static final String DB_PASSWORD = "lyessou1213";
 
-    public static boolean authenticateUser(String username, String password) throws SQLException {
-        String query = "SELECT password FROM users WHERE username = ?";
-        try (Connection conn = DriverManager.getConnection(DB_URL, DB_USER, DB_PASSWORD);
-             PreparedStatement stmt = conn.prepareStatement(query)) {
-            stmt.setString(1, username);
-            ResultSet rs = stmt.executeQuery();
-            if (rs.next()) {
-                String hashedPassword = rs.getString("password");
-                return PasswordUtils.verifyPassword(password, hashedPassword);
+    public static int authenticateUser(String username, String password) throws SQLException {
+    String query = "SELECT password, active, failed_attempts FROM users WHERE username = ?";
+    try (Connection conn = DriverManager.getConnection(DB_URL, DB_USER, DB_PASSWORD);
+         PreparedStatement stmt = conn.prepareStatement(query)) {
+        stmt.setString(1, username);
+        ResultSet rs = stmt.executeQuery();
+        if (rs.next()) {
+            boolean isActive = rs.getBoolean("active");
+            int failedAttempts = rs.getInt("failed_attempts");
+            if (!isActive) {
+                // Account is not active, return 2
+                return 2;
             }
-            return false;
+            if (failedAttempts >= 5) {
+                // Account is locked, set it to inactive and return 3
+                updateFailedAttempts(conn, username, true);
+                return 3;
+            }
+            String hashedPassword = rs.getString("password");
+            boolean isAuthenticated = PasswordUtils.verifyPassword(password, hashedPassword);
+            if (!isAuthenticated) {
+                // Increment the failed attempts count and return 1
+                updateFailedAttempts(conn, username, false);
+                return 1;
+            }
+            // Authentication successful, return 0
+            return 0;
         }
+        // Username not found, return -1
+        return -1;
     }
+}
+    private static void updateFailedAttempts(Connection conn, String username, boolean lockAccount) throws SQLException {
+    String query = "UPDATE users SET failed_attempts = ?, active = ? WHERE username = ?";
+    try (PreparedStatement stmt = conn.prepareStatement(query)) {
+        if (lockAccount) {
+            stmt.setInt(1, 5);
+            stmt.setBoolean(2, false);
+        } else {
+            int currentFailedAttempts = getCurrentFailedAttempts(conn, username);
+            stmt.setInt(1, currentFailedAttempts + 1);
+            stmt.setBoolean(2, true);
+        }
+        stmt.setString(3, username);
+        stmt.executeUpdate();
+    }
+}
 
+private static int getCurrentFailedAttempts(Connection conn, String username) throws SQLException {
+    String query = "SELECT failed_attempts FROM users WHERE username = ?";
+    try (PreparedStatement stmt = conn.prepareStatement(query)) {
+        stmt.setString(1, username);
+        ResultSet rs = stmt.executeQuery();
+        if (rs.next()) {
+            return rs.getInt("failed_attempts");
+        }
+        return 0;
+    }
+}
 
+    public static boolean isAccountActive(String username) throws SQLException {
+    String query = "SELECT active FROM users WHERE username = ?";
+    try (Connection conn = DriverManager.getConnection(DB_URL, DB_USER, DB_PASSWORD);
+        PreparedStatement stmt = conn.prepareStatement(query)) {
+        stmt.setString(1, username);
+        ResultSet rs = stmt.executeQuery();
+        if (rs.next()) {
+            return rs.getBoolean("active");
+        }
+        return false;
+    }
+}
 
     public static void populateArticleTable(JTable table, String searchColumn, String searchValue) {
         try (Connection conn = DriverManager.getConnection(DB_URL, DB_USER, DB_PASSWORD);
