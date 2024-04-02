@@ -13,40 +13,49 @@ import org.apache.pdfbox.pdmodel.font.PDType1Font;
  *
  * @author lyeschl
  */
+import com.itextpdf.kernel.pdf.PdfDocument;
+import com.itextpdf.kernel.pdf.PdfWriter;
+import com.itextpdf.layout.Document;
+import com.itextpdf.layout.element.Paragraph;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+
+import com.itextpdf.kernel.pdf.PdfDocument;
+import com.itextpdf.kernel.pdf.PdfWriter;
+import com.itextpdf.layout.Document;
+import com.itextpdf.layout.element.Paragraph;
+import com.itextpdf.layout.element.Table;
+import com.itextpdf.layout.properties.UnitValue;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+
 public class PDFGenerator {
-    public void generatePDF(String exitdate, String ticketcode, String nature,String desig, String articles, String pump, String articlecode, String outputFile) throws IOException {
-        try (PDDocument document = new PDDocument()) {
-            PDPage page = new PDPage();
-            document.addPage(page);
-
-            try (PDPageContentStream contentStream = new PDPageContentStream(document, page)) {
-                contentStream.beginText();
-                contentStream.setFont(PDType1Font.HELVETICA, 12);
-                contentStream.newLineAtOffset(100, 700);
-                contentStream.showText("Exit Date: " + exitdate);
-                contentStream.newLineAtOffset(0, -20);
-                contentStream.showText("Ticket Code: " + ticketcode);
-                contentStream.showText("Nature: " + nature);
-                contentStream.newLineAtOffset(0, -20);
-                contentStream.showText("Designation: " + desig);
-                contentStream.newLineAtOffset(0, -20);
-                contentStream.showText("N* Articles: " + articles);
-                contentStream.newLineAtOffset(0, -20);
-                contentStream.showText("Pump: " + pump);
-                contentStream.newLineAtOffset(0, -20);
-                contentStream.showText("Article Code: " + articlecode);
-                contentStream.endText();
-            }
-
-            document.save(outputFile);
-        }
-    }
-    public static void main(String[] args) {
-        PDFGenerator pdfGenerator = new PDFGenerator();
+    public void generatePDF(String exitDate, String ticketCode, String nature, String designation, String articles, String pump, String articleCode, String outputFile) throws IOException {
         try {
-        pdfGenerator.generatePDF("2023-04-20", "ABC123", "Maintenance", "Manager", "Wrench, Screwdriver, Pliers", "Pump 1", "PART-001", "output.pdf");            System.out.println("PDF generated successfully!");
-        } catch (IOException e) {
+            PdfWriter writer = new PdfWriter(outputFile);
+            PdfDocument pdf = new PdfDocument(writer);
+            Document document = new Document(pdf);
+
+            document.add(new Paragraph("Exit Date: " + exitDate));
+            document.add(new Paragraph("Ticket Code: " + ticketCode));
+            document.add(new Paragraph("Nature: " + nature));
+            document.add(new Paragraph("Designation: " + designation));
+
+            // Create a table with 2 columns
+            Table table = new Table(UnitValue.createPercentArray(new float[]{50, 50}));
+            table.addCell("Articles");
+            table.addCell(articles);
+            table.addCell("Pump");
+            table.addCell(pump);
+            table.addCell("Article Code");
+            table.addCell(articleCode);
+
+            document.add(table);
+
+            document.close();
+        } catch (FileNotFoundException e) {
             System.err.println("Error generating PDF: " + e.getMessage());
         }
     }
 }
+
