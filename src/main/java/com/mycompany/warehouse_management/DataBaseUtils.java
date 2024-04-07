@@ -18,7 +18,7 @@ public class DataBaseUtils {
     private static final String DB_PASSWORD = "lyessou1213";
 
     public static int authenticateUser(String username, String password) throws SQLException {
-    String query = "SELECT password, active, failed_attempts FROM users WHERE username = ?";
+    String query = "SELECT password, active, failed_attempts FROM users WHERE BINARY username = ?";
     try (Connection conn = DriverManager.getConnection(DB_URL, DB_USER, DB_PASSWORD);
          PreparedStatement stmt = conn.prepareStatement(query)) {
         stmt.setString(1, username);
