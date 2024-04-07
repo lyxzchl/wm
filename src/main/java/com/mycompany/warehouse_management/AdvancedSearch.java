@@ -4,10 +4,15 @@ import com.formdev.flatlaf.FlatDarkLaf;
 import com.formdev.flatlaf.FlatLightLaf;
 import java.awt.Dimension;
 import java.awt.Toolkit;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JTable;
 import javax.swing.UIManager;
+import javax.swing.event.ListSelectionEvent;
+import javax.swing.event.ListSelectionListener;
 
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
@@ -18,33 +23,104 @@ import javax.swing.UIManager;
  *
  * @author lyeschl
  */
+
+
 public class AdvancedSearch extends javax.swing.JFrame {
 
     /**
      * Creates new form AdvancedSearch
      */
     public AdvancedSearch() {
-
-            try {
+    try {
         UIManager.setLookAndFeel(new FlatDarkLaf());
-
-        
-        
     } catch (Exception ex) {
         Logger.getLogger(AdvancedSearch.class.getName()).log(Level.SEVERE, null, ex);
     }
-        initComponents();
-        Toolkit toolkit = Toolkit.getDefaultToolkit();
-        Dimension screenSize = toolkit.getScreenSize();
-        int screenWidth = screenSize.width;
-        int screenHeight = screenSize.height;
+    initComponents();
+    Toolkit toolkit = Toolkit.getDefaultToolkit();
+    Dimension screenSize = toolkit.getScreenSize();
+    int screenWidth = screenSize.width;
+    int screenHeight = screenSize.height;
 
-        int windowWidth = (int) (screenWidth * 0.8);
-        int windowHeight = (int) (screenHeight * 0.8);
-        setSize(windowWidth, windowHeight);
-        setLocationRelativeTo(null);
+    int windowWidth = (int) (screenWidth * 0.8);
+    int windowHeight = (int) (screenHeight * 0.8);
+    setSize(windowWidth, windowHeight);
+    setLocationRelativeTo(null);
+
+    // Add the listener to the resultsTable
+    resultsTable.getSelectionModel().addListSelectionListener(new ListSelectionListener() {
+    @Override
+    public void valueChanged(ListSelectionEvent event) {
+        if (!event.getValueIsAdjusting()) {
+            int selectedRow = resultsTable.getSelectedRow();
+            if (selectedRow != -1) {
+                // Get the selected article's data
+                String codeArt = (String) resultsTable.getValueAt(selectedRow, 0);
+                String desigArt = (String) resultsTable.getValueAt(selectedRow, 1);
+                String codeClass = (String) resultsTable.getValueAt(selectedRow, 2);
+                String uniteMes = (String) resultsTable.getValueAt(selectedRow, 3);
+                double qteSt = (double) resultsTable.getValueAt(selectedRow, 4);
+                String casier = (String) resultsTable.getValueAt(selectedRow, 5);
+                double stockMini = (double) resultsTable.getValueAt(selectedRow, 6);
+                double stockMax = (double) resultsTable.getValueAt(selectedRow, 7);
+                double stockSecu = (double) resultsTable.getValueAt(selectedRow, 8);
+                double valeur = (double) resultsTable.getValueAt(selectedRow, 9);
+                boolean mort = (boolean) resultsTable.getValueAt(selectedRow, 10);
+                String observation = (String) resultsTable.getValueAt(selectedRow, 11);
+                String rayon = (String) resultsTable.getValueAt(selectedRow, 12);
+                boolean dormant = (boolean) resultsTable.getValueAt(selectedRow, 13);
+                boolean actif = (boolean) resultsTable.getValueAt(selectedRow, 14);
+
+                // Create a new Article object with the selected data
+                Article selectedArticle = new Article(
+                    codeArt,
+                    desigArt,
+                    codeClass,
+                    uniteMes,
+                    qteSt,
+                    casier,
+                    stockMini,
+                    stockMax,
+                    stockSecu,
+                    valeur,
+                    mort,
+                    observation,
+                    rayon,
+                    dormant,
+                    actif
+                );
+
+                // Open the ArticleSheet interface and pass the selected article
+                ArticleSheet articleSheet = new ArticleSheet(selectedArticle);
+                articleSheet.setVisible(true);
+                dispose();
+            }
+        }
     }
+});
 
+
+}
+private double getDoubleValue(JTable table, int row, int column) {
+    java.lang.Class columnClass = table.getColumnClass(column);
+    if (columnClass == Double.class) {
+        return (double) table.getValueAt(row, column);
+    } else if (columnClass == Integer.class) {
+        return (int) table.getValueAt(row, column);
+    } else {
+        throw new ClassCastException("Cannot cast column " + column + " to Double");
+    }
+}
+
+private boolean getBooleanValue(JTable table, int row, int column) {
+    java.lang.Class columnClass = table.getColumnClass(column);
+    if (columnClass == Boolean.class) {
+        return (boolean) table.getValueAt(row, column);
+    } else {
+        throw new ClassCastException("Cannot cast column " + column + " to Boolean");
+    }
+}
+                
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -63,14 +139,14 @@ public class AdvancedSearch extends javax.swing.JFrame {
         codeRadio = new javax.swing.JRadioButton();
         classRadio = new javax.swing.JRadioButton();
         jScrollPane2 = new javax.swing.JScrollPane();
-        resultsTabel = new javax.swing.JTable();
+        resultsTable = new javax.swing.JTable();
         logoLabel = new javax.swing.JLabel();
         backButton = new javax.swing.JButton();
         desigRadio = new javax.swing.JRadioButton();
         searchLogoLabel = new javax.swing.JLabel();
         articleCount = new javax.swing.JLabel();
         articleCountTextField = new javax.swing.JTextField();
-        searchButton1 = new javax.swing.JButton();
+        searchButton = new javax.swing.JButton();
         measureUnitRadio = new javax.swing.JRadioButton();
         rayonRadio = new javax.swing.JRadioButton();
         casierRadio = new javax.swing.JRadioButton();
@@ -115,6 +191,24 @@ public class AdvancedSearch extends javax.swing.JFrame {
                 searchBarActionPerformed(evt);
             }
         });
+        searchBar.addKeyListener(new KeyListener() {
+            //    @Override
+            public void keyTyped(KeyEvent e) {
+                // Not used
+            }
+
+            //    @Override
+            public void keyPressed(KeyEvent e) {
+                if (e.getKeyCode() == KeyEvent.VK_ENTER) {
+                    searchButtonActionPerformed(null);
+                }
+            }
+
+            //    @Override
+            public void keyReleased(KeyEvent e) {
+                // Not used
+            }
+        });
 
         codeRadio.setBackground(new java.awt.Color(51, 51, 51));
         buttonGroup1.add(codeRadio);
@@ -140,356 +234,381 @@ public class AdvancedSearch extends javax.swing.JFrame {
 
         jScrollPane2.setBackground(new java.awt.Color(255, 255, 102));
 
-        resultsTabel.setBackground(new java.awt.Color(102, 102, 102));
-        resultsTabel.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null}
+        resultsTable.setBackground(new java.awt.Color(102, 102, 102));
+        resultsTable.setModel(new javax.swing.table.DefaultTableModel(
+            new Object[][] {
+                {null, null, null, null, null, null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null, null, null, null, null, null}
             },
-            new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4", "Title 5", "Title 6", "Title 7", "Title 8", "Title 9"
-            }
-        ));
-        resultsTabel.setGridColor(new java.awt.Color(153, 153, 153));
-        resultsTabel.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
-        resultsTabel.setShowGrid(true);
-        resultsTabel.setShowVerticalLines(false);
-        jScrollPane2.setViewportView(resultsTabel);
+            new String[] {
+                "Code_Art", "Desig_Art", "Code_Class", "Unite_Mes", "Qte_St", "Casier", "Stock_Mini", "Stock_Max", "Stock_Secu", "Valeur", "Mort", "Observation", "Rayon", "Dormant", "Actif"
+            })
+            {@Override
+                public java.lang.Class getColumnClass(int columnIndex) {
+                    switch (columnIndex) {
+                        case 0:
+                        case 1:
+                        case 2:
+                        case 3:
+                        case 5:
+                        case 11:
+                        case 12:
+                        return String.class;
+                        case 4:
+                        case 6:
+                        case 7:
+                        case 8:
+                        case 9:
+                        return Double.class;
+                        case 10:
+                        case 13:
+                        case 14:
+                        return Boolean.class;
+                        default:
+                        return Object.class;
+                    }
+                }}
+            );
+            resultsTable.setGridColor(new java.awt.Color(153, 153, 153));
+            resultsTable.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
+            resultsTable.setShowGrid(true);
+            resultsTable.setShowVerticalLines(false);
+            jScrollPane2.setViewportView(resultsTable);
 
-        logoLabel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/output-onlinepngtools(1).png"))); // NOI18N
+            logoLabel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/output-onlinepngtools(1).png"))); // NOI18N
 
-        backButton.setBackground(new java.awt.Color(51, 51, 51));
-        backButton.setFont(new java.awt.Font("POI Aeronaut Trial", 1, 12)); // NOI18N
-        backButton.setForeground(new java.awt.Color(153, 153, 153));
-        backButton.setText("<<Back");
-        backButton.setBorder(javax.swing.BorderFactory.createMatteBorder(2, 2, 2, 2, new java.awt.Color(0, 51, 102)));
-        backButton.setContentAreaFilled(false);
-        backButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                backButtonActionPerformed(evt);
-            }
-        });
+            backButton.setBackground(new java.awt.Color(51, 51, 51));
+            backButton.setFont(new java.awt.Font("POI Aeronaut Trial", 1, 12)); // NOI18N
+            backButton.setForeground(new java.awt.Color(153, 153, 153));
+            backButton.setText("<<Back");
+            backButton.setBorder(javax.swing.BorderFactory.createMatteBorder(2, 2, 2, 2, new java.awt.Color(0, 51, 102)));
+            backButton.setContentAreaFilled(false);
+            backButton.addActionListener(new java.awt.event.ActionListener() {
+                public void actionPerformed(java.awt.event.ActionEvent evt) {
+                    backButtonActionPerformed(evt);
+                }
+            });
 
-        desigRadio.setBackground(new java.awt.Color(51, 51, 51));
-        buttonGroup1.add(desigRadio);
-        desigRadio.setFont(new java.awt.Font("POI Aeronaut Trial", 0, 12)); // NOI18N
-        desigRadio.setForeground(new java.awt.Color(153, 153, 153));
-        desigRadio.setText("Designation");
-        desigRadio.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                desigRadioActionPerformed(evt);
-            }
-        });
+            desigRadio.setBackground(new java.awt.Color(51, 51, 51));
+            buttonGroup1.add(desigRadio);
+            desigRadio.setFont(new java.awt.Font("POI Aeronaut Trial", 0, 12)); // NOI18N
+            desigRadio.setForeground(new java.awt.Color(153, 153, 153));
+            desigRadio.setText("Designation");
+            desigRadio.addActionListener(new java.awt.event.ActionListener() {
+                public void actionPerformed(java.awt.event.ActionEvent evt) {
+                    desigRadioActionPerformed(evt);
+                }
+            });
 
-        searchLogoLabel.setIcon(new javax.swing.ImageIcon("/run/media/lyeschl/ssd/main/dox/study/l3si/pfe/thesis/images/icons/search_icon.png")); // NOI18N
+            searchLogoLabel.setIcon(new javax.swing.ImageIcon("/run/media/lyeschl/ssd/main/dox/study/l3si/pfe/thesis/images/icons/search_icon.png")); // NOI18N
 
-        articleCount.setBackground(new java.awt.Color(0, 0, 0));
-        articleCount.setFont(new java.awt.Font("POI Aeronaut Trial", 1, 14)); // NOI18N
-        articleCount.setForeground(new java.awt.Color(153, 153, 153));
-        articleCount.setText("Article count: ");
+            articleCount.setBackground(new java.awt.Color(0, 0, 0));
+            articleCount.setFont(new java.awt.Font("POI Aeronaut Trial", 1, 14)); // NOI18N
+            articleCount.setForeground(new java.awt.Color(153, 153, 153));
+            articleCount.setText("Article count: ");
 
-        articleCountTextField.setBackground(new java.awt.Color(51, 51, 51));
-        articleCountTextField.setFont(new java.awt.Font("POI Aeronaut Trial", 0, 11)); // NOI18N
-        articleCountTextField.setForeground(new java.awt.Color(153, 153, 153));
-        articleCountTextField.setText("69420");
-        articleCountTextField.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 2, 0, new java.awt.Color(0, 51, 102)));
-        articleCountTextField.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                articleCountTextFieldActionPerformed(evt);
-            }
-        });
+            articleCountTextField.setBackground(new java.awt.Color(51, 51, 51));
+            articleCountTextField.setFont(new java.awt.Font("POI Aeronaut Trial", 0, 11)); // NOI18N
+            articleCountTextField.setForeground(new java.awt.Color(153, 153, 153));
+            articleCountTextField.setText("69420");
+            articleCountTextField.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 2, 0, new java.awt.Color(0, 51, 102)));
+            articleCountTextField.addActionListener(new java.awt.event.ActionListener() {
+                public void actionPerformed(java.awt.event.ActionEvent evt) {
+                    articleCountTextFieldActionPerformed(evt);
+                }
+            });
 
-        searchButton1.setBackground(new java.awt.Color(51, 51, 51));
-        searchButton1.setFont(new java.awt.Font("POI Aeronaut Trial", 0, 11)); // NOI18N
-        searchButton1.setForeground(new java.awt.Color(153, 153, 153));
-        searchButton1.setText("Search");
-        searchButton1.setBorder(javax.swing.BorderFactory.createMatteBorder(2, 2, 2, 2, new java.awt.Color(0, 51, 102)));
-        searchButton1.setContentAreaFilled(false);
-        searchButton1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                searchButton1ActionPerformed(evt);
-            }
-        });
+            searchButton.setBackground(new java.awt.Color(51, 51, 51));
+            searchButton.setFont(new java.awt.Font("POI Aeronaut Trial", 0, 11)); // NOI18N
+            searchButton.setForeground(new java.awt.Color(153, 153, 153));
+            searchButton.setText("Search");
+            searchButton.setBorder(javax.swing.BorderFactory.createMatteBorder(2, 2, 2, 2, new java.awt.Color(0, 51, 102)));
+            searchButton.setContentAreaFilled(false);
+            searchButton.addActionListener(new java.awt.event.ActionListener() {
+                public void actionPerformed(java.awt.event.ActionEvent evt) {
+                    searchButtonActionPerformed(evt);
+                }
+            });
 
-        measureUnitRadio.setBackground(new java.awt.Color(51, 51, 51));
-        buttonGroup1.add(measureUnitRadio);
-        measureUnitRadio.setFont(new java.awt.Font("POI Aeronaut Trial", 0, 12)); // NOI18N
-        measureUnitRadio.setForeground(new java.awt.Color(153, 153, 153));
-        measureUnitRadio.setText("Measure Unit");
-        measureUnitRadio.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                measureUnitRadioActionPerformed(evt);
-            }
-        });
+            measureUnitRadio.setBackground(new java.awt.Color(51, 51, 51));
+            buttonGroup1.add(measureUnitRadio);
+            measureUnitRadio.setFont(new java.awt.Font("POI Aeronaut Trial", 0, 12)); // NOI18N
+            measureUnitRadio.setForeground(new java.awt.Color(153, 153, 153));
+            measureUnitRadio.setText("Measure Unit");
+            measureUnitRadio.addActionListener(new java.awt.event.ActionListener() {
+                public void actionPerformed(java.awt.event.ActionEvent evt) {
+                    measureUnitRadioActionPerformed(evt);
+                }
+            });
 
-        rayonRadio.setBackground(new java.awt.Color(51, 51, 51));
-        buttonGroup1.add(rayonRadio);
-        rayonRadio.setFont(new java.awt.Font("POI Aeronaut Trial", 0, 12)); // NOI18N
-        rayonRadio.setForeground(new java.awt.Color(153, 153, 153));
-        rayonRadio.setText("Aisle");
-        rayonRadio.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                rayonRadioActionPerformed(evt);
-            }
-        });
+            rayonRadio.setBackground(new java.awt.Color(51, 51, 51));
+            buttonGroup1.add(rayonRadio);
+            rayonRadio.setFont(new java.awt.Font("POI Aeronaut Trial", 0, 12)); // NOI18N
+            rayonRadio.setForeground(new java.awt.Color(153, 153, 153));
+            rayonRadio.setText("Aisle");
+            rayonRadio.addActionListener(new java.awt.event.ActionListener() {
+                public void actionPerformed(java.awt.event.ActionEvent evt) {
+                    rayonRadioActionPerformed(evt);
+                }
+            });
 
-        casierRadio.setBackground(new java.awt.Color(51, 51, 51));
-        buttonGroup1.add(casierRadio);
-        casierRadio.setFont(new java.awt.Font("POI Aeronaut Trial", 0, 12)); // NOI18N
-        casierRadio.setForeground(new java.awt.Color(153, 153, 153));
-        casierRadio.setText("Shelf");
-        casierRadio.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                casierRadioActionPerformed(evt);
-            }
-        });
+            casierRadio.setBackground(new java.awt.Color(51, 51, 51));
+            buttonGroup1.add(casierRadio);
+            casierRadio.setFont(new java.awt.Font("POI Aeronaut Trial", 0, 12)); // NOI18N
+            casierRadio.setForeground(new java.awt.Color(153, 153, 153));
+            casierRadio.setText("Shelf");
+            casierRadio.addActionListener(new java.awt.event.ActionListener() {
+                public void actionPerformed(java.awt.event.ActionEvent evt) {
+                    casierRadioActionPerformed(evt);
+                }
+            });
 
-        valueRadio.setBackground(new java.awt.Color(51, 51, 51));
-        buttonGroup1.add(valueRadio);
-        valueRadio.setFont(new java.awt.Font("POI Aeronaut Trial", 0, 12)); // NOI18N
-        valueRadio.setForeground(new java.awt.Color(153, 153, 153));
-        valueRadio.setText("Value");
-        valueRadio.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                valueRadioActionPerformed(evt);
-            }
-        });
+            valueRadio.setBackground(new java.awt.Color(51, 51, 51));
+            buttonGroup1.add(valueRadio);
+            valueRadio.setFont(new java.awt.Font("POI Aeronaut Trial", 0, 12)); // NOI18N
+            valueRadio.setForeground(new java.awt.Color(153, 153, 153));
+            valueRadio.setText("Value");
+            valueRadio.addActionListener(new java.awt.event.ActionListener() {
+                public void actionPerformed(java.awt.event.ActionEvent evt) {
+                    valueRadioActionPerformed(evt);
+                }
+            });
 
-        stockQRadio.setBackground(new java.awt.Color(51, 51, 51));
-        buttonGroup1.add(stockQRadio);
-        stockQRadio.setFont(new java.awt.Font("POI Aeronaut Trial", 0, 12)); // NOI18N
-        stockQRadio.setForeground(new java.awt.Color(153, 153, 153));
-        stockQRadio.setText("Stock Quantity");
-        stockQRadio.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                stockQRadioActionPerformed(evt);
-            }
-        });
+            stockQRadio.setBackground(new java.awt.Color(51, 51, 51));
+            buttonGroup1.add(stockQRadio);
+            stockQRadio.setFont(new java.awt.Font("POI Aeronaut Trial", 0, 12)); // NOI18N
+            stockQRadio.setForeground(new java.awt.Color(153, 153, 153));
+            stockQRadio.setText("Stock Quantity");
+            stockQRadio.addActionListener(new java.awt.event.ActionListener() {
+                public void actionPerformed(java.awt.event.ActionEvent evt) {
+                    stockQRadioActionPerformed(evt);
+                }
+            });
 
-        stockMinRadio.setBackground(new java.awt.Color(51, 51, 51));
-        buttonGroup1.add(stockMinRadio);
-        stockMinRadio.setFont(new java.awt.Font("POI Aeronaut Trial", 0, 12)); // NOI18N
-        stockMinRadio.setForeground(new java.awt.Color(153, 153, 153));
-        stockMinRadio.setText("Minimum Stock");
-        stockMinRadio.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                stockMinRadioActionPerformed(evt);
-            }
-        });
+            stockMinRadio.setBackground(new java.awt.Color(51, 51, 51));
+            buttonGroup1.add(stockMinRadio);
+            stockMinRadio.setFont(new java.awt.Font("POI Aeronaut Trial", 0, 12)); // NOI18N
+            stockMinRadio.setForeground(new java.awt.Color(153, 153, 153));
+            stockMinRadio.setText("Minimum Stock");
+            stockMinRadio.addActionListener(new java.awt.event.ActionListener() {
+                public void actionPerformed(java.awt.event.ActionEvent evt) {
+                    stockMinRadioActionPerformed(evt);
+                }
+            });
 
-        stockMaxRadio.setBackground(new java.awt.Color(51, 51, 51));
-        buttonGroup1.add(stockMaxRadio);
-        stockMaxRadio.setFont(new java.awt.Font("POI Aeronaut Trial", 0, 12)); // NOI18N
-        stockMaxRadio.setForeground(new java.awt.Color(153, 153, 153));
-        stockMaxRadio.setText("Maximum Stock");
-        stockMaxRadio.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                stockMaxRadioActionPerformed(evt);
-            }
-        });
+            stockMaxRadio.setBackground(new java.awt.Color(51, 51, 51));
+            buttonGroup1.add(stockMaxRadio);
+            stockMaxRadio.setFont(new java.awt.Font("POI Aeronaut Trial", 0, 12)); // NOI18N
+            stockMaxRadio.setForeground(new java.awt.Color(153, 153, 153));
+            stockMaxRadio.setText("Maximum Stock");
+            stockMaxRadio.addActionListener(new java.awt.event.ActionListener() {
+                public void actionPerformed(java.awt.event.ActionEvent evt) {
+                    stockMaxRadioActionPerformed(evt);
+                }
+            });
 
-        stockSecRadio.setBackground(new java.awt.Color(51, 51, 51));
-        buttonGroup1.add(stockSecRadio);
-        stockSecRadio.setFont(new java.awt.Font("POI Aeronaut Trial", 0, 12)); // NOI18N
-        stockSecRadio.setForeground(new java.awt.Color(153, 153, 153));
-        stockSecRadio.setText("Secure Stock");
-        stockSecRadio.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                stockSecRadioActionPerformed(evt);
-            }
-        });
+            stockSecRadio.setBackground(new java.awt.Color(51, 51, 51));
+            buttonGroup1.add(stockSecRadio);
+            stockSecRadio.setFont(new java.awt.Font("POI Aeronaut Trial", 0, 12)); // NOI18N
+            stockSecRadio.setForeground(new java.awt.Color(153, 153, 153));
+            stockSecRadio.setText("Secure Stock");
+            stockSecRadio.addActionListener(new java.awt.event.ActionListener() {
+                public void actionPerformed(java.awt.event.ActionEvent evt) {
+                    stockSecRadioActionPerformed(evt);
+                }
+            });
 
-        observRadio.setBackground(new java.awt.Color(51, 51, 51));
-        buttonGroup1.add(observRadio);
-        observRadio.setFont(new java.awt.Font("POI Aeronaut Trial", 0, 12)); // NOI18N
-        observRadio.setForeground(new java.awt.Color(153, 153, 153));
-        observRadio.setText("Observation");
-        observRadio.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                observRadioActionPerformed(evt);
-            }
-        });
+            observRadio.setBackground(new java.awt.Color(51, 51, 51));
+            buttonGroup1.add(observRadio);
+            observRadio.setFont(new java.awt.Font("POI Aeronaut Trial", 0, 12)); // NOI18N
+            observRadio.setForeground(new java.awt.Color(153, 153, 153));
+            observRadio.setText("Observation");
+            observRadio.addActionListener(new java.awt.event.ActionListener() {
+                public void actionPerformed(java.awt.event.ActionEvent evt) {
+                    observRadioActionPerformed(evt);
+                }
+            });
 
-        activeRadio.setBackground(new java.awt.Color(51, 51, 51));
-        buttonGroup1.add(activeRadio);
-        activeRadio.setFont(new java.awt.Font("POI Aeronaut Trial", 0, 12)); // NOI18N
-        activeRadio.setForeground(new java.awt.Color(153, 153, 153));
-        activeRadio.setText("Active");
-        activeRadio.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                activeRadioActionPerformed(evt);
-            }
-        });
+            activeRadio.setBackground(new java.awt.Color(51, 51, 51));
+            buttonGroup1.add(activeRadio);
+            activeRadio.setFont(new java.awt.Font("POI Aeronaut Trial", 0, 12)); // NOI18N
+            activeRadio.setForeground(new java.awt.Color(153, 153, 153));
+            activeRadio.setText("Active");
+            activeRadio.addActionListener(new java.awt.event.ActionListener() {
+                public void actionPerformed(java.awt.event.ActionEvent evt) {
+                    activeRadioActionPerformed(evt);
+                }
+            });
 
-        dormantRadio.setBackground(new java.awt.Color(51, 51, 51));
-        buttonGroup1.add(dormantRadio);
-        dormantRadio.setFont(new java.awt.Font("POI Aeronaut Trial", 0, 12)); // NOI18N
-        dormantRadio.setForeground(new java.awt.Color(153, 153, 153));
-        dormantRadio.setText("Dormant");
-        dormantRadio.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                dormantRadioActionPerformed(evt);
-            }
-        });
+            dormantRadio.setBackground(new java.awt.Color(51, 51, 51));
+            buttonGroup1.add(dormantRadio);
+            dormantRadio.setFont(new java.awt.Font("POI Aeronaut Trial", 0, 12)); // NOI18N
+            dormantRadio.setForeground(new java.awt.Color(153, 153, 153));
+            dormantRadio.setText("Dormant");
+            dormantRadio.addActionListener(new java.awt.event.ActionListener() {
+                public void actionPerformed(java.awt.event.ActionEvent evt) {
+                    dormantRadioActionPerformed(evt);
+                }
+            });
 
-        deadRadio.setBackground(new java.awt.Color(51, 51, 51));
-        buttonGroup1.add(deadRadio);
-        deadRadio.setFont(new java.awt.Font("POI Aeronaut Trial", 0, 12)); // NOI18N
-        deadRadio.setForeground(new java.awt.Color(153, 153, 153));
-        deadRadio.setText("Dead");
-        deadRadio.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                deadRadioActionPerformed(evt);
-            }
-        });
+            deadRadio.setBackground(new java.awt.Color(51, 51, 51));
+            buttonGroup1.add(deadRadio);
+            deadRadio.setFont(new java.awt.Font("POI Aeronaut Trial", 0, 12)); // NOI18N
+            deadRadio.setForeground(new java.awt.Color(153, 153, 153));
+            deadRadio.setText("Dead");
+            deadRadio.addActionListener(new java.awt.event.ActionListener() {
+                public void actionPerformed(java.awt.event.ActionEvent evt) {
+                    deadRadioActionPerformed(evt);
+                }
+            });
 
-        jLabel1.setFont(new java.awt.Font("POI Aeronaut Trial", 1, 36)); // NOI18N
-        jLabel1.setText("Advanced Search");
+            jLabel1.setFont(new java.awt.Font("POI Aeronaut Trial", 1, 36)); // NOI18N
+            jLabel1.setText("Advanced Search");
 
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(articleCount)
-                .addGap(18, 18, 18)
-                .addComponent(articleCountTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(49, 49, 49))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addGap(20, 20, 20)
-                .addComponent(backButton, javax.swing.GroupLayout.PREFERRED_SIZE, 124, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(203, 203, 203)
-                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 294, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(logoLabel)
-                .addGap(14, 14, 14))
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(185, 185, 185)
-                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 661, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(155, 155, 155)
-                        .addComponent(searchLogoLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(searchBar, javax.swing.GroupLayout.PREFERRED_SIZE, 466, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(searchButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 149, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addGroup(jPanel1Layout.createSequentialGroup()
-                                        .addComponent(valueRadio)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(codeRadio)
-                                        .addGap(9, 9, 9)
-                                        .addComponent(classRadio)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                        .addComponent(desigRadio)
-                                        .addGap(26, 26, 26)
-                                        .addComponent(stockMaxRadio)
-                                        .addGap(12, 12, 12)
-                                        .addComponent(measureUnitRadio)
-                                        .addGap(28, 28, 28)
-                                        .addComponent(rayonRadio)
-                                        .addGap(34, 34, 34))
-                                    .addGroup(jPanel1Layout.createSequentialGroup()
-                                        .addComponent(stockSecRadio)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                        .addComponent(stockQRadio)
-                                        .addGap(18, 18, 18)
-                                        .addComponent(observRadio)
-                                        .addGap(18, 18, 18)
-                                        .addComponent(activeRadio)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                        .addComponent(stockMinRadio)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(dormantRadio)
-                                        .addGap(26, 26, 26)))
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(deadRadio)
-                                    .addComponent(casierRadio))))))
-                .addContainerGap(180, Short.MAX_VALUE))
-        );
-        jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(logoLabel))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(17, 17, 17)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jLabel1)
-                            .addComponent(backButton, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(searchLogoLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addGap(53, 53, 53)
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                    .addComponent(searchBar)
-                                    .addComponent(searchButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                        .addGap(25, 25, 25)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(casierRadio)
-                            .addComponent(rayonRadio)
-                            .addComponent(measureUnitRadio)
-                            .addComponent(stockMaxRadio)
-                            .addComponent(desigRadio)
-                            .addComponent(classRadio)
-                            .addComponent(codeRadio)
-                            .addComponent(valueRadio))
-                        .addGap(21, 21, 21)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(observRadio)
-                            .addComponent(activeRadio)
-                            .addComponent(dormantRadio)
-                            .addComponent(deadRadio)
-                            .addComponent(stockSecRadio)
-                            .addComponent(stockMinRadio)
-                            .addComponent(stockQRadio))
-                        .addGap(18, 18, 18)
-                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 267, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(9, 9, 9)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(articleCount, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(articleCountTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(22, 22, 22))
-        );
+            javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+            jPanel1.setLayout(jPanel1Layout);
+            jPanel1Layout.setHorizontalGroup(
+                jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                    .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(articleCount)
+                    .addGap(18, 18, 18)
+                    .addComponent(articleCountTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGap(49, 49, 49))
+                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                    .addGap(20, 20, 20)
+                    .addComponent(backButton, javax.swing.GroupLayout.PREFERRED_SIZE, 124, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGap(203, 203, 203)
+                    .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 294, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(logoLabel)
+                    .addGap(14, 14, 14))
+                .addGroup(jPanel1Layout.createSequentialGroup()
+                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addGroup(jPanel1Layout.createSequentialGroup()
+                            .addGap(185, 185, 185)
+                            .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 661, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGroup(jPanel1Layout.createSequentialGroup()
+                            .addGap(155, 155, 155)
+                            .addComponent(searchLogoLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addGroup(jPanel1Layout.createSequentialGroup()
+                                    .addComponent(searchBar, javax.swing.GroupLayout.PREFERRED_SIZE, 466, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(searchButton, javax.swing.GroupLayout.PREFERRED_SIZE, 149, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGroup(jPanel1Layout.createSequentialGroup()
+                                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                        .addGroup(jPanel1Layout.createSequentialGroup()
+                                            .addComponent(valueRadio)
+                                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                            .addComponent(codeRadio)
+                                            .addGap(9, 9, 9)
+                                            .addComponent(classRadio)
+                                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                            .addComponent(desigRadio)
+                                            .addGap(26, 26, 26)
+                                            .addComponent(stockMaxRadio)
+                                            .addGap(12, 12, 12)
+                                            .addComponent(measureUnitRadio)
+                                            .addGap(28, 28, 28)
+                                            .addComponent(rayonRadio)
+                                            .addGap(34, 34, 34))
+                                        .addGroup(jPanel1Layout.createSequentialGroup()
+                                            .addComponent(stockSecRadio)
+                                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                            .addComponent(stockQRadio)
+                                            .addGap(18, 18, 18)
+                                            .addComponent(observRadio)
+                                            .addGap(18, 18, 18)
+                                            .addComponent(activeRadio)
+                                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                            .addComponent(stockMinRadio)
+                                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                            .addComponent(dormantRadio)
+                                            .addGap(26, 26, 26)))
+                                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addComponent(deadRadio)
+                                        .addComponent(casierRadio))))))
+                    .addContainerGap(180, Short.MAX_VALUE))
+            );
+            jPanel1Layout.setVerticalGroup(
+                jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(jPanel1Layout.createSequentialGroup()
+                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(jPanel1Layout.createSequentialGroup()
+                            .addContainerGap()
+                            .addComponent(logoLabel))
+                        .addGroup(jPanel1Layout.createSequentialGroup()
+                            .addGap(17, 17, 17)
+                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                .addComponent(jLabel1)
+                                .addComponent(backButton, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addGroup(jPanel1Layout.createSequentialGroup()
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(searchLogoLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGroup(jPanel1Layout.createSequentialGroup()
+                                    .addGap(53, 53, 53)
+                                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                        .addComponent(searchBar)
+                                        .addComponent(searchButton, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                            .addGap(25, 25, 25)
+                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                .addComponent(casierRadio)
+                                .addComponent(rayonRadio)
+                                .addComponent(measureUnitRadio)
+                                .addComponent(stockMaxRadio)
+                                .addComponent(desigRadio)
+                                .addComponent(classRadio)
+                                .addComponent(codeRadio)
+                                .addComponent(valueRadio))
+                            .addGap(21, 21, 21)
+                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                .addComponent(observRadio)
+                                .addComponent(activeRadio)
+                                .addComponent(dormantRadio)
+                                .addComponent(deadRadio)
+                                .addComponent(stockSecRadio)
+                                .addComponent(stockMinRadio)
+                                .addComponent(stockQRadio))
+                            .addGap(18, 18, 18)
+                            .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 267, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGap(9, 9, 9)
+                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(articleCount, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(articleCountTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGap(22, 22, 22))
+            );
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addContainerGap())
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addContainerGap())
-        );
+            javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
+            getContentPane().setLayout(layout);
+            layout.setHorizontalGroup(
+                layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                    .addContainerGap()
+                    .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addContainerGap())
+            );
+            layout.setVerticalGroup(
+                layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                    .addContainerGap()
+                    .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addContainerGap())
+            );
 
-        pack();
-    }// </editor-fold>//GEN-END:initComponents
+            pack();
+        }// </editor-fold>//GEN-END:initComponents
 
     private void searchBarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_searchBarActionPerformed
         // TODO add your handling code here:
@@ -511,7 +630,7 @@ public class AdvancedSearch extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_articleCountTextFieldActionPerformed
 
-    private void searchButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_searchButton1ActionPerformed
+    private void searchButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_searchButtonActionPerformed
         String searchColumn = "";
         String searchValue = searchBar.getText().trim();
 
@@ -547,11 +666,16 @@ public class AdvancedSearch extends javax.swing.JFrame {
             searchColumn = "mort";
         }
 
-        if (!searchColumn.isEmpty() && !searchValue.isEmpty()) {
-            DataBaseUtils.populateArticleTable(resultsTabel, searchColumn, searchValue);
-            resultsTabel.revalidate();
-            resultsTabel.repaint();
+        if (!searchValue.isEmpty()) {
+        if (!searchColumn.isEmpty()) {
+            DataBaseUtils.populateArticleTable(resultsTable, searchColumn, searchValue);
+        } else {
+            // If no radio button is selected, search in all columns
+            DataBaseUtils.populateArticleTable(resultsTable, searchValue);
         }
+        resultsTable.revalidate();
+        resultsTable.repaint();
+    }
         // Get the count of articles
         int articleCount;
         try {
@@ -563,8 +687,8 @@ public class AdvancedSearch extends javax.swing.JFrame {
         }
         
 
-    }//GEN-LAST:event_searchButton1ActionPerformed
-
+    }//GEN-LAST:event_searchButtonActionPerformed
+    
     private void backButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backButtonActionPerformed
         // TODO add your handling code here:
         dispose();
@@ -676,9 +800,9 @@ public class AdvancedSearch extends javax.swing.JFrame {
     private javax.swing.JRadioButton measureUnitRadio;
     private javax.swing.JRadioButton observRadio;
     private javax.swing.JRadioButton rayonRadio;
-    private javax.swing.JTable resultsTabel;
+    private javax.swing.JTable resultsTable;
     private javax.swing.JTextField searchBar;
-    private javax.swing.JButton searchButton1;
+    private javax.swing.JButton searchButton;
     private javax.swing.JLabel searchLogoLabel;
     private javax.swing.JRadioButton stockMaxRadio;
     private javax.swing.JRadioButton stockMinRadio;

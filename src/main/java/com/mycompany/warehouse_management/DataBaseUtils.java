@@ -125,6 +125,56 @@ private static int getCurrentFailedAttempts(Connection conn, String username) th
             ex.printStackTrace(); // Add this line to print the stack trace of any SQL exceptions
         }
 }
+    public static void populateArticleTable(JTable table, String searchValue) {
+    try (Connection conn = DriverManager.getConnection(DB_URL, DB_USER, DB_PASSWORD);
+         PreparedStatement stmt = conn.prepareStatement("SELECT * FROM Article WHERE " +
+                 "code_art LIKE ? OR " +
+                 "desig_art LIKE ? OR " +
+                 "code_class LIKE ? OR " +
+                 "unite_mes LIKE ? OR " +
+                 "casier LIKE ? OR " +
+                 "rayon LIKE ? OR " +
+                 "observation LIKE ?")) {
+
+        stmt.setString(1, "%" + searchValue + "%");
+        stmt.setString(2, "%" + searchValue + "%");
+        stmt.setString(3, "%" + searchValue + "%");
+        stmt.setString(4, "%" + searchValue + "%");
+        stmt.setString(5, "%" + searchValue + "%");
+        stmt.setString(6, "%" + searchValue + "%");
+        stmt.setString(7, "%" + searchValue + "%");
+
+        ResultSet rs = stmt.executeQuery();
+
+        // Get the metadata of the result set
+        ResultSetMetaData metaData = rs.getMetaData();
+        int columnCount = metaData.getColumnCount();
+
+        // Create a default table model to store the data
+        DefaultTableModel model = new DefaultTableModel();
+
+        // Add column names
+        for (int i = 1; i <= columnCount; i++) {
+            model.addColumn(metaData.getColumnName(i));
+        }
+
+        // Add data rows
+        while (rs.next()) {
+            Object[] row = new Object[columnCount];
+            for (int i = 1; i <= columnCount; i++) {
+                row[i - 1] = rs.getObject(i);
+            }
+            model.addRow(row);
+        }
+
+        // Set the table model
+        table.setModel(model);
+    } catch (SQLException ex) {
+        ex.printStackTrace();
+    }
+}
+
+
     public static int countArticles() throws SQLException {
         int count = 0;
         try (Connection conn = DriverManager.getConnection(DB_URL, DB_USER, DB_PASSWORD);

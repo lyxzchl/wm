@@ -25,6 +25,28 @@ public class Article {
     private boolean dormant;
     private boolean actif;
 
+    public Article() {
+    }
+
+    
+    public Article(String codeArt, String desigArt, String codeClass, String uniteMes, double qteSt, String casier, double stockMini, double stockMax, double stockSecu, double valeur, boolean mort, String observation, String rayon, boolean dormant, boolean actif) {
+        this.codeArt = codeArt;
+        this.desigArt = desigArt;
+        this.codeClass = codeClass;
+        this.uniteMes = uniteMes;
+        this.qteSt = qteSt;
+        this.casier = casier;
+        this.stockMini = stockMini;
+        this.stockMax = stockMax;
+        this.stockSecu = stockSecu;
+        this.valeur = valeur;
+        this.mort = mort;
+        this.observation = observation;
+        this.rayon = rayon;
+        this.dormant = dormant;
+        this.actif = actif;
+    }
+
 
     public String getCodeArt() {
         return codeArt;

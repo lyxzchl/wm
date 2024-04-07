@@ -20,11 +20,15 @@ import javax.swing.UIManager;
  * @author lyeschl
  */
 public class ArticleSheet extends javax.swing.JFrame {
-
+    private Article article;
     /**
      * Creates new form Article
      */
     public ArticleSheet() {
+        initComponents();
+        // You can initialize the text fields with default values or leave them empty
+    }
+    public ArticleSheet(Article article) {
                try {
         UIManager.setLookAndFeel(new FlatDarkLaf());
 
@@ -44,7 +48,25 @@ public class ArticleSheet extends javax.swing.JFrame {
         setSize(windowWidth, windowHeight);
         setLocationRelativeTo(null);
         articles = new ArrayList<Article>();
+        // Populate the text fields with the article's data
+        classTextField.setText(article.getCodeClass());
+        articleCodeTextField.setText(article.getCodeArt());
+        observTextField.setText(article.getDesigArt());
+        mesureUTextField.setText(article.getUniteMes());
+        stockQTextField.setText(String.valueOf(article.getQteSt()));
+        shelfTextField.setText(article.getCasier());
+        observTextField.setText(article.getObservation());
+        deadToggleButton.setText(article.isMort() ? "Yes" : "No");
+        dormantToggleButton.setText(article.isDormant() ? "Yes" : "No");
+        activeToggleButton.setText(article.isActif() ? "Yes" : "No");
+        aisleTextField.setText(article.getRayon());
+        stockMinTextField.setText(String.valueOf(article.getStockMini()));
+        stockMaxTextField.setText(String.valueOf(article.getStockMax()));
+        stockSecTextField.setText(String.valueOf(article.getStockSecu()));
+        valueTextField.setText(String.valueOf(article.getValeur()));
     }
+
+    
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -764,100 +786,100 @@ public class ArticleSheet extends javax.swing.JFrame {
         ex.printStackTrace();
     }
     }//GEN-LAST:event_goToFirstButtonActionPerformed
-    private Article getCurrentArticle() {
-        Article currentArticle = new Article();
-        currentArticle.setCodeClass(classTextField.getText());
-        currentArticle.setCodeArt(articleCodeTextField.getText());
-        currentArticle.setDesigArt(observTextField.getText());
-        currentArticle.setUniteMes(mesureUTextField.getText());
-        currentArticle.setQteSt(Double.parseDouble(stockQTextField.getText()));
-        currentArticle.setCasier(shelfTextField.getText());
-        currentArticle.setObservation(observTextField.getText());
-        currentArticle.setMort(deadToggleButton.getText().equalsIgnoreCase("Yes"));
-        currentArticle.setDormant(dormantToggleButton.getText().equalsIgnoreCase("Yes"));
-        currentArticle.setActif(activeToggleButton.getText().equalsIgnoreCase("Yes"));
-        currentArticle.setRayon(aisleTextField.getText());
-        currentArticle.setStockMini(Double.parseDouble(stockMinTextField.getText()));
-        currentArticle.setStockMax(Double.parseDouble(stockMaxTextField.getText()));
-        currentArticle.setStockSecu(Double.parseDouble(stockSecTextField.getText()));
-        currentArticle.setValeur(Double.parseDouble(valueTextField.getText()));
-        return currentArticle;
-}
+//    private Article getCurrentArticle() {
+////        Article currentArticle = new Article();
+////        currentArticle.setCodeClass(classTextField.getText());
+////        currentArticle.setCodeArt(articleCodeTextField.getText());
+////        currentArticle.setDesigArt(observTextField.getText());
+////        currentArticle.setUniteMes(mesureUTextField.getText());
+////        currentArticle.setQteSt(Double.parseDouble(stockQTextField.getText()));
+////        currentArticle.setCasier(shelfTextField.getText());
+////        currentArticle.setObservation(observTextField.getText());
+////        currentArticle.setMort(deadToggleButton.getText().equalsIgnoreCase("Yes"));
+////        currentArticle.setDormant(dormantToggleButton.getText().equalsIgnoreCase("Yes"));
+////        currentArticle.setActif(activeToggleButton.getText().equalsIgnoreCase("Yes"));
+////        currentArticle.setRayon(aisleTextField.getText());
+////        currentArticle.setStockMini(Double.parseDouble(stockMinTextField.getText()));
+////        currentArticle.setStockMax(Double.parseDouble(stockMaxTextField.getText()));
+////        currentArticle.setStockSecu(Double.parseDouble(stockSecTextField.getText()));
+////        currentArticle.setValeur(Double.parseDouble(valueTextField.getText()));
+////        return currentArticle;
+//}
 
 
     private void changeButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_changeButtonActionPerformed
         // TODO add your handling code here:
-        try {
-        // Get the currently selected article from the list
-        int selectedIndex = articles.indexOf(getCurrentArticle());
-        if (selectedIndex >= 0) {
-            // Update the selected article with the values from the text fields
-            Article selectedArticle = articles.get(selectedIndex);
-            selectedArticle.setCodeClass(classTextField.getText());
-            selectedArticle.setCodeArt(articleCodeTextField.getText());
-            selectedArticle.setDesigArt(observTextField.getText());
-            selectedArticle.setUniteMes(mesureUTextField.getText());
-            selectedArticle.setQteSt(Double.parseDouble(stockQTextField.getText()));
-            selectedArticle.setCasier(shelfTextField.getText());
-            selectedArticle.setObservation(observTextField.getText());
-            selectedArticle.setMort(deadToggleButton.getText().equalsIgnoreCase("Yes"));
-            selectedArticle.setDormant(dormantToggleButton.getText().equalsIgnoreCase("Yes"));
-            selectedArticle.setActif(activeToggleButton.getText().equalsIgnoreCase("Yes"));
-            selectedArticle.setRayon(aisleTextField.getText());
-            selectedArticle.setStockMini(Double.parseDouble(stockMinTextField.getText()));
-            selectedArticle.setStockMax(Double.parseDouble(stockMaxTextField.getText()));
-            selectedArticle.setStockSecu(Double.parseDouble(stockSecTextField.getText()));
-            selectedArticle.setValeur(Double.parseDouble(valueTextField.getText()));
-        }
-    } catch (NumberFormatException ex) {
-        // Handle any errors in parsing the numeric values
-        JOptionPane.showMessageDialog(this, "Please enter valid numeric values.", "Error", JOptionPane.ERROR_MESSAGE);
-    }
+//        try {
+//        // Get the currently selected article from the list
+//        int selectedIndex = articles.indexOf(getCurrentArticle());
+//        if (selectedIndex >= 0) {
+//            // Update the selected article with the values from the text fields
+//            Article selectedArticle = articles.get(selectedIndex);
+//            selectedArticle.setCodeClass(classTextField.getText());
+//            selectedArticle.setCodeArt(articleCodeTextField.getText());
+//            selectedArticle.setDesigArt(observTextField.getText());
+//            selectedArticle.setUniteMes(mesureUTextField.getText());
+//            selectedArticle.setQteSt(Double.parseDouble(stockQTextField.getText()));
+//            selectedArticle.setCasier(shelfTextField.getText());
+//            selectedArticle.setObservation(observTextField.getText());
+//            selectedArticle.setMort(deadToggleButton.getText().equalsIgnoreCase("Yes"));
+//            selectedArticle.setDormant(dormantToggleButton.getText().equalsIgnoreCase("Yes"));
+//            selectedArticle.setActif(activeToggleButton.getText().equalsIgnoreCase("Yes"));
+//            selectedArticle.setRayon(aisleTextField.getText());
+//            selectedArticle.setStockMini(Double.parseDouble(stockMinTextField.getText()));
+//            selectedArticle.setStockMax(Double.parseDouble(stockMaxTextField.getText()));
+//            selectedArticle.setStockSecu(Double.parseDouble(stockSecTextField.getText()));
+//            selectedArticle.setValeur(Double.parseDouble(valueTextField.getText()));
+//        }
+//    } catch (NumberFormatException ex) {
+//        // Handle any errors in parsing the numeric values
+//        JOptionPane.showMessageDialog(this, "Please enter valid numeric values.", "Error", JOptionPane.ERROR_MESSAGE);
+//    }
 
     }//GEN-LAST:event_changeButtonActionPerformed
-
+//
     private void saveButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_saveButtonActionPerformed
         // TODO add your handling code here:
-    try {
-        // Save the new or modified articles to the database
-        for (Article article : articles) {
-            Article existingArticle = DataBaseUtils.getArticleById(article.getCodeArt());
-            if (existingArticle == null) {
-                // New article, insert it into the database
-                DataBaseUtils.insertArticle(article);
-            } else {
-                // Existing article, update it in the database
-                updateArticleInDatabase(article, existingArticle);
-            }
-        }
-
-        // Clear the text fields
-        clearTextFields();
-    } catch (SQLException ex) {
-        // Handle any SQL exceptions
-        JOptionPane.showMessageDialog(this, "Error saving article: " + ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
-    }
+//    try {
+//        // Save the new or modified articles to the database
+//        for (Article article : articles) {
+//            Article existingArticle = DataBaseUtils.getArticleById(article.getCodeArt());
+//            if (existingArticle == null) {
+//                // New article, insert it into the database
+//                DataBaseUtils.insertArticle(article);
+//            } else {
+//                // Existing article, update it in the database
+//                updateArticleInDatabase(article, existingArticle);
+//            }
+//        }
+//
+//        // Clear the text fields
+//        clearTextFields();
+//    } catch (SQLException ex) {
+//        // Handle any SQL exceptions
+//        JOptionPane.showMessageDialog(this, "Error saving article: " + ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+//    }
     }//GEN-LAST:event_saveButtonActionPerformed
-    private void updateArticleInDatabase(Article newArticle, Article existingArticle) throws SQLException {
-        // Update the existing article with the new values
-        existingArticle.setDesigArt(newArticle.getDesigArt());
-        existingArticle.setCodeClass(newArticle.getCodeClass());
-        existingArticle.setUniteMes(newArticle.getUniteMes());
-        existingArticle.setQteSt(newArticle.getQteSt());
-        existingArticle.setCasier(newArticle.getCasier());
-        existingArticle.setStockMini(newArticle.getStockMini());
-        existingArticle.setStockMax(newArticle.getStockMax());
-        existingArticle.setStockSecu(newArticle.getStockSecu());
-        existingArticle.setValeur(newArticle.getValeur());
-        existingArticle.setMort(newArticle.isMort());
-        existingArticle.setObservation(newArticle.getObservation());
-        existingArticle.setRayon(newArticle.getRayon());
-        existingArticle.setDormant(newArticle.isDormant());
-        existingArticle.setActif(newArticle.isActif());
-
-        // Update the article in the database
-        DataBaseUtils.updateArticle(existingArticle);
-}
+//    private void updateArticleInDatabase(Article newArticle, Article existingArticle) throws SQLException {
+//        // Update the existing article with the new values
+//        existingArticle.setDesigArt(newArticle.getDesigArt());
+//        existingArticle.setCodeClass(newArticle.getCodeClass());
+//        existingArticle.setUniteMes(newArticle.getUniteMes());
+//        existingArticle.setQteSt(newArticle.getQteSt());
+//        existingArticle.setCasier(newArticle.getCasier());
+//        existingArticle.setStockMini(newArticle.getStockMini());
+//        existingArticle.setStockMax(newArticle.getStockMax());
+//        existingArticle.setStockSecu(newArticle.getStockSecu());
+//        existingArticle.setValeur(newArticle.getValeur());
+//        existingArticle.setMort(newArticle.isMort());
+//        existingArticle.setObservation(newArticle.getObservation());
+//        existingArticle.setRayon(newArticle.getRayon());
+//        existingArticle.setDormant(newArticle.isDormant());
+//        existingArticle.setActif(newArticle.isActif());
+//
+//        // Update the article in the database
+//        DataBaseUtils.updateArticle(existingArticle);
+//}
     private void cancelButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cancelButtonActionPerformed
         // TODO add your handling code here:
         dispose();
