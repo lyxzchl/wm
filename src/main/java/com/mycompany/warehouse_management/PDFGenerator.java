@@ -28,9 +28,11 @@ import com.itextpdf.layout.element.Table;
 import com.itextpdf.layout.properties.UnitValue;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.text.SimpleDateFormat;
+import java.util.List;
 
 public class PDFGenerator {
-    public void generatePDF(String exitDate, String ticketCode, String nature, String designation, String articles, String pump, String articleCode, String outputFile) throws IOException {
+    public void generateExitPDF(String exitDate, String ticketCode, List<ArticleExit> exitArticles, String outputFile) throws IOException {
         try {
             PdfWriter writer = new PdfWriter(outputFile);
             PdfDocument pdf = new PdfDocument(writer);
@@ -38,17 +40,76 @@ public class PDFGenerator {
 
             document.add(new Paragraph("Exit Date: " + exitDate));
             document.add(new Paragraph("Ticket Code: " + ticketCode));
-            document.add(new Paragraph("Nature: " + nature));
-            document.add(new Paragraph("Designation: " + designation));
 
-            // Create a table with 2 columns
-            Table table = new Table(UnitValue.createPercentArray(new float[]{50, 50}));
-            table.addCell("Articles");
-            table.addCell(articles);
-            table.addCell("Pump");
-            table.addCell(pump);
-            table.addCell("Article Code");
-            table.addCell(articleCode);
+            // Create a table with the ArticleExit properties
+            Table table = new Table(UnitValue.createPercentArray(new float[]{10, 20, 10, 10, 10, 10, 10, 10, 10}));
+            table.addCell("Num Sort");
+            table.addCell("Code Art");
+            table.addCell("Qte Sort");
+            table.addCell("Prix Unit");
+            table.addCell("Montant S");
+            table.addCell("Pump Anc");
+            table.addCell("Qte Stock Anc");
+            table.addCell("Pump Nouv");
+            table.addCell("Qte Stock Nouv");
+
+            for (ArticleExit article : exitArticles) {
+                table.addCell(article.getNumSort());
+                table.addCell(article.getCodeArt());
+                table.addCell(String.valueOf(article.getQteSort()));
+                table.addCell(String.valueOf(article.getPrixUnit()));
+                table.addCell(String.valueOf(article.getMontantS()));
+                table.addCell(String.valueOf(article.getPumpAnc()));
+                table.addCell(String.valueOf(article.getQteStockAnc()));
+                table.addCell(String.valueOf(article.getPumpNouv()));
+                table.addCell(String.valueOf(article.getQteStockNouv()));
+            }
+
+            document.add(table);
+
+            document.close();
+        } catch (FileNotFoundException e) {
+            System.err.println("Error generating PDF: " + e.getMessage());
+        }
+    }
+    public void generateReturnPDF(String returnDate, String ticketCode, List<ArticleReturn> returnArticles, String outputFile) throws IOException {
+        try {
+            PdfWriter writer = new PdfWriter(outputFile);
+            PdfDocument pdf = new PdfDocument(writer);
+            Document document = new Document(pdf);
+
+            document.add(new Paragraph("Return Date: " + returnDate));
+            document.add(new Paragraph("Ticket Code: " + ticketCode));
+
+            // Create a table with the ArticleReturn properties
+            Table table = new Table(UnitValue.createPercentArray(new float[]{10, 20, 10, 10, 10, 10, 10, 10, 10, 10, 10}));
+            table.addCell("Num BRS");
+            table.addCell("Code Art");
+            table.addCell("Qte Reint");
+            table.addCell("Prix Unit");
+            table.addCell("Montant Re");
+            table.addCell("Num Sort");
+            table.addCell("Pump Anc");
+            table.addCell("Qte Stock Anc");
+            table.addCell("Qte Stock Nouv");
+            table.addCell("Pump Nouv");
+            table.addCell("Date Reint");
+            table.addCell("Heure Reint");
+
+            for (ArticleReturn article : returnArticles) {
+                table.addCell(article.getNumBrs());
+                table.addCell(article.getCodeArt());
+                table.addCell(String.valueOf(article.getQteReint()));
+                table.addCell(String.valueOf(article.getPrixUnit()));
+                table.addCell(String.valueOf(article.getMontRe()));
+                table.addCell(article.getNumSort());
+                table.addCell(String.valueOf(article.getPumpAnc()));
+                table.addCell(String.valueOf(article.getQteStockAnc()));
+                table.addCell(String.valueOf(article.getQteStockNouv()));
+                table.addCell(String.valueOf(article.getPumpNouv()));
+                table.addCell(article.getDateReint().toString());
+                table.addCell(article.getHeureReint());
+            }
 
             document.add(table);
 

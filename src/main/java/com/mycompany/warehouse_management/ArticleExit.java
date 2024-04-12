@@ -27,6 +27,29 @@ public class ArticleExit {
 
     // Getters and Setters
     // ...
+    
+    public ArticleExit() {
+    }
+
+    public ArticleExit(String codeArt, int qteSort, int prixUnit, int montantS, int pumpAnc, int qteStockAnc, int pumpNouv, int qteStockNouv, Date dateSort, String heureSort, int qteSortRest, int qteDem) {
+        this.numSort = generateNumSort(); // Generate a unique number for the sort
+        this.codeArt = codeArt;
+        this.qteSort = qteSort;
+        this.prixUnit = prixUnit;
+        this.montantS = montantS;
+        this.pumpAnc = pumpAnc;
+        this.qteStockAnc = qteStockAnc;
+        this.pumpNouv = pumpNouv;
+        this.qteStockNouv = qteStockNouv;
+        this.dateSort = dateSort;
+        this.heureSort = heureSort;
+        this.qteSortRest = qteSortRest;
+        this.qteDem = qteDem;
+    }
+    private String generateNumSort() {
+        // Implement a logic to generate a unique number for the sort
+        return "SORT-" + System.currentTimeMillis();
+    }
 
     public String getNumSort() {
         return numSort;

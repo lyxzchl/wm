@@ -8,6 +8,7 @@ import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -160,6 +161,7 @@ private boolean getBooleanValue(JTable table, int row, int column) {
         jLabel1 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         selectedArticlesList = new javax.swing.JList<>();
+        createExitButton = new javax.swing.JButton();
 
         jMenuItem1.setText("jMenuItem1");
 
@@ -317,6 +319,18 @@ private boolean getBooleanValue(JTable table, int row, int column) {
             });
             jScrollPane1.setViewportView(selectedArticlesList);
 
+            createExitButton.setBackground(new java.awt.Color(51, 51, 51));
+            createExitButton.setFont(new java.awt.Font("POI Aeronaut Trial", 0, 11)); // NOI18N
+            createExitButton.setForeground(new java.awt.Color(153, 153, 153));
+            createExitButton.setText("Create Exit");
+            createExitButton.setBorder(javax.swing.BorderFactory.createMatteBorder(2, 2, 2, 2, new java.awt.Color(0, 51, 102)));
+            createExitButton.setContentAreaFilled(false);
+            createExitButton.addActionListener(new java.awt.event.ActionListener() {
+                public void actionPerformed(java.awt.event.ActionEvent evt) {
+                    createExitButtonActionPerformed(evt);
+                }
+            });
+
             javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
             jPanel1.setLayout(jPanel1Layout);
             jPanel1Layout.setHorizontalGroup(
@@ -335,8 +349,13 @@ private boolean getBooleanValue(JTable table, int row, int column) {
                                 .addGroup(jPanel1Layout.createSequentialGroup()
                                     .addGap(28, 28, 28)
                                     .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 500, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addGap(107, 107, 107)
-                                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 134, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addGroup(jPanel1Layout.createSequentialGroup()
+                                            .addGap(107, 107, 107)
+                                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 134, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                        .addGroup(jPanel1Layout.createSequentialGroup()
+                                            .addGap(121, 121, 121)
+                                            .addComponent(createExitButton, javax.swing.GroupLayout.PREFERRED_SIZE, 103, javax.swing.GroupLayout.PREFERRED_SIZE))))
                                 .addGroup(jPanel1Layout.createSequentialGroup()
                                     .addComponent(searchLogoLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -372,7 +391,10 @@ private boolean getBooleanValue(JTable table, int row, int column) {
                             .addGap(95, 95, 95)
                             .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 267, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGroup(jPanel1Layout.createSequentialGroup()
+                                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addGap(18, 18, 18)
+                                    .addComponent(createExitButton, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)))
                             .addGap(21, 21, 21))
                         .addGroup(jPanel1Layout.createSequentialGroup()
                             .addContainerGap()
@@ -442,6 +464,40 @@ private boolean getBooleanValue(JTable table, int row, int column) {
         db.setVisible(true);
     }//GEN-LAST:event_backButtonActionPerformed
 
+    private void createExitButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_createExitButtonActionPerformed
+        // TODO add your handling code here:
+        if (!selectedArticles.isEmpty()) {
+        List<ArticleExit> exitArticles = convertToExitArticles(selectedArticles);
+        ExitTicket exitTicket = new ExitTicket(exitArticles);
+        exitTicket.setVisible(true);
+        dispose();
+    } else {
+        // Display a message or do something else if no articles are selected
+    }
+    }//GEN-LAST:event_createExitButtonActionPerformed
+    private List<ArticleExit> convertToExitArticles(List<Article> selectedArticles) {
+    List<ArticleExit> exitArticles = new ArrayList<>();
+    for (Article article : selectedArticles) {
+        ArticleExit exitArticle;
+        exitArticle = new ArticleExit(
+                article.getCodeArt(),
+                (int) article.getQteSt(),
+                // Set the other properties of the ArticleExit object
+                0, // prixUnit
+                0, // montantS
+                0, // pumpAnc
+                (int) article.getQteSt(), // qteStockAnc
+                0, // pumpNouv
+                (int) article.getQteSt(), // qteStockNouv
+                new Date(), // dateSort
+                "00:00", // heureSort
+                (int) article.getQteSt(), // qteSortRest
+                0 // qteDem
+        );
+        exitArticles.add(exitArticle);
+    }
+    return exitArticles;
+}
     /**
      * @param args the command line arguments
      */
@@ -481,6 +537,7 @@ private boolean getBooleanValue(JTable table, int row, int column) {
     private javax.swing.JTextField articleCountTextField;
     private javax.swing.JButton backButton;
     private javax.swing.ButtonGroup buttonGroup1;
+    private javax.swing.JButton createExitButton;
     private javax.swing.JInternalFrame jInternalFrame1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JMenuItem jMenuItem1;

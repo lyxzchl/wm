@@ -3,21 +3,37 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
 package com.mycompany.warehouse_management;
+import com.formdev.flatlaf.FlatDarkLaf;
 
 import java.awt.Dimension;
 import java.awt.Toolkit;
 import java.io.IOException;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.UIManager;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
  * @author lyeschl
  */
 public class ReturnTicket extends javax.swing.JFrame {
-
+    private List<ArticleReturn> returnArticles;
     /**
      * Creates new form ReturnTicket
      */
     public ReturnTicket() {
+        try {
+        UIManager.setLookAndFeel(new FlatDarkLaf());
+
+        
+        
+    } catch (Exception ex) {
+        Logger.getLogger(AdvancedSearch.class.getName()).log(Level.SEVERE, null, ex);
+    }
         initComponents();
         Toolkit toolkit = Toolkit.getDefaultToolkit();
         Dimension screenSize = toolkit.getScreenSize();
@@ -29,7 +45,34 @@ public class ReturnTicket extends javax.swing.JFrame {
         setSize(windowWidth, windowHeight);
         setLocationRelativeTo(null);
     }
+    public ReturnTicket(List<ArticleReturn> returnArticles) {
+        initComponents();
+        this.returnArticles = returnArticles;
+        populateReturnArticlesTable();
+    }
 
+    private void populateReturnArticlesTable() {
+        DefaultTableModel model = (DefaultTableModel) return_articlesTable.getModel();
+        model.setRowCount(0); // Clear the table
+
+        for (ArticleReturn article : returnArticles) {
+            Object[] row = {
+                article.getNumBrs(),
+                article.getCodeArt(),
+                article.getQteReint(),
+                article.getPrixUnit(),
+                article.getMontRe(),
+                article.getNumSort(),
+                article.getPumpAnc(),
+                article.getQteStockAnc(),
+                article.getQteStockNouv(),
+                article.getPumpNouv(),
+                article.getDateReint(),
+                article.getHeureReint()
+            };
+            model.addRow(row);
+        }
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -43,29 +86,28 @@ public class ReturnTicket extends javax.swing.JFrame {
         exitTicketLabel = new javax.swing.JLabel();
         returnDateLabel = new javax.swing.JLabel();
         returnDateFormattedTextField = new javax.swing.JFormattedTextField();
-        brsLabel = new javax.swing.JLabel();
-        brsTextField = new javax.swing.JTextField();
-        natureLabel = new javax.swing.JLabel();
-        natureComboBox = new javax.swing.JComboBox<>();
-        desigLabel = new javax.swing.JLabel();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        desigTextArea = new javax.swing.JTextArea();
-        articlesLabel = new javax.swing.JLabel();
-        articlesTextField = new javax.swing.JTextField();
-        pumpLabel = new javax.swing.JLabel();
-        pumpTextField = new javax.swing.JTextField();
-        articleCodeLabel = new javax.swing.JLabel();
-        articleCodeTextField = new javax.swing.JTextField();
+        ticketCodeLabel = new javax.swing.JLabel();
+        ticketCodeTextField = new javax.swing.JTextField();
         logoLabel = new javax.swing.JLabel();
+        nbrsLabel = new javax.swing.JLabel();
+        nbrsTextField = new javax.swing.JTextField();
+        validDateLabel = new javax.swing.JLabel();
+        validDateFormattedTextField = new javax.swing.JFormattedTextField();
+        validToggleButton = new javax.swing.JToggleButton();
+        validLabel = new javax.swing.JLabel();
+        cancelLabel = new javax.swing.JLabel();
+        cancelToggleButton = new javax.swing.JToggleButton();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        return_articlesTable = new javax.swing.JTable();
+        warehousecodeLabel = new javax.swing.JLabel();
+        warehousecodeTextField = new javax.swing.JTextField();
         printButton = new javax.swing.JButton();
         cancelButton = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setBackground(new java.awt.Color(51, 51, 51));
-        getContentPane().setLayout(null);
 
         jPanel1.setBackground(new java.awt.Color(51, 51, 51));
-        jPanel1.setForeground(new java.awt.Color(255, 255, 255));
 
         exitTicketLabel.setBackground(new java.awt.Color(0, 0, 0));
         exitTicketLabel.setFont(new java.awt.Font("POI Aeronaut Trial", 1, 24)); // NOI18N
@@ -76,9 +118,6 @@ public class ReturnTicket extends javax.swing.JFrame {
         returnDateLabel.setForeground(new java.awt.Color(153, 153, 153));
         returnDateLabel.setText("Return Date");
 
-        returnDateFormattedTextField.setBackground(new java.awt.Color(51, 51, 51));
-        returnDateFormattedTextField.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 2, 0, new java.awt.Color(0, 51, 102)));
-        returnDateFormattedTextField.setForeground(new java.awt.Color(255, 255, 255));
         returnDateFormattedTextField.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.DateFormatter(java.text.DateFormat.getDateInstance(java.text.DateFormat.SHORT))));
         returnDateFormattedTextField.setFont(new java.awt.Font("Roboto", 0, 11)); // NOI18N
         returnDateFormattedTextField.addActionListener(new java.awt.event.ActionListener() {
@@ -87,82 +126,103 @@ public class ReturnTicket extends javax.swing.JFrame {
             }
         });
 
-        brsLabel.setFont(new java.awt.Font("POI Aeronaut Trial", 1, 14)); // NOI18N
-        brsLabel.setForeground(new java.awt.Color(153, 153, 153));
-        brsLabel.setText("BRS");
+        ticketCodeLabel.setFont(new java.awt.Font("POI Aeronaut Trial", 1, 14)); // NOI18N
+        ticketCodeLabel.setForeground(new java.awt.Color(153, 153, 153));
+        ticketCodeLabel.setText("Ticket Code");
 
-        brsTextField.setBackground(new java.awt.Color(51, 51, 51));
-        brsTextField.setForeground(new java.awt.Color(255, 255, 255));
-        brsTextField.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 2, 0, new java.awt.Color(0, 51, 102)));
-        brsTextField.addActionListener(new java.awt.event.ActionListener() {
+        ticketCodeTextField.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                brsTextFieldActionPerformed(evt);
-            }
-        });
-
-        natureLabel.setFont(new java.awt.Font("POI Aeronaut Trial", 1, 14)); // NOI18N
-        natureLabel.setForeground(new java.awt.Color(153, 153, 153));
-        natureLabel.setText("Nature");
-
-        natureComboBox.setBackground(new java.awt.Color(102, 102, 102));
-        natureComboBox.setForeground(new java.awt.Color(255, 255, 255));
-        natureComboBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Garantie 2 ans", "Garantie ", "Something else", " " }));
-        natureComboBox.setBorder(javax.swing.BorderFactory.createMatteBorder(2, 2, 2, 2, new java.awt.Color(0, 51, 102)));
-
-        desigLabel.setFont(new java.awt.Font("POI Aeronaut Trial", 1, 14)); // NOI18N
-        desigLabel.setForeground(new java.awt.Color(153, 153, 153));
-        desigLabel.setText("Designation");
-
-        desigTextArea.setBackground(new java.awt.Color(102, 102, 102));
-        desigTextArea.setColumns(20);
-        desigTextArea.setFont(new java.awt.Font("Roboto", 0, 14)); // NOI18N
-        desigTextArea.setForeground(new java.awt.Color(255, 255, 255));
-        desigTextArea.setRows(5);
-        desigTextArea.setText("...");
-        desigTextArea.setBorder(javax.swing.BorderFactory.createMatteBorder(2, 2, 2, 2, new java.awt.Color(0, 51, 102)));
-        jScrollPane1.setViewportView(desigTextArea);
-
-        articlesLabel.setFont(new java.awt.Font("POI Aeronaut Trial", 1, 14)); // NOI18N
-        articlesLabel.setForeground(new java.awt.Color(153, 153, 153));
-        articlesLabel.setText("N* Articles");
-
-        articlesTextField.setBackground(new java.awt.Color(51, 51, 51));
-        articlesTextField.setForeground(new java.awt.Color(255, 255, 255));
-        articlesTextField.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 2, 0, new java.awt.Color(0, 51, 102)));
-        articlesTextField.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                articlesTextFieldActionPerformed(evt);
-            }
-        });
-
-        pumpLabel.setFont(new java.awt.Font("POI Aeronaut Trial", 1, 14)); // NOI18N
-        pumpLabel.setForeground(new java.awt.Color(153, 153, 153));
-        pumpLabel.setText("Pump");
-
-        pumpTextField.setBackground(new java.awt.Color(51, 51, 51));
-        pumpTextField.setForeground(new java.awt.Color(255, 255, 255));
-        pumpTextField.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 2, 0, new java.awt.Color(0, 51, 102)));
-        pumpTextField.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                pumpTextFieldActionPerformed(evt);
-            }
-        });
-
-        articleCodeLabel.setFont(new java.awt.Font("POI Aeronaut Trial", 1, 14)); // NOI18N
-        articleCodeLabel.setForeground(new java.awt.Color(153, 153, 153));
-        articleCodeLabel.setText("Article Code");
-
-        articleCodeTextField.setBackground(new java.awt.Color(51, 51, 51));
-        articleCodeTextField.setForeground(new java.awt.Color(255, 255, 255));
-        articleCodeTextField.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 2, 0, new java.awt.Color(0, 51, 102)));
-        articleCodeTextField.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                articleCodeTextFieldActionPerformed(evt);
+                ticketCodeTextFieldActionPerformed(evt);
             }
         });
 
         logoLabel.setBackground(new java.awt.Color(255, 255, 255));
         logoLabel.setIcon(new javax.swing.ImageIcon("/run/media/lyeschl/ssd/main/load/output-onlinepngtools(1).png")); // NOI18N
+
+        nbrsLabel.setFont(new java.awt.Font("POI Aeronaut Trial", 1, 14)); // NOI18N
+        nbrsLabel.setForeground(new java.awt.Color(153, 153, 153));
+        nbrsLabel.setText("N* BRS");
+
+        nbrsTextField.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                nbrsTextFieldActionPerformed(evt);
+            }
+        });
+
+        validDateLabel.setFont(new java.awt.Font("POI Aeronaut Trial", 1, 14)); // NOI18N
+        validDateLabel.setForeground(new java.awt.Color(153, 153, 153));
+        validDateLabel.setText("Validation Date");
+
+        validDateFormattedTextField.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.DateFormatter(java.text.DateFormat.getDateInstance(java.text.DateFormat.SHORT))));
+        validDateFormattedTextField.setFont(new java.awt.Font("Roboto", 0, 11)); // NOI18N
+        validDateFormattedTextField.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                validDateFormattedTextFieldActionPerformed(evt);
+            }
+        });
+
+        validToggleButton.setText("Yes");
+
+        validLabel.setFont(new java.awt.Font("POI Aeronaut Trial", 1, 14)); // NOI18N
+        validLabel.setForeground(new java.awt.Color(153, 153, 153));
+        validLabel.setText("Valid?");
+
+        cancelLabel.setFont(new java.awt.Font("POI Aeronaut Trial", 1, 14)); // NOI18N
+        cancelLabel.setForeground(new java.awt.Color(153, 153, 153));
+        cancelLabel.setText("Canceled?");
+
+        cancelToggleButton.setText("No");
+        cancelToggleButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cancelToggleButtonActionPerformed(evt);
+            }
+        });
+
+        return_articlesTable.setModel(new javax.swing.table.DefaultTableModel(
+            new Object[][] {
+                {null, null, null, null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null, null, null, null}
+            },
+            new String[] {
+                "Num Sort", "Code Art", "Qte Sort", "Prix Unit", "Montant S", "Pump Anc", "Qte Stock Anc", "Pump Nouv", "Qte Stock Nouv", "Date Sort", "Heure Sort", "Qte Sort Rest", "Qte Dem"
+            }
+        ) {
+            @Override
+            public java.lang.Class<?> getColumnClass(int columnIndex) {
+                switch (columnIndex) {
+                    case 0:
+                    case 1:
+                    case 9:
+                    case 10:
+                    return String.class;
+                    case 2:
+                    case 3:
+                    case 4:
+                    case 5:
+                    case 6:
+                    case 7:
+                    case 8:
+                    case 11:
+                    case 12:
+                    return Integer.class;
+                    default:
+                    return Object.class;
+                }
+            }
+        });
+        jScrollPane1.setViewportView(return_articlesTable);
+
+        warehousecodeLabel.setFont(new java.awt.Font("POI Aeronaut Trial", 1, 14)); // NOI18N
+        warehousecodeLabel.setForeground(new java.awt.Color(153, 153, 153));
+        warehousecodeLabel.setText("Warehouse Code");
+
+        warehousecodeTextField.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                warehousecodeTextFieldActionPerformed(evt);
+            }
+        });
 
         printButton.setBackground(new java.awt.Color(0, 51, 102));
         printButton.setFont(new java.awt.Font("POI Aeronaut Trial", 1, 14)); // NOI18N
@@ -191,103 +251,113 @@ public class ReturnTicket extends javax.swing.JFrame {
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(15, 15, 15)
-                        .addComponent(returnDateLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(returnDateFormattedTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(36, 36, 36)
-                        .addComponent(brsLabel)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(brsTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(33, 33, 33)
-                        .addComponent(natureLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(natureComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(506, 506, 506)
-                        .addComponent(articleCodeLabel)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(articleCodeTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(25, 25, 25)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(exitTicketLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 176, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(desigLabel)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 390, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGap(18, 18, 18)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(articlesLabel)
-                            .addComponent(pumpLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(18, 18, 18)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(pumpTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(articlesTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addContainerGap(356, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(logoLabel)
+                .addGap(257, 257, 257)
+                .addComponent(exitTicketLabel)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(printButton, javax.swing.GroupLayout.PREFERRED_SIZE, 103, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(cancelButton, javax.swing.GroupLayout.PREFERRED_SIZE, 87, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(24, 24, 24))
-            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(jPanel1Layout.createSequentialGroup()
-                    .addGap(0, 95, Short.MAX_VALUE)
-                    .addComponent(logoLabel)
-                    .addGap(0, 920, Short.MAX_VALUE)))
+                .addGap(520, 520, 520))
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 906, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(50, 50, 50)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(nbrsLabel)
+                            .addComponent(validLabel))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(validToggleButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(nbrsTextField, javax.swing.GroupLayout.DEFAULT_SIZE, 100, Short.MAX_VALUE)))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(31, 31, 31)
+                        .addComponent(returnDateLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(returnDateFormattedTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(35, 35, 35)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(ticketCodeLabel)
+                        .addGap(18, 18, 18)
+                        .addComponent(ticketCodeTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(validDateLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 103, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(warehousecodeLabel))
+                        .addGap(18, 18, 18)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(warehousecodeTextField)
+                            .addComponent(validDateFormattedTextField, javax.swing.GroupLayout.DEFAULT_SIZE, 100, Short.MAX_VALUE))))
+                .addGap(35, 35, 35)
+                .addComponent(cancelLabel)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(cancelToggleButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGap(842, 842, 842))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(19, 19, 19)
-                .addComponent(exitTicketLabel)
-                .addGap(86, 86, 86)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(brsLabel)
-                    .addComponent(returnDateLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(brsTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(natureLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(returnDateFormattedTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(natureComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(37, 37, 37)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(60, 60, 60)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(articlesTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(articlesLabel))
-                        .addGap(18, 18, 18)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(pumpTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(pumpLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 175, Short.MAX_VALUE)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(printButton, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(cancelButton, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(25, 25, 25))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
+                            .addComponent(nbrsTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(nbrsLabel)
+                            .addComponent(ticketCodeTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(ticketCodeLabel))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                    .addComponent(articleCodeLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(articleCodeTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addGap(18, 18, 18)
-                                .addComponent(desigLabel)))
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
-            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(jPanel1Layout.createSequentialGroup()
-                    .addGap(0, 408, Short.MAX_VALUE)
-                    .addComponent(logoLabel)
-                    .addGap(0, 27, Short.MAX_VALUE)))
+                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                .addComponent(validToggleButton)
+                                .addComponent(validLabel))
+                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                .addComponent(validDateFormattedTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(validDateLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(cancelToggleButton)
+                                .addComponent(cancelLabel))))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                .addComponent(printButton, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(cancelButton, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(exitTicketLabel)))
+                    .addComponent(logoLabel))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(warehousecodeTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(warehousecodeLabel))
+                    .addComponent(returnDateLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(returnDateFormattedTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 225, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(60, Short.MAX_VALUE))
         );
 
-        getContentPane().add(jPanel1);
-        jPanel1.setBounds(6, 0, 1060, 500);
+        LocalDate currentDate = LocalDate.now();
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MM/dd/yyyy");
+        String formattedDate = currentDate.format(formatter);
+        returnDateFormattedTextField.setText(formattedDate);
+
+        // Set the current date in the validDateFormattedTextField
+        validDateFormattedTextField.setText(formattedDate);
+
+        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
+        getContentPane().setLayout(layout);
+        layout.setHorizontalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 922, Short.MAX_VALUE)
+        );
+        layout.setVerticalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+        );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -296,21 +366,40 @@ public class ReturnTicket extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_returnDateFormattedTextFieldActionPerformed
 
-    private void brsTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_brsTextFieldActionPerformed
+    private void ticketCodeTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ticketCodeTextFieldActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_brsTextFieldActionPerformed
+    }//GEN-LAST:event_ticketCodeTextFieldActionPerformed
 
-    private void articlesTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_articlesTextFieldActionPerformed
+    private void nbrsTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nbrsTextFieldActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_articlesTextFieldActionPerformed
+    }//GEN-LAST:event_nbrsTextFieldActionPerformed
 
-    private void pumpTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_pumpTextFieldActionPerformed
+    private void validDateFormattedTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_validDateFormattedTextFieldActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_pumpTextFieldActionPerformed
+    }//GEN-LAST:event_validDateFormattedTextFieldActionPerformed
 
-    private void articleCodeTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_articleCodeTextFieldActionPerformed
+    private void cancelToggleButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cancelToggleButtonActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_articleCodeTextFieldActionPerformed
+    }//GEN-LAST:event_cancelToggleButtonActionPerformed
+
+    private void warehousecodeTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_warehousecodeTextFieldActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_warehousecodeTextFieldActionPerformed
+
+    private void printButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_printButtonActionPerformed
+        // TODO add your handling code here:
+        PDFGenerator pdfGenerator = new PDFGenerator();
+    try {
+        String returnDate = returnDateFormattedTextField.getText();
+        String ticketCode = ticketCodeTextField.getText();
+        List<ArticleReturn> returnArticles = this.returnArticles;
+
+        pdfGenerator.generateReturnPDF(returnDate, ticketCode, returnArticles, "return-ticket.pdf");
+        System.out.println("PDF generated successfully!");
+    } catch (IOException e) {
+        System.err.println("Error generating PDF: " + e.getMessage());
+    }
+    }//GEN-LAST:event_printButtonActionPerformed
 
     private void cancelButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cancelButtonActionPerformed
         // TODO add your handling code here:
@@ -319,25 +408,6 @@ public class ReturnTicket extends javax.swing.JFrame {
         Dashboard dash = new Dashboard();
         dash.setVisible(true);
     }//GEN-LAST:event_cancelButtonActionPerformed
-
-    private void printButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_printButtonActionPerformed
-        // TODO add your handling code here:
-        PDFGenerator pdfGenerator = new PDFGenerator();
-    try {
-        String exitDate = returnDateFormattedTextField.getText();
-        String ticketCode = brsTextField.getText();
-        String nature = (String) natureComboBox.getSelectedItem();
-        String designation = desigTextArea.getText();
-        String articles = articlesTextField.getText();
-        String pump = pumpTextField.getText();
-        String articleCode = articleCodeTextField.getText();
-
-        pdfGenerator.generatePDF(exitDate, ticketCode, nature, designation, articles, pump, articleCode, "return-ticket.pdf");
-        System.out.println("PDF generated successfully!");
-    } catch (IOException e) {
-        System.err.println("Error generating PDF: " + e.getMessage());
-    }
-    }//GEN-LAST:event_printButtonActionPerformed
 
     /**
      * @param args the command line arguments
@@ -365,6 +435,9 @@ public class ReturnTicket extends javax.swing.JFrame {
             java.util.logging.Logger.getLogger(ReturnTicket.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
@@ -375,25 +448,26 @@ public class ReturnTicket extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JLabel articleCodeLabel;
-    private javax.swing.JTextField articleCodeTextField;
-    private javax.swing.JLabel articlesLabel;
-    private javax.swing.JTextField articlesTextField;
-    private javax.swing.JLabel brsLabel;
-    private javax.swing.JTextField brsTextField;
     private javax.swing.JButton cancelButton;
-    private javax.swing.JLabel desigLabel;
-    private javax.swing.JTextArea desigTextArea;
+    private javax.swing.JLabel cancelLabel;
+    private javax.swing.JToggleButton cancelToggleButton;
     private javax.swing.JLabel exitTicketLabel;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLabel logoLabel;
-    private javax.swing.JComboBox<String> natureComboBox;
-    private javax.swing.JLabel natureLabel;
+    private javax.swing.JLabel nbrsLabel;
+    private javax.swing.JTextField nbrsTextField;
     private javax.swing.JButton printButton;
-    private javax.swing.JLabel pumpLabel;
-    private javax.swing.JTextField pumpTextField;
     private javax.swing.JFormattedTextField returnDateFormattedTextField;
     private javax.swing.JLabel returnDateLabel;
+    private javax.swing.JTable return_articlesTable;
+    private javax.swing.JLabel ticketCodeLabel;
+    private javax.swing.JTextField ticketCodeTextField;
+    private javax.swing.JFormattedTextField validDateFormattedTextField;
+    private javax.swing.JLabel validDateLabel;
+    private javax.swing.JLabel validLabel;
+    private javax.swing.JToggleButton validToggleButton;
+    private javax.swing.JLabel warehousecodeLabel;
+    private javax.swing.JTextField warehousecodeTextField;
     // End of variables declaration//GEN-END:variables
 }

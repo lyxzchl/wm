@@ -8,6 +8,7 @@ import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -160,6 +161,7 @@ private boolean getBooleanValue(JTable table, int row, int column) {
         jLabel1 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         selectedArticlesList = new javax.swing.JList<>();
+        createReturnButton = new javax.swing.JButton();
 
         jMenuItem1.setText("jMenuItem1");
 
@@ -317,6 +319,18 @@ private boolean getBooleanValue(JTable table, int row, int column) {
             });
             jScrollPane1.setViewportView(selectedArticlesList);
 
+            createReturnButton.setBackground(new java.awt.Color(51, 51, 51));
+            createReturnButton.setFont(new java.awt.Font("POI Aeronaut Trial", 0, 11)); // NOI18N
+            createReturnButton.setForeground(new java.awt.Color(153, 153, 153));
+            createReturnButton.setText("Create Return");
+            createReturnButton.setBorder(javax.swing.BorderFactory.createMatteBorder(2, 2, 2, 2, new java.awt.Color(0, 51, 102)));
+            createReturnButton.setContentAreaFilled(false);
+            createReturnButton.addActionListener(new java.awt.event.ActionListener() {
+                public void actionPerformed(java.awt.event.ActionEvent evt) {
+                    createReturnButtonActionPerformed(evt);
+                }
+            });
+
             javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
             jPanel1.setLayout(jPanel1Layout);
             jPanel1Layout.setHorizontalGroup(
@@ -335,8 +349,13 @@ private boolean getBooleanValue(JTable table, int row, int column) {
                                 .addGroup(jPanel1Layout.createSequentialGroup()
                                     .addGap(28, 28, 28)
                                     .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 500, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addGap(107, 107, 107)
-                                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 134, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addGroup(jPanel1Layout.createSequentialGroup()
+                                            .addGap(107, 107, 107)
+                                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 134, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                        .addGroup(jPanel1Layout.createSequentialGroup()
+                                            .addGap(122, 122, 122)
+                                            .addComponent(createReturnButton, javax.swing.GroupLayout.PREFERRED_SIZE, 103, javax.swing.GroupLayout.PREFERRED_SIZE))))
                                 .addGroup(jPanel1Layout.createSequentialGroup()
                                     .addComponent(searchLogoLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -372,7 +391,10 @@ private boolean getBooleanValue(JTable table, int row, int column) {
                             .addGap(95, 95, 95)
                             .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 267, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGroup(jPanel1Layout.createSequentialGroup()
+                                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                    .addComponent(createReturnButton, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)))
                             .addGap(21, 21, 21))
                         .addGroup(jPanel1Layout.createSequentialGroup()
                             .addContainerGap()
@@ -442,6 +464,49 @@ private boolean getBooleanValue(JTable table, int row, int column) {
         db.setVisible(true);
     }//GEN-LAST:event_backButtonActionPerformed
 
+    private void createReturnButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_createReturnButtonActionPerformed
+        // TODO add your handling code here:
+        if (!selectedArticles.isEmpty()) {
+        List<ArticleReturn> returnArticles = convertToReturnArticles(selectedArticles);
+        ReturnTicket returnTicket = new ReturnTicket(returnArticles);
+        returnTicket.setVisible(true);
+        dispose();
+    } else {
+        // Display a message or do something else if no articles are selected
+    }
+    }//GEN-LAST:event_createReturnButtonActionPerformed
+private List<ArticleReturn> convertToReturnArticles(List<Article> selectedArticles) {
+    List<ArticleReturn> returnArticles = new ArrayList<>();
+    for (Article article : selectedArticles) {
+        ArticleReturn returnArticle = new ArticleReturn(
+            generateNumBrs(article.getCodeArt()), // Generate a unique number for the return
+            article.getCodeArt(),
+            (int) article.getQteSt(), // qteReint
+            0, // prixUnit
+            0, // montRe
+            generateNumSort(), // numSort
+            0, // pumpAnc
+            (int) article.getQteSt(), // qteStockAnc
+            (int) article.getQteSt(), // qteStockNouv
+            0, // pumpNouv
+            new Date(), // dateReint
+            "00:00" // heureReint
+        );
+        returnArticles.add(returnArticle);
+    }
+    return returnArticles;
+}
+
+private String generateNumBrs(String codeArt) {
+    // Implement a logic to generate a unique number for the return based on the article code
+    return "BRS-" + codeArt + "-" + System.currentTimeMillis();
+}
+
+private String generateNumSort() {
+    // Implement a logic to generate a unique number for the sort
+    return "SORT-" + System.currentTimeMillis();
+}
+
     /**
      * @param args the command line arguments
      */
@@ -483,6 +548,7 @@ private boolean getBooleanValue(JTable table, int row, int column) {
     private javax.swing.JTextField articleCountTextField;
     private javax.swing.JButton backButton;
     private javax.swing.ButtonGroup buttonGroup1;
+    private javax.swing.JButton createReturnButton;
     private javax.swing.JInternalFrame jInternalFrame1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JMenuItem jMenuItem1;

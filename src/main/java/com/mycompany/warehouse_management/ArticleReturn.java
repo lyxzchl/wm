@@ -23,7 +23,24 @@ public class ArticleReturn {
     private int pumpNouv;
     private Date dateReint;
     private String heureReint;
-
+    public ArticleReturn(String numBrs, String codeArt, int qteReint, int prixUnit, int montRe, String numSort, int pumpAnc, int qteStockAnc, int qteStockNouv, int pumpNouv, Date dateReint, String heureReint) {
+        this.numBrs = numBrs;
+        this.codeArt = codeArt;
+        this.qteReint = qteReint;
+        this.prixUnit = prixUnit;
+        this.montRe = montRe;
+        this.numSort = numSort;
+        this.pumpAnc = pumpAnc;
+        this.qteStockAnc = qteStockAnc;
+        this.qteStockNouv = qteStockNouv;
+        this.pumpNouv = pumpNouv;
+        this.dateReint = dateReint;
+        this.heureReint = heureReint;
+    }
+    private String generateNumBrs() {
+    // Implement a logic to generate a unique number for the return
+    return "BRS-" + System.currentTimeMillis();
+}
     // Getters and Setters
     // ...
 
