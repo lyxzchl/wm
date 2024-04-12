@@ -103,10 +103,7 @@ public class ExitSheet extends javax.swing.JFrame {
                     listModel.addElement(article.getCodeArt() + " - " + article.getDesigArt());
                 }
                 selectedArticlesList.setModel(listModel);
-                // Open the ArticleSheet interface and pass the selected article
-                ArticleSheet articleSheet = new ArticleSheet(selectedArticle);
-                articleSheet.setVisible(true);
-                dispose();
+;
             }
         }
     }
