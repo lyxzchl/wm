@@ -59,6 +59,10 @@ public class ExitTicket extends javax.swing.JFrame {
         logoLabel = new javax.swing.JLabel();
         cancelButton = new javax.swing.JButton();
         printButton = new javax.swing.JButton();
+        nbssLabel = new javax.swing.JLabel();
+        nbssTextField = new javax.swing.JTextField();
+        exitDateLabel1 = new javax.swing.JLabel();
+        exitDateFormattedTextField1 = new javax.swing.JFormattedTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setBackground(new java.awt.Color(51, 51, 51));
@@ -164,6 +168,28 @@ public class ExitTicket extends javax.swing.JFrame {
             }
         });
 
+        nbssLabel.setFont(new java.awt.Font("POI Aeronaut Trial", 1, 14)); // NOI18N
+        nbssLabel.setForeground(new java.awt.Color(153, 153, 153));
+        nbssLabel.setText("N* BSS");
+
+        nbssTextField.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                nbssTextFieldActionPerformed(evt);
+            }
+        });
+
+        exitDateLabel1.setFont(new java.awt.Font("POI Aeronaut Trial", 1, 14)); // NOI18N
+        exitDateLabel1.setForeground(new java.awt.Color(153, 153, 153));
+        exitDateLabel1.setText("Exit Date");
+
+        exitDateFormattedTextField1.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.DateFormatter(java.text.DateFormat.getDateInstance(java.text.DateFormat.SHORT))));
+        exitDateFormattedTextField1.setFont(new java.awt.Font("Roboto", 0, 11)); // NOI18N
+        exitDateFormattedTextField1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                exitDateFormattedTextField1ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -180,8 +206,18 @@ public class ExitTicket extends javax.swing.JFrame {
                         .addGap(348, 348, 348)
                         .addComponent(exitTicketLabel))
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(252, 252, 252)
-                        .addComponent(ticketCodeLabel)))
+                        .addGap(223, 223, 223)
+                        .addComponent(ticketCodeLabel))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(45, 45, 45)
+                        .addComponent(nbssLabel)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(nbssTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(35, 35, 35)
+                        .addComponent(exitDateLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, 0)
+                        .addComponent(exitDateFormattedTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(381, Short.MAX_VALUE))
             .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(jPanel1Layout.createSequentialGroup()
@@ -225,9 +261,17 @@ public class ExitTicket extends javax.swing.JFrame {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(15, 15, 15)
                 .addComponent(exitTicketLabel)
-                .addGap(105, 105, 105)
+                .addGap(21, 21, 21)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(nbssTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(nbssLabel))
+                .addGap(54, 54, 54)
                 .addComponent(ticketCodeLabel)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 232, Short.MAX_VALUE)
+                .addGap(15, 15, 15)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(exitDateLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(exitDateFormattedTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 187, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(printButton, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(cancelButton, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -328,6 +372,14 @@ public class ExitTicket extends javax.swing.JFrame {
     }
     }//GEN-LAST:event_printButtonActionPerformed
 
+    private void nbssTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nbssTextFieldActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_nbssTextFieldActionPerformed
+
+    private void exitDateFormattedTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_exitDateFormattedTextField1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_exitDateFormattedTextField1ActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -373,13 +425,17 @@ public class ExitTicket extends javax.swing.JFrame {
     private javax.swing.JLabel desigLabel;
     private javax.swing.JTextArea desigTextArea;
     private javax.swing.JFormattedTextField exitDateFormattedTextField;
+    private javax.swing.JFormattedTextField exitDateFormattedTextField1;
     private javax.swing.JLabel exitDateLabel;
+    private javax.swing.JLabel exitDateLabel1;
     private javax.swing.JLabel exitTicketLabel;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLabel logoLabel;
     private javax.swing.JComboBox<String> natureComboBox;
+    private javax.swing.JLabel nbssLabel;
+    private javax.swing.JTextField nbssTextField;
     private javax.swing.JButton printButton;
     private javax.swing.JLabel pumpLabel;
     private javax.swing.JTextField pumpTextField;

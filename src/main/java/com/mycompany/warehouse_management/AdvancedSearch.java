@@ -13,6 +13,7 @@ import javax.swing.JTable;
 import javax.swing.UIManager;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
+import javax.swing.table.DefaultTableModel;
 
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
@@ -54,22 +55,23 @@ public class AdvancedSearch extends javax.swing.JFrame {
         if (!event.getValueIsAdjusting()) {
             int selectedRow = resultsTable.getSelectedRow();
             if (selectedRow != -1) {
-                // Get the selected article's data
-                String codeArt = (String) resultsTable.getValueAt(selectedRow, 0);
-                String desigArt = (String) resultsTable.getValueAt(selectedRow, 1);
-                String codeClass = (String) resultsTable.getValueAt(selectedRow, 2);
-                String uniteMes = (String) resultsTable.getValueAt(selectedRow, 3);
-                double qteSt = (double) resultsTable.getValueAt(selectedRow, 4);
-                String casier = (String) resultsTable.getValueAt(selectedRow, 5);
-                double stockMini = (double) resultsTable.getValueAt(selectedRow, 6);
-                double stockMax = (double) resultsTable.getValueAt(selectedRow, 7);
-                double stockSecu = (double) resultsTable.getValueAt(selectedRow, 8);
-                double valeur = (double) resultsTable.getValueAt(selectedRow, 9);
-                boolean mort = (boolean) resultsTable.getValueAt(selectedRow, 10);
-                String observation = (String) resultsTable.getValueAt(selectedRow, 11);
-                String rayon = (String) resultsTable.getValueAt(selectedRow, 12);
-                boolean dormant = (boolean) resultsTable.getValueAt(selectedRow, 13);
-                boolean actif = (boolean) resultsTable.getValueAt(selectedRow, 14);
+                // Retrieve the values directly from the TableModel
+                DefaultTableModel model = (DefaultTableModel) resultsTable.getModel();
+                String codeArt = (String) model.getValueAt(selectedRow, 0);
+                String desigArt = (String) model.getValueAt(selectedRow, 1);
+                double qteSt = ((Number) model.getValueAt(selectedRow, 4)).doubleValue();
+                String codeClass = (String) model.getValueAt(selectedRow, 2);
+                String uniteMes = (String) model.getValueAt(selectedRow, 3);
+                String casier = (String) model.getValueAt(selectedRow, 5);
+                double stockMini = ((Number) model.getValueAt(selectedRow, 6)).doubleValue();
+                double stockMax = ((Number) model.getValueAt(selectedRow, 7)).doubleValue();
+                double stockSecu = ((Number) model.getValueAt(selectedRow, 8)).doubleValue();
+                double valeur = ((Number) model.getValueAt(selectedRow, 9)).doubleValue();
+                boolean mort = (boolean) model.getValueAt(selectedRow, 10);
+                String observation = (String) model.getValueAt(selectedRow, 11);
+                String rayon = (String) model.getValueAt(selectedRow, 12);
+                boolean dormant = (boolean) model.getValueAt(selectedRow, 13);
+                boolean actif = (boolean) model.getValueAt(selectedRow, 14);
 
                 // Create a new Article object with the selected data
                 Article selectedArticle = new Article(
@@ -89,7 +91,6 @@ public class AdvancedSearch extends javax.swing.JFrame {
                     dormant,
                     actif
                 );
-
                 // Open the ArticleSheet interface and pass the selected article
                 ArticleSheet articleSheet = new ArticleSheet(selectedArticle);
                 articleSheet.setVisible(true);
@@ -264,6 +265,7 @@ private boolean getBooleanValue(JTable table, int row, int column) {
                         case 12:
                         return String.class;
                         case 4:
+                        return Number.class;
                         case 6:
                         case 7:
                         case 8:
