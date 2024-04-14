@@ -20,9 +20,9 @@ import javax.swing.table.DefaultTableModel;
  * @author lyeschl
  */
 public class DataBaseUtils {
-    private static final String DB_URL = "jdbc:mariadb://localhost:3306/spare_parts_warehouse";
-    private static final String DB_USER = "lyeschl";
-    private static final String DB_PASSWORD = "lyessou1213";
+    public static final String DB_URL = System.getenv("DB_URL");
+    public static final String DB_USER = System.getenv("DB_USER");
+    public static final String DB_PASSWORD = System.getenv("DB_PASSWORD");
 
     public static String getDB_URL() {
         return DB_URL;
