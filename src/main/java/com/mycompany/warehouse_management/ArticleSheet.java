@@ -25,8 +25,25 @@ public class ArticleSheet extends javax.swing.JFrame {
      * Creates new form Article
      */
     public ArticleSheet() {
+        try {
+        UIManager.setLookAndFeel(new FlatDarkLaf());
+
+        
+        
+    } catch (Exception ex) {
+        Logger.getLogger(AdvancedSearch.class.getName()).log(Level.SEVERE, null, ex);
+    }
         initComponents();
         // You can initialize the text fields with default values or leave them empty
+        Toolkit toolkit = Toolkit.getDefaultToolkit();
+        Dimension screenSize = toolkit.getScreenSize();
+        int screenWidth = screenSize.width;
+        int screenHeight = screenSize.height;
+
+        int windowWidth = (int) (screenWidth * 0.8);
+        int windowHeight = (int) (screenHeight * 0.8);
+        setSize(windowWidth, windowHeight);
+        setLocationRelativeTo(null);
     }
     public ArticleSheet(Article article) {
                try {
@@ -122,7 +139,7 @@ public class ArticleSheet extends javax.swing.JFrame {
         articleSheetLabel = new javax.swing.JLabel();
         aisleTextField = new javax.swing.JTextField();
         jScrollPane3 = new javax.swing.JScrollPane();
-        desigTextField1 = new javax.swing.JTextArea();
+        desigTextField = new javax.swing.JTextArea();
         gotoSeachButton = new javax.swing.JButton();
 
         jCheckBoxMenuItem1.setSelected(true);
@@ -415,12 +432,12 @@ public class ArticleSheet extends javax.swing.JFrame {
             }
         });
 
-        desigTextField1.setBackground(new java.awt.Color(102, 102, 102));
-        desigTextField1.setColumns(20);
-        desigTextField1.setForeground(new java.awt.Color(255, 255, 255));
-        desigTextField1.setRows(5);
-        desigTextField1.setBorder(null);
-        jScrollPane3.setViewportView(desigTextField1);
+        desigTextField.setBackground(new java.awt.Color(102, 102, 102));
+        desigTextField.setColumns(20);
+        desigTextField.setForeground(new java.awt.Color(255, 255, 255));
+        desigTextField.setRows(5);
+        desigTextField.setBorder(null);
+        jScrollPane3.setViewportView(desigTextField);
 
         gotoSeachButton.setFont(new java.awt.Font("POI Aeronaut Trial", 0, 16)); // NOI18N
         gotoSeachButton.setText("Search");
@@ -718,7 +735,7 @@ public class ArticleSheet extends javax.swing.JFrame {
             Article nextArticle = articles.get(currentIndex);
             classTextField.setText(nextArticle.getCodeClass());
             articleCodeTextField.setText(nextArticle.getCodeArt());
-            observTextField.setText(nextArticle.getDesigArt());
+            desigTextField.setText(nextArticle.getDesigArt());
             mesureUTextField.setText(nextArticle.getUniteMes());
             stockQTextField.setText(String.valueOf(nextArticle.getQteSt()));
             shelfTextField.setText(nextArticle.getCasier());
@@ -752,7 +769,7 @@ public class ArticleSheet extends javax.swing.JFrame {
             // Populate the text fields with the last article's data
             classTextField.setText(lastArticle.getCodeClass());
             articleCodeTextField.setText(lastArticle.getCodeArt());
-            observTextField.setText(lastArticle.getDesigArt());
+            desigTextField.setText(lastArticle.getDesigArt());
             mesureUTextField.setText(lastArticle.getUniteMes());
             stockQTextField.setText(String.valueOf(lastArticle.getQteSt()));
             shelfTextField.setText(lastArticle.getCasier());
@@ -786,7 +803,7 @@ public class ArticleSheet extends javax.swing.JFrame {
             // Populate the text fields with the first article's data
             classTextField.setText(firstArticle.getCodeClass());
             articleCodeTextField.setText(firstArticle.getCodeArt());
-            observTextField.setText(firstArticle.getDesigArt());
+            desigTextField.setText(firstArticle.getDesigArt());
             mesureUTextField.setText(firstArticle.getUniteMes());
             stockQTextField.setText(String.valueOf(firstArticle.getQteSt()));
             shelfTextField.setText(firstArticle.getCasier());
@@ -969,7 +986,7 @@ public class ArticleSheet extends javax.swing.JFrame {
     private javax.swing.JLabel deadLabel;
     private javax.swing.JToggleButton deadToggleButton;
     private javax.swing.JLabel desigLabel;
-    private javax.swing.JTextArea desigTextField1;
+    private javax.swing.JTextArea desigTextField;
     private javax.swing.JLabel dormantLabel;
     private javax.swing.JToggleButton dormantToggleButton;
     private javax.swing.JButton goToFirstButton;

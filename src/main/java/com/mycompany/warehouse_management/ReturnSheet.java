@@ -7,12 +7,16 @@ import java.awt.Toolkit;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.sql.SQLException;
+import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.DefaultListModel;
+import javax.swing.JComponent;
+import javax.swing.JOptionPane;
 import javax.swing.JTable;
 import javax.swing.UIManager;
 import javax.swing.event.ListSelectionEvent;
@@ -31,6 +35,8 @@ import javax.swing.table.DefaultTableModel;
 
 
 public class ReturnSheet extends javax.swing.JFrame {
+    private JComponent parentComponent; // Declare a class-level variable to store the parent component
+
     private List<Article> selectedArticles = new ArrayList<>();    /**
      * Creates new form AdvancedSearch
      */
@@ -62,9 +68,9 @@ public class ReturnSheet extends javax.swing.JFrame {
                 DefaultTableModel model = (DefaultTableModel) resultsTable.getModel();
                 String codeArt = (String) model.getValueAt(selectedRow, 0);
                 String desigArt = (String) model.getValueAt(selectedRow, 1);
-                double qteSt = ((Number) model.getValueAt(selectedRow, 4)).doubleValue();
                 String codeClass = (String) model.getValueAt(selectedRow, 2);
                 String uniteMes = (String) model.getValueAt(selectedRow, 3);
+                double qteSt = ((Number) model.getValueAt(selectedRow, 4)).doubleValue();
                 String casier = (String) model.getValueAt(selectedRow, 5);
                 double stockMini = ((Number) model.getValueAt(selectedRow, 6)).doubleValue();
                 double stockMax = ((Number) model.getValueAt(selectedRow, 7)).doubleValue();
@@ -95,20 +101,42 @@ public class ReturnSheet extends javax.swing.JFrame {
                     actif
                 );
 
-                // Add the selected article to the list of selected articles
-                selectedArticles.add(selectedArticle);
+                // Show a popup to ask for the total of instances to return
+                String totalInstancesStr = JOptionPane.showInputDialog(
+                    parentComponent,
+                    "Enter the total instances of the selected article to return:",
+                    "Total Instances to Return",
+                    JOptionPane.QUESTION_MESSAGE
+                );
 
-                // Update the selectedArticlesList model
-                DefaultListModel<String> listModel = new DefaultListModel<>();
-                for (Article article : selectedArticles) {
-                    listModel.addElement(article.getCodeArt() + " - " + article.getDesigArt());
+                if (totalInstancesStr != null) {
+                    try {
+                        int totalInstances = Integer.parseInt(totalInstancesStr);
+                        selectedArticle.setTemporary_to_return(totalInstances);
+
+                        // Add the selected article to the list of selected articles
+                        selectedArticles.add(selectedArticle);
+
+                        // Update the selectedArticlesList model
+                        DefaultListModel<String> listModel = new DefaultListModel<>();
+                        for (Article article : selectedArticles) {
+                            listModel.addElement(article.getCodeArt() + " - " + article.getDesigArt());
+                        }
+                        selectedArticlesList.setModel(listModel);
+                    } catch (NumberFormatException e) {
+                        JOptionPane.showMessageDialog(
+                            parentComponent,
+                            "Invalid input. Please enter a valid number.",
+                            "Error",
+                            JOptionPane.ERROR_MESSAGE
+                        );
+                    }
                 }
-                selectedArticlesList.setModel(listModel);
-;
             }
         }
     }
 });
+
 
 
 }
@@ -465,31 +493,47 @@ private boolean getBooleanValue(JTable table, int row, int column) {
     private void createReturnButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_createReturnButtonActionPerformed
         // TODO add your handling code here:
         if (!selectedArticles.isEmpty()) {
-        List<ArticleReturn> returnArticles = convertToReturnArticles(selectedArticles);
-        ReturnTicket returnTicket = new ReturnTicket(returnArticles);
-        returnTicket.setVisible(true);
-        dispose();
-    } else {
+            String numSort = generateNumSort(); // Retrieve the exit number associated with the return
+            List<ArticleReturn> returnArticles = convertToReturnArticles(selectedArticles, numSort);
+            ReturnTicket returnTicket = new ReturnTicket(returnArticles);
+            returnTicket.setVisible(true);
+            dispose();
+        } else {
         // Display a message or do something else if no articles are selected
     }
     }//GEN-LAST:event_createReturnButtonActionPerformed
-private List<ArticleReturn> convertToReturnArticles(List<Article> selectedArticles) {
+private List<ArticleReturn> convertToReturnArticles(List<Article> selectedArticles, String numSort) {
     List<ArticleReturn> returnArticles = new ArrayList<>();
     for (Article article : selectedArticles) {
+        int qteRet = (int) article.getTemporary_to_return(); // Get the quantity to return from the Article object
+        double oldQteSt = article.getQteSt();
+        double newQteSt = article.getQteSt() + qteRet;
+        article.setQteSt(newQteSt); // Update the Article.qte_st with the new value
+
+        int pumpAnc = (int) (article.getValeur() * oldQteSt); // Calculate pumpAnc
+        int pumpNouv = (int) (article.getValeur() * newQteSt); // Calculate pumpNouv
+        int prixUnit = (int) (article.getValeur() * 1.2); // Calculate prixUnit with a 20% markup
+        int montantR = prixUnit * qteRet; // Calculate montantR
+
+        LocalTime returnTime = LocalTime.now(); // Get the current time
+        String heureRet = returnTime.format(DateTimeFormatter.ofPattern("HH:mm")); // Format the time as a string
+        
         ArticleReturn returnArticle = new ArticleReturn(
-            generateNumBrs(article.getCodeArt()), // Generate a unique number for the return
-            article.getCodeArt(),
-            (int) article.getQteSt(), // qteReint
-            0, // prixUnit
-            0, // montRe
-            generateNumSort(), // numSort
-            0, // pumpAnc
-            (int) article.getQteSt(), // qteStockAnc
-            (int) article.getQteSt(), // qteStockNouv
-            0, // pumpNouv
-            new Date(), // dateReint
-            "00:00" // heureReint
+            article.getCodeArt(), //codeArt
+            qteRet, // qte_ret
+            prixUnit, // prixUnit
+            montantR, // montantR
+            numSort, // numnSort
+            pumpAnc, // pumpAnc
+            (int) oldQteSt, // qteStockAnc (old value)
+            pumpNouv, // pumpNouv
+            (int) newQteSt, // qteStockNouv (new value)
+            new Date(), // dateRet
+            heureRet // heureRet
         );
+        returnArticle.setQteReint(qteRet);
+        returnArticle.setQteStockAnc((int) oldQteSt);
+        returnArticle.setQteStockNouv((int) newQteSt);
         returnArticles.add(returnArticle);
     }
     return returnArticles;

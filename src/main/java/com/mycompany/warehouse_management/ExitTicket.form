@@ -315,7 +315,7 @@
         </Component>
         <Component class="javax.swing.JToggleButton" name="validToggleButton">
           <Properties>
-            <Property name="text" type="java.lang.String" value="Yes"/>
+            <Property name="text" type="java.lang.String" value="No"/>
           </Properties>
         </Component>
         <Component class="javax.swing.JLabel" name="validLabel">

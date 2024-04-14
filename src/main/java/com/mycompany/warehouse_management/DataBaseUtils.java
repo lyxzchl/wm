@@ -540,8 +540,8 @@ private static ResultSet exitResultSet = null;
             JOptionPane.showMessageDialog(frame, "Error fetching article return data.", "Error", JOptionPane.ERROR_MESSAGE);
         }
     }
-//    ExitTicket -> Add Button
-    public static String createExitTuple(String numOT, String codeMag, String codeAnal, String exitDate, String validDate, String valide, String annule) {
+//    in DataBaseUtils , ExitTicket -> Add Button
+    public static String createExitTuple(String numOT, String codeMag, String codeAnal, String exitDate, String validDate, String valide, String annule, List<ArticleExit> exitArticles) {
         try {
             SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
             java.util.Date exitDateObj = sdf.parse(exitDate);
@@ -551,7 +551,10 @@ private static ResultSet exitResultSet = null;
             java.sql.Date dateValideSql = new java.sql.Date(validDateObj.getTime());
 
             String numSort = generateNumSort();
-
+            int total = 0;
+            for (ArticleExit article : exitArticles) {
+                total += article.getQteSort();
+            }
             try (Connection conn = DriverManager.getConnection(DB_URL, DB_USER, DB_PASSWORD);
                  PreparedStatement stmt = conn.prepareStatement("INSERT INTO `Exit` (num_sort, num_OT, code_anal, code_mag, date_sort, date_valide, valide, annule) VALUES (?, ?, ?, ?, ?, ?, ?, ?)")) {
                 stmt.setString(1, numSort);
@@ -575,36 +578,91 @@ private static ResultSet exitResultSet = null;
     }
 
     public static void createArticleExitTuples(String exitDate, String numSort, java.util.List<ArticleExit> exitArticles) {
-        try {
-            SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
-            java.util.Date date = sdf.parse(exitDate);
-            java.sql.Date dateSortSql = new java.sql.Date(date.getTime());
+    try {
+        SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
+        java.util.Date date = sdf.parse(exitDate);
+        java.sql.Date dateSortSql = new java.sql.Date(date.getTime());
 
-            try (Connection conn = DriverManager.getConnection(DB_URL, DB_USER, DB_PASSWORD);
-                 PreparedStatement stmt = conn.prepareStatement("INSERT INTO Article_Exit (num_sort, code_art, qte_sort, prix_unit, montant_S, pump_anc, qte_stk_anc, pump_nouv, qte_stk_nouv, date_sort, heure_sort, qte_sort_rest, qte_dem) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)")) {
-                for (ArticleExit article : exitArticles) {
-                    stmt.setString(1, numSort);
-                    stmt.setString(2, article.getCodeArt());
-                    stmt.setInt(3, article.getQteSort());
-                    stmt.setInt(4, article.getPrixUnit());
-                    stmt.setInt(5, article.getMontantS());
-                    stmt.setInt(6, article.getPumpAnc());
-                    stmt.setInt(7, article.getQteStockAnc());
-                    stmt.setInt(8, article.getPumpNouv());
-                    stmt.setInt(9, article.getQteStockNouv());
-                    stmt.setDate(10, dateSortSql);
-                    stmt.setString(11, article.getHeureSort());
-                    stmt.setInt(12, article.getQteSortRest());
-                    stmt.setInt(13, article.getQteDem());
-                    stmt.executeUpdate();
+        try (Connection conn = DriverManager.getConnection(DB_URL, DB_USER, DB_PASSWORD);
+             PreparedStatement stmt = conn.prepareStatement("INSERT INTO Article_Exit (num_sort, code_art, qte_sort, prix_unit, montant_S, pump_anc, qte_stk_anc, pump_nouv, qte_stk_nouv, date_sort, heure_sort, qte_sort_rest, qte_dem) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
+             PreparedStatement updateStmt = conn.prepareStatement("UPDATE Article SET qte_st = ? WHERE code_art = ?")) {
+            for (ArticleExit article : exitArticles) {
+                // Retrieve the stock_secu and stock_min values for the article
+                int stockSecu = getStockSecu(conn, article.getCodeArt());
+                int stockMin = getStockMin(conn, article.getCodeArt());
+
+                int oldQteSt = (int) article.getQteStockAnc();
+                int newQteSt = oldQteSt - article.getQteSort();
+
+                if (newQteSt < stockSecu) {
+                    // Display a warning message if the exit makes the qte_st drop below stock_secu
+                    JOptionPane.showMessageDialog(null, "Warning: The exit for article " + article.getCodeArt() + " will make the quantity in stock drop below the security stock level.", "Warning", JOptionPane.WARNING_MESSAGE);
                 }
-            } catch (SQLException e) {
-                e.printStackTrace();
+                if (newQteSt < stockMin) {
+                    // Display an error message and don't proceed with the exit if the qte_st drops below stock_min
+                    JOptionPane.showMessageDialog(null, "Error: The exit for article " + article.getCodeArt() + " will make the quantity in stock drop below the minimum stock level. The exit cannot be processed.", "Error", JOptionPane.ERROR_MESSAGE);
+                    return;
+                }
+//                System.out.println(stockSecu);
+                stmt.setString(1, numSort);
+                stmt.setString(2, article.getCodeArt());
+                stmt.setInt(3, article.getQteSort());
+                stmt.setInt(4, article.getPrixUnit());
+                stmt.setInt(5, article.getMontantS());
+                stmt.setInt(6, article.getPumpAnc());
+                stmt.setInt(7, oldQteSt);
+                stmt.setInt(8, article.getPumpNouv());
+                stmt.setInt(9, newQteSt);
+                stmt.setDate(10, dateSortSql);
+                stmt.setString(11, article.getHeureSort());
+                stmt.setInt(12, newQteSt);
+                stmt.setInt(13, article.getQteDem());
+                stmt.executeUpdate();
+
+                // Update the qte_st in the Article table
+                updateStmt.setInt(1, newQteSt);
+                updateStmt.setString(2, article.getCodeArt());
+                updateStmt.executeUpdate();
             }
-        } catch (ParseException e) {
+        } catch (SQLException e) {
             e.printStackTrace();
         }
+    } catch (ParseException e) {
+        e.printStackTrace();
     }
+}
+
+
+private static int getStockSecu(Connection conn, String codeArt) {
+    try (PreparedStatement stmt = conn.prepareStatement("SELECT stock_secu FROM Article WHERE code_art = ?")) {
+        stmt.setString(1, codeArt);
+        try (ResultSet rs = stmt.executeQuery()) {
+            if (rs.next()) {
+                return rs.getInt("stock_secu");
+            }
+        }
+    } catch (SQLException e) {
+        e.printStackTrace();
+    }
+    return 0;
+}
+
+private static int getStockMin(Connection conn, String codeArt) {
+    try (PreparedStatement stmt = conn.prepareStatement("SELECT stock_mini FROM Article WHERE code_art = ?")) {
+        stmt.setString(1, codeArt);
+        try (ResultSet rs = stmt.executeQuery()) {
+            if (rs.next()) {
+                return rs.getInt("stock_mini");
+            }
+        }
+    } catch (SQLException e) {
+        e.printStackTrace();
+    }
+    return 0;
+}
+
+
+
 
     private static String generateNumSort() {
         // Implement a logic to generate a unique number for the sort

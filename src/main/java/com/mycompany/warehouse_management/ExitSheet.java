@@ -7,12 +7,16 @@ import java.awt.Toolkit;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.sql.SQLException;
+import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.DefaultListModel;
+import javax.swing.JComponent;
+import javax.swing.JOptionPane;
 import javax.swing.JTable;
 import javax.swing.UIManager;
 import javax.swing.event.ListSelectionEvent;
@@ -31,6 +35,7 @@ import javax.swing.table.DefaultTableModel;
 
 
 public class ExitSheet extends javax.swing.JFrame {
+    private JComponent parentComponent; // Declare a class-level variable to store the parent component
     private List<Article> selectedArticles = new ArrayList<>();    /**
      * Creates new form AdvancedSearch
      */
@@ -62,9 +67,9 @@ public class ExitSheet extends javax.swing.JFrame {
                 DefaultTableModel model = (DefaultTableModel) resultsTable.getModel();
                 String codeArt = (String) model.getValueAt(selectedRow, 0);
                 String desigArt = (String) model.getValueAt(selectedRow, 1);
-                double qteSt = ((Number) model.getValueAt(selectedRow, 4)).doubleValue();
                 String codeClass = (String) model.getValueAt(selectedRow, 2);
                 String uniteMes = (String) model.getValueAt(selectedRow, 3);
+                double qteSt = ((Number) model.getValueAt(selectedRow, 4)).doubleValue();
                 String casier = (String) model.getValueAt(selectedRow, 5);
                 double stockMini = ((Number) model.getValueAt(selectedRow, 6)).doubleValue();
                 double stockMax = ((Number) model.getValueAt(selectedRow, 7)).doubleValue();
@@ -95,16 +100,41 @@ public class ExitSheet extends javax.swing.JFrame {
                     actif
                 );
 
-                // Add the selected article to the list of selected articles
-                selectedArticles.add(selectedArticle);
+                
+                   
+                
+                // Show a popup to ask for the total of instances
+                String totalInstancesStr = JOptionPane.showInputDialog(
+                    parentComponent,
+                    "Enter the total instances of the selected article:",
+                    "Total Instances",
+                    JOptionPane.QUESTION_MESSAGE
+                );
 
-                // Update the selectedArticlesList model
-                DefaultListModel<String> listModel = new DefaultListModel<>();
-                for (Article article : selectedArticles) {
-                    listModel.addElement(article.getCodeArt() + " - " + article.getDesigArt());
+                if (totalInstancesStr != null) {
+                    try {
+                        int totalInstances = Integer.parseInt(totalInstancesStr);
+                        selectedArticle.setTemporary_to_exit(totalInstances);
+
+                        // Add the selected article to the list of selected articles
+                        selectedArticles.add(selectedArticle);
+
+                        // Update the selectedArticlesList model
+                        DefaultListModel<String> listModel = new DefaultListModel<>();
+                        for (Article article : selectedArticles) {
+                            listModel.addElement(article.getCodeArt() + " - " + article.getDesigArt());
+                        }
+                        selectedArticlesList.setModel(listModel);
+                    } catch (NumberFormatException e) {
+                        JOptionPane.showMessageDialog(
+                            parentComponent,
+                    "Invalid input. Please enter a valid number.",
+                      "Error",
+                 JOptionPane.ERROR_MESSAGE
+                    );
                 }
-                selectedArticlesList.setModel(listModel);
-;
+                }
+
             }
         }
     }
@@ -289,7 +319,7 @@ private boolean getBooleanValue(JTable table, int row, int column) {
             articleCountTextField.setBackground(new java.awt.Color(51, 51, 51));
             articleCountTextField.setFont(new java.awt.Font("POI Aeronaut Trial", 0, 11)); // NOI18N
             articleCountTextField.setForeground(new java.awt.Color(153, 153, 153));
-            articleCountTextField.setText("69420");
+            articleCountTextField.setText("0");
             articleCountTextField.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 2, 0, new java.awt.Color(0, 51, 102)));
             articleCountTextField.addActionListener(new java.awt.event.ActionListener() {
                 public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -391,12 +421,12 @@ private boolean getBooleanValue(JTable table, int row, int column) {
                             .addContainerGap()
                             .addComponent(logoLabel)
                             .addGap(161, 161, 161)))
-                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 267, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                         .addGroup(jPanel1Layout.createSequentialGroup()
                             .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 220, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGap(18, 18, 18)
-                            .addComponent(createExitButton, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addComponent(createExitButton, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
                     .addGap(18, 18, 18)
                     .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(articleCount, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -465,37 +495,61 @@ private boolean getBooleanValue(JTable table, int row, int column) {
     private void createExitButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_createExitButtonActionPerformed
         // TODO add your handling code here:
         if (!selectedArticles.isEmpty()) {
-        List<ArticleExit> exitArticles = convertToExitArticles(selectedArticles);
-        ExitTicket exitTicket = new ExitTicket(exitArticles);
-        exitTicket.setVisible(true);
-        dispose();
-    } else {
-        // Display a message or do something else if no articles are selected
-    }
+            List<ArticleExit> exitArticles = convertToExitArticles(selectedArticles);
+            ExitTicket exitTicket = new ExitTicket(exitArticles);
+            exitTicket.setVisible(true);
+            dispose();
+        } else {
+            // Display a message or do something else if no articles are selected
+        }
     }//GEN-LAST:event_createExitButtonActionPerformed
     private List<ArticleExit> convertToExitArticles(List<Article> selectedArticles) {
     List<ArticleExit> exitArticles = new ArrayList<>();
     for (Article article : selectedArticles) {
-        ArticleExit exitArticle;
-        exitArticle = new ArticleExit(
-                article.getCodeArt(),
-                (int) article.getQteSt(),
-                // Set the other properties of the ArticleExit object
-                0, // prixUnit
-                0, // montantS
-                0, // pumpAnc
-                (int) article.getQteSt(), // qteStockAnc
-                0, // pumpNouv
-                (int) article.getQteSt(), // qteStockNouv
-                new Date(), // dateSort
-                "00:00", // heureSort
-                (int) article.getQteSt(), // qteSortRest
-                0 // qteDem
+        int qteDem = (int) article.getTemporary_to_exit(); // Get the total instances from the Article object
+        double oldQteSt = article.getQteSt();
+        double newQteSt = article.getQteSt() - qteDem;
+        article.setQteSt(newQteSt); // Update the Article.qte_st with the new value
+
+        int pumpAnc = (int) (article.getValeur() * oldQteSt); // Calculate pumpAnc
+        int pumpNouv = (int) (article.getValeur() * article.getQteSt()); // Calculate pumpNouv
+        int prixUnit = (int) (article.getValeur() * 1.2); // Calculate prixUnit with a 20% markup
+        int montantS = prixUnit * qteDem; // Calculate montantS
+
+        LocalTime exitTime = LocalTime.now(); // Get the current time
+        String heureSort = exitTime.format(DateTimeFormatter.ofPattern("HH:mm")); // Format the time as a string
+
+        ArticleExit exitArticle = new ArticleExit(
+            article.getCodeArt(),
+            qteDem, // qte_sort
+            prixUnit, // prixUnit
+            montantS, // montantS
+            pumpAnc, // pumpAnc
+            (int) oldQteSt, // qteStockAnc (old value)
+            pumpNouv, // pumpNouv&
+            (int) newQteSt, // qteStockNouv (new value)
+            new Date(), // dateSort
+            heureSort, // heureSort
+            (int) newQteSt, // qteSortRest (new value)
+            qteDem // qte_dem
         );
+        exitArticle.setQteSort(qteDem);
+        exitArticle.setQteDem(qteDem);
+        exitArticle.setQteStockAnc((int) oldQteSt);
+        exitArticle.setQteStockNouv((int) newQteSt);
+        exitArticle.setQteSortRest((int) newQteSt);
         exitArticles.add(exitArticle);
     }
     return exitArticles;
 }
+
+
+
+
+
+
+
+
     /**
      * @param args the command line arguments
      */

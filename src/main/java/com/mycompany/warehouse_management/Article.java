@@ -24,6 +24,8 @@ public class Article {
     private String rayon;
     private boolean dormant;
     private boolean actif;
+    private int temporary_to_exit;
+    private int temporary_to_return;
 
     public Article() {
     }
@@ -47,7 +49,23 @@ public class Article {
         this.actif = actif;
     }
 
+    public void setTemporary_to_exit(int temporary_to_exit) {
+        this.temporary_to_exit = temporary_to_exit;
+    }
 
+    public int getTemporary_to_exit() {
+        return temporary_to_exit;
+    }
+
+    public int getTemporary_to_return() {
+        return temporary_to_return;
+    }
+
+    public void setTemporary_to_return(int temporary_to_return) {
+        this.temporary_to_return = temporary_to_return;
+    }
+    
+    
     public String getCodeArt() {
         return codeArt;
     }

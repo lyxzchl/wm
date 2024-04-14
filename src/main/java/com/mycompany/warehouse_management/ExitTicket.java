@@ -183,7 +183,7 @@ public class ExitTicket extends javax.swing.JFrame {
             }
         });
 
-        validToggleButton.setText("Yes");
+        validToggleButton.setText("No");
 
         validLabel.setFont(new java.awt.Font("POI Aeronaut Trial", 1, 14)); // NOI18N
         validLabel.setForeground(new java.awt.Color(153, 153, 153));
@@ -481,7 +481,7 @@ public class ExitTicket extends javax.swing.JFrame {
         String valide = (validToggleButton.isSelected()) ? "Yes" : "No";
         String annule = (cancelToggleButton.isSelected()) ? "Yes" : "No";
 
-        String numSort = DataBaseUtils.createExitTuple(numOT, codeMag, codeAnal, exitDate, validDate, valide, annule);
+        String numSort = DataBaseUtils.createExitTuple(numOT, codeMag, codeAnal, exitDate, validDate, valide, annule,this.exitArticles);
         if (numSort != null) {
             DataBaseUtils.createArticleExitTuples(exitDate, numSort, this.exitArticles);
             JOptionPane.showMessageDialog(this, "Exit and Article_Exit tuples created successfully!");
