@@ -8,11 +8,19 @@ import com.formdev.flatlaf.FlatDarkLaf;
 import java.awt.Dimension;
 import java.awt.Toolkit;
 import java.io.IOException;
+import java.sql.Connection;
+import java.sql.Date;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 import javax.swing.UIManager;
 import javax.swing.table.DefaultTableModel;
 
@@ -105,6 +113,8 @@ public class ExitTicket extends javax.swing.JFrame {
         warehousecodeTextField = new javax.swing.JTextField();
         printButton = new javax.swing.JButton();
         cancelButton = new javax.swing.JButton();
+        addButton = new javax.swing.JButton();
+        nextButton = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setBackground(new java.awt.Color(51, 51, 51));
@@ -130,7 +140,7 @@ public class ExitTicket extends javax.swing.JFrame {
 
         ticketCodeLabel.setFont(new java.awt.Font("POI Aeronaut Trial", 1, 14)); // NOI18N
         ticketCodeLabel.setForeground(new java.awt.Color(153, 153, 153));
-        ticketCodeLabel.setText("Ticket Code");
+        ticketCodeLabel.setText("N* OT");
 
         ticketCodeTextField.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -258,6 +268,26 @@ public class ExitTicket extends javax.swing.JFrame {
             }
         });
 
+        addButton.setFont(new java.awt.Font("POI Aeronaut Trial", 0, 16)); // NOI18N
+        addButton.setText("Add");
+        addButton.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 2, 0, new java.awt.Color(0, 51, 102)));
+        addButton.setContentAreaFilled(false);
+        addButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                addButtonActionPerformed(evt);
+            }
+        });
+
+        nextButton.setFont(new java.awt.Font("POI Aeronaut Trial", 0, 16)); // NOI18N
+        nextButton.setText("Next >");
+        nextButton.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 2, 0, new java.awt.Color(0, 51, 102)));
+        nextButton.setContentAreaFilled(false);
+        nextButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                nextButtonActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -271,10 +301,6 @@ public class ExitTicket extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addComponent(cancelButton, javax.swing.GroupLayout.PREFERRED_SIZE, 87, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(520, 520, 520))
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 906, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(31, 31, 31)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
@@ -316,6 +342,17 @@ public class ExitTicket extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(costcenterTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 906, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(32, 32, 32)
+                        .addComponent(addButton, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(nextButton, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -357,11 +394,15 @@ public class ExitTicket extends javax.swing.JFrame {
                     .addComponent(exitDateFormattedTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 225, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(60, Short.MAX_VALUE))
+                .addGap(18, 18, 18)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(addButton)
+                    .addComponent(nextButton))
+                .addContainerGap(23, Short.MAX_VALUE))
         );
 
         LocalDate currentDate = LocalDate.now();
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MM/dd/yyyy");
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
         String formattedDate = currentDate.format(formatter);
         exitDateFormattedTextField.setText(formattedDate);
 
@@ -385,10 +426,6 @@ public class ExitTicket extends javax.swing.JFrame {
     private void exitDateFormattedTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_exitDateFormattedTextFieldActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_exitDateFormattedTextFieldActionPerformed
-
-    private void ticketCodeTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ticketCodeTextFieldActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_ticketCodeTextFieldActionPerformed
 
     private void costcenterTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_costcenterTextFieldActionPerformed
         // TODO add your handling code here:
@@ -433,6 +470,114 @@ public class ExitTicket extends javax.swing.JFrame {
         dash.setVisible(true);
     }//GEN-LAST:event_cancelButtonActionPerformed
 
+    private void addButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addButtonActionPerformed
+        // TODO add your handling code here:
+        // Get the necessary data from the interface
+        String numOT = ticketCodeTextField.getText();
+        String codeMag = warehousecodeTextField.getText();
+        String codeAnal = costcenterTextField.getText();
+        String exitDate = exitDateFormattedTextField.getText();
+        String validDate = validDateFormattedTextField.getText();
+        String valide = (validToggleButton.isSelected()) ? "Yes" : "No";
+        String annule = (cancelToggleButton.isSelected()) ? "Yes" : "No";
+
+        String numSort = DataBaseUtils.createExitTuple(numOT, codeMag, codeAnal, exitDate, validDate, valide, annule);
+        if (numSort != null) {
+            DataBaseUtils.createArticleExitTuples(exitDate, numSort, this.exitArticles);
+            JOptionPane.showMessageDialog(this, "Exit and Article_Exit tuples created successfully!");
+        } else {
+            JOptionPane.showMessageDialog(this, "Error creating Exit and Article_Exit tuples.", "Error", JOptionPane.ERROR_MESSAGE);
+        }
+    }//GEN-LAST:event_addButtonActionPerformed
+
+    private void ticketCodeTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ticketCodeTextFieldActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_ticketCodeTextFieldActionPerformed
+
+    private void nextButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nextButtonActionPerformed
+        // TODO add your handling code here:
+        DataBaseUtils.displayNextExit(this, ticketCodeTextField, warehousecodeTextField, costcenterTextField,
+                                 exitDateFormattedTextField, validToggleButton, cancelToggleButton,
+                                 exit_articlesTable);
+    }//GEN-LAST:event_nextButtonActionPerformed
+//private String createExitTuple(String numOT, String codeMag, String codeAnal, String exitDate, String validDate, String valide, String annule) {
+//    try {
+//        SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
+//        java.util.Date exitDateObj = sdf.parse(exitDate);
+//        java.sql.Date dateSortSql = new java.sql.Date(exitDateObj.getTime());
+//
+//        java.util.Date validDateObj = sdf.parse(validDate);
+//        java.sql.Date dateValideSql = new java.sql.Date(validDateObj.getTime());
+//
+//        String numSort = generateNumSort();
+//
+//        try (Connection conn = DriverManager.getConnection(DataBaseUtils.getDB_URL(), DataBaseUtils.getDB_USER(), DataBaseUtils.getDB_PASSWORD());
+//             PreparedStatement stmt = conn.prepareStatement("INSERT INTO `Exit` (num_sort, num_OT, code_anal, code_mag, date_sort, date_valide, valide, annule) VALUES (?, ?, ?, ?, ?, ?, ?, ?)")) {
+//            stmt.setString(1, numSort);
+//            stmt.setString(2, numOT);
+//            stmt.setString(3, codeAnal);
+//            stmt.setString(4, codeMag);
+//            stmt.setDate(5, dateSortSql);
+//            stmt.setDate(6, dateValideSql);
+//            stmt.setString(7, valide);
+//            stmt.setString(8, annule);
+//            stmt.executeUpdate();
+//        } catch (SQLException e) {
+//            e.printStackTrace();
+//            return null;
+//        }
+//        return numSort;
+//    } catch (ParseException e) {
+//        e.printStackTrace();
+//        return null;
+//    }
+//}
+//
+//
+//private void createArticleExitTuples(String exitDate, String numSort) {
+//    try {
+//        SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
+//        java.util.Date date = sdf.parse(exitDate);
+//        java.sql.Date dateSortSql = new java.sql.Date(date.getTime());
+//
+//        try (Connection conn = DriverManager.getConnection(DataBaseUtils.getDB_URL(), DataBaseUtils.getDB_USER(), DataBaseUtils.getDB_PASSWORD());
+//             PreparedStatement stmt = conn.prepareStatement("INSERT INTO Article_Exit (num_sort, code_art, qte_sort, prix_unit, montant_S, pump_anc, qte_stk_anc, pump_nouv, qte_stk_nouv, date_sort, heure_sort, qte_sort_rest, qte_dem) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)")) {
+//            for (ArticleExit article : this.exitArticles) {
+//                stmt.setString(1, numSort);
+//                stmt.setString(2, article.getCodeArt());
+//                stmt.setInt(3, article.getQteSort());
+//                stmt.setInt(4, article.getPrixUnit());
+//                stmt.setInt(5, article.getMontantS());
+//                stmt.setInt(6, article.getPumpAnc());
+//                stmt.setInt(7, article.getQteStockAnc());
+//                stmt.setInt(8, article.getPumpNouv());
+//                stmt.setInt(9, article.getQteStockNouv());
+//                stmt.setDate(10, dateSortSql);
+//                stmt.setString(11, article.getHeureSort());
+//                stmt.setInt(12, article.getQteSortRest());
+//                stmt.setInt(13, article.getQteDem());
+//                stmt.executeUpdate();
+//            }
+//        } catch (SQLException e) {
+//            e.printStackTrace();
+//        }
+//    } catch (ParseException e) {
+//        e.printStackTrace();
+//    }
+//}
+//
+//private String generateNumSort() {
+//    // Implement a logic to generate a unique number for the sort
+//    return "SORT-" + System.currentTimeMillis();
+//}
+
+
+
+
+
+
+
+
     /**
      * @param args the command line arguments
      */
@@ -470,6 +615,7 @@ public class ExitTicket extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton addButton;
     private javax.swing.JButton cancelButton;
     private javax.swing.JLabel cancelLabel;
     private javax.swing.JToggleButton cancelToggleButton;
@@ -484,6 +630,7 @@ public class ExitTicket extends javax.swing.JFrame {
     private javax.swing.JLabel logoLabel;
     private javax.swing.JLabel nbssLabel;
     private javax.swing.JTextField nbssTextField;
+    private javax.swing.JButton nextButton;
     private javax.swing.JButton printButton;
     private javax.swing.JLabel ticketCodeLabel;
     private javax.swing.JTextField ticketCodeTextField;

@@ -4,9 +4,16 @@
  */
 package com.mycompany.warehouse_management;
 import java.sql.*;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
+import javax.swing.JFormattedTextField;
+import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 import javax.swing.JTable;
+import javax.swing.JTextField;
+import javax.swing.JToggleButton;
 import javax.swing.table.DefaultTableModel;
 /**
  *
@@ -17,6 +24,18 @@ public class DataBaseUtils {
     private static final String DB_USER = "lyeschl";
     private static final String DB_PASSWORD = "lyessou1213";
 
+    public static String getDB_URL() {
+        return DB_URL;
+    }
+
+    public static String getDB_USER() {
+        return DB_USER;
+    }
+
+    public static String getDB_PASSWORD() {
+        return DB_PASSWORD;
+    }
+    
     public static int authenticateUser(String username, String password) throws SQLException {
     String query = "SELECT password, active, failed_attempts FROM users WHERE BINARY username = ?";
     try (Connection conn = DriverManager.getConnection(DB_URL, DB_USER, DB_PASSWORD);
@@ -349,6 +368,232 @@ public static List<Return> getAllReturns() throws SQLException {
 
     return returns;
 }
+// ExitTicket -> Next Button
+private static ResultSet exitResultSet = null;
+    private static int exitCurrentRow = 0;
 
+    public static void displayNextExit(JFrame frame, JTextField ticketCodeTextField, JTextField warehousecodeTextField,
+                                      JTextField costcenterTextField, JFormattedTextField exitDateFormattedTextField,
+                                      JToggleButton validToggleButton, JToggleButton cancelToggleButton,
+                                      JTable exit_ArticlesTable) {
+        try (Connection conn = DriverManager.getConnection(DB_URL, DB_USER, DB_PASSWORD);
+             Statement stmt = conn.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
+             ResultSet rs = stmt.executeQuery("SELECT * FROM `Exit` ORDER BY num_sort")) {
+            if (exitResultSet == null) {
+                exitResultSet = rs;
+            }
+
+            if (exitResultSet.next()) {
+                String numSort = exitResultSet.getString("num_sort");
+                String numOT = exitResultSet.getString("num_OT");
+                String codeMag = exitResultSet.getString("code_mag");
+                String codeAnal = exitResultSet.getString("code_anal");
+                Date dateSortSql = exitResultSet.getDate("date_sort");
+                String valide = exitResultSet.getString("valide");
+                String annule = exitResultSet.getString("annule");
+
+                SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
+                String dateSort = sdf.format(dateSortSql);
+
+                ticketCodeTextField.setText(numOT);
+                warehousecodeTextField.setText(codeMag);
+                costcenterTextField.setText(codeAnal);
+                exitDateFormattedTextField.setText(dateSort);
+                validToggleButton.setSelected("Yes".equals(valide));
+                cancelToggleButton.setSelected("Yes".equals(annule));
+
+                // Fetch and display the Article_Exit tuples
+                displayArticleExits(frame, exit_ArticlesTable, numSort);
+            } else {
+                JOptionPane.showMessageDialog(frame, "No more exits to display.", "Information", JOptionPane.INFORMATION_MESSAGE);
+                exitResultSet = null;
+                exitCurrentRow = 0;
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+            JOptionPane.showMessageDialog(frame, "Error fetching exit data.", "Error", JOptionPane.ERROR_MESSAGE);
+        }
+    }
+
+    public static void displayArticleExits(JFrame frame, JTable exit_ArticlesTable, String numSort) {
+        try (Connection conn = DriverManager.getConnection(DB_URL, DB_USER, DB_PASSWORD);
+             PreparedStatement stmt = conn.prepareStatement("SELECT * FROM Article_Exit WHERE num_sort = ?")) {
+            stmt.setString(1, numSort);
+            ResultSet rs = stmt.executeQuery();
+
+            // Clear the existing data in the exit_ArticlesTable
+            ((DefaultTableModel) exit_ArticlesTable.getModel()).setRowCount(0);
+
+            while (rs.next()) {
+                String codeArt = rs.getString("code_art");
+                int qteSort = rs.getInt("qte_sort");
+                int prixUnit = rs.getInt("prix_unit");
+                int montantS = rs.getInt("montant_S");
+                int pumpAnc = rs.getInt("pump_anc");
+                int qteStockAnc = rs.getInt("qte_stk_anc");
+                int pumpNouv = rs.getInt("pump_nouv");
+                int qteStockNouv = rs.getInt("qte_stk_nouv");
+                Date dateSortSql = rs.getDate("date_sort");
+                String heureSort = rs.getString("heure_sort");
+                int qteSortRest = rs.getInt("qte_sort_rest");
+                int qteDem = rs.getInt("qte_dem");
+
+                SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
+                String dateSort = sdf.format(dateSortSql);
+
+                Object[] row = {numSort,codeArt, qteSort, prixUnit, montantS, pumpAnc, qteStockAnc, pumpNouv, qteStockNouv, dateSort, heureSort, qteSortRest, qteDem};
+                ((DefaultTableModel) exit_ArticlesTable.getModel()).addRow(row);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+            JOptionPane.showMessageDialog(frame, "Error fetching article exit data.", "Error", JOptionPane.ERROR_MESSAGE);
+        }
+    }
+// ReturnTicket -> Next Button
+    private static ResultSet returnResultSet = null;
+    private static int returnCurrentRow = 0;
+
+    public static void displayNextReturn(JFrame frame, JTextField ticketCodeTextField, JTextField warehousecodeTextField,
+                                         JFormattedTextField exitDateFormattedTextField, JToggleButton validToggleButton,
+                                         JToggleButton cancelToggleButton, JTable return_ArticlesTable) {
+        try (Connection conn = DriverManager.getConnection(DB_URL, DB_USER, DB_PASSWORD);
+             Statement stmt = conn.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
+             ResultSet rs = stmt.executeQuery("SELECT * FROM `Return` ORDER BY num_brs")) {
+            if (returnResultSet == null) {
+                returnResultSet = rs;
+            }
+
+            if (returnResultSet.next()) {
+                String numBRS = returnResultSet.getString("num_brs");
+                String codeMag = returnResultSet.getString("code_mag");
+                Date dateReintSql = returnResultSet.getDate("date_reint");
+                String valide = returnResultSet.getString("valide");
+                String annule = returnResultSet.getString("annule");
+
+                SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
+                String dateReint = sdf.format(dateReintSql);
+
+                ticketCodeTextField.setText(numBRS);
+                warehousecodeTextField.setText(codeMag);
+                exitDateFormattedTextField.setText(dateReint);
+                validToggleButton.setSelected("Yes".equals(valide));
+                cancelToggleButton.setSelected("Yes".equals(annule));
+
+                // Fetch and display the Article_Return tuples
+                displayArticleReturns(frame, return_ArticlesTable, numBRS);
+            } else {
+                JOptionPane.showMessageDialog(frame, "No more returns to display.", "Information", JOptionPane.INFORMATION_MESSAGE);
+                returnResultSet = null;
+                returnCurrentRow = 0;
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+            JOptionPane.showMessageDialog(frame, "Error fetching return data.", "Error", JOptionPane.ERROR_MESSAGE);
+        }
+    }
+
+    public static void displayArticleReturns(JFrame frame, JTable return_ArticlesTable, String numBRS) {
+        try (Connection conn = DriverManager.getConnection(DB_URL, DB_USER, DB_PASSWORD);
+             PreparedStatement stmt = conn.prepareStatement("SELECT * FROM Article_Return WHERE num_brs = ?")) {
+            stmt.setString(1, numBRS);
+            ResultSet rs = stmt.executeQuery();
+
+            // Clear the existing data in the return_ArticlesTable
+            ((DefaultTableModel) return_ArticlesTable.getModel()).setRowCount(0);
+
+            while (rs.next()) {
+                String codeArt = rs.getString("code_art");
+                int qteReint = rs.getInt("qte_reint");
+                int prixUnit = rs.getInt("prix_unit");
+                int montRe = rs.getInt("mont_re");
+                String numSort = rs.getString("num_sort");
+                int pumpAnc = rs.getInt("pump_anc");
+                int qteStockAnc = rs.getInt("qte_stk_anc");
+                int qteStockNouv = rs.getInt("qte_stk_nouv");
+                int pumpNouv = rs.getInt("pump_nouv");
+                Date dateReintSql = rs.getDate("date_reint");
+                String heureReint = rs.getString("heure_reint");
+
+                SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
+                String dateReint = sdf.format(dateReintSql);
+
+                Object[] row = {numBRS,codeArt, qteReint, prixUnit, montRe, numSort, pumpAnc, qteStockAnc, qteStockNouv, pumpNouv, dateReint, heureReint};
+                ((DefaultTableModel) return_ArticlesTable.getModel()).addRow(row);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+            JOptionPane.showMessageDialog(frame, "Error fetching article return data.", "Error", JOptionPane.ERROR_MESSAGE);
+        }
+    }
+//    ExitTicket -> Add Button
+    public static String createExitTuple(String numOT, String codeMag, String codeAnal, String exitDate, String validDate, String valide, String annule) {
+        try {
+            SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
+            java.util.Date exitDateObj = sdf.parse(exitDate);
+            java.sql.Date dateSortSql = new java.sql.Date(exitDateObj.getTime());
+
+            java.util.Date validDateObj = sdf.parse(validDate);
+            java.sql.Date dateValideSql = new java.sql.Date(validDateObj.getTime());
+
+            String numSort = generateNumSort();
+
+            try (Connection conn = DriverManager.getConnection(DB_URL, DB_USER, DB_PASSWORD);
+                 PreparedStatement stmt = conn.prepareStatement("INSERT INTO `Exit` (num_sort, num_OT, code_anal, code_mag, date_sort, date_valide, valide, annule) VALUES (?, ?, ?, ?, ?, ?, ?, ?)")) {
+                stmt.setString(1, numSort);
+                stmt.setString(2, numOT);
+                stmt.setString(3, codeAnal);
+                stmt.setString(4, codeMag);
+                stmt.setDate(5, dateSortSql);
+                stmt.setDate(6, dateValideSql);
+                stmt.setString(7, valide);
+                stmt.setString(8, annule);
+                stmt.executeUpdate();
+            } catch (SQLException e) {
+                e.printStackTrace();
+                return null;
+            }
+            return numSort;
+        } catch (ParseException e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
+
+    public static void createArticleExitTuples(String exitDate, String numSort, java.util.List<ArticleExit> exitArticles) {
+        try {
+            SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
+            java.util.Date date = sdf.parse(exitDate);
+            java.sql.Date dateSortSql = new java.sql.Date(date.getTime());
+
+            try (Connection conn = DriverManager.getConnection(DB_URL, DB_USER, DB_PASSWORD);
+                 PreparedStatement stmt = conn.prepareStatement("INSERT INTO Article_Exit (num_sort, code_art, qte_sort, prix_unit, montant_S, pump_anc, qte_stk_anc, pump_nouv, qte_stk_nouv, date_sort, heure_sort, qte_sort_rest, qte_dem) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)")) {
+                for (ArticleExit article : exitArticles) {
+                    stmt.setString(1, numSort);
+                    stmt.setString(2, article.getCodeArt());
+                    stmt.setInt(3, article.getQteSort());
+                    stmt.setInt(4, article.getPrixUnit());
+                    stmt.setInt(5, article.getMontantS());
+                    stmt.setInt(6, article.getPumpAnc());
+                    stmt.setInt(7, article.getQteStockAnc());
+                    stmt.setInt(8, article.getPumpNouv());
+                    stmt.setInt(9, article.getQteStockNouv());
+                    stmt.setDate(10, dateSortSql);
+                    stmt.setString(11, article.getHeureSort());
+                    stmt.setInt(12, article.getQteSortRest());
+                    stmt.setInt(13, article.getQteDem());
+                    stmt.executeUpdate();
+                }
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+    }
+
+    private static String generateNumSort() {
+        // Implement a logic to generate a unique number for the sort
+        return "SORT-" + System.currentTimeMillis();
+    }
 }
 

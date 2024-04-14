@@ -56,7 +56,6 @@ public class LoginInterface extends javax.swing.JFrame {
         sloganLabel1 = new javax.swing.JLabel();
         sloganLabel4 = new javax.swing.JLabel();
         backgroundImage = new javax.swing.JLabel();
-        jSplitPane1 = new javax.swing.JSplitPane();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setSize(new java.awt.Dimension(600, 500));
@@ -138,10 +137,10 @@ public class LoginInterface extends javax.swing.JFrame {
                 .addGroup(loginPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(usernameField)
                     .addComponent(passwordField)
-                    .addComponent(passwordLabel)
-                    .addComponent(usernameLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 76, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(continueButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(blockedButton, javax.swing.GroupLayout.DEFAULT_SIZE, 236, Short.MAX_VALUE))
+                    .addComponent(blockedButton, javax.swing.GroupLayout.DEFAULT_SIZE, 236, Short.MAX_VALUE)
+                    .addComponent(usernameLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(passwordLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         loginPanelLayout.setVerticalGroup(
@@ -199,8 +198,6 @@ public class LoginInterface extends javax.swing.JFrame {
         backgroundImage.setText("jLabel1");
         getContentPane().add(backgroundImage);
         backgroundImage.setBounds(0, -10, 1120, 630);
-        getContentPane().add(jSplitPane1);
-        jSplitPane1.setBounds(180, 420, 202, 26);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -324,7 +321,6 @@ public class LoginInterface extends javax.swing.JFrame {
     private javax.swing.JLabel backgroundImage;
     private javax.swing.JButton blockedButton;
     private javax.swing.JButton continueButton;
-    private javax.swing.JSplitPane jSplitPane1;
     private javax.swing.JLabel loginLabel;
     private javax.swing.JPanel loginPanel;
     private javax.swing.JLabel logoLabel;

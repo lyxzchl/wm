@@ -8,11 +8,18 @@ import com.formdev.flatlaf.FlatDarkLaf;
 import java.awt.Dimension;
 import java.awt.Toolkit;
 import java.io.IOException;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 import javax.swing.UIManager;
 import javax.swing.table.DefaultTableModel;
 
@@ -86,8 +93,6 @@ public class ReturnTicket extends javax.swing.JFrame {
         exitTicketLabel = new javax.swing.JLabel();
         returnDateLabel = new javax.swing.JLabel();
         returnDateFormattedTextField = new javax.swing.JFormattedTextField();
-        ticketCodeLabel = new javax.swing.JLabel();
-        ticketCodeTextField = new javax.swing.JTextField();
         logoLabel = new javax.swing.JLabel();
         nbrsLabel = new javax.swing.JLabel();
         nbrsTextField = new javax.swing.JTextField();
@@ -103,6 +108,8 @@ public class ReturnTicket extends javax.swing.JFrame {
         warehousecodeTextField = new javax.swing.JTextField();
         printButton = new javax.swing.JButton();
         cancelButton = new javax.swing.JButton();
+        addButton = new javax.swing.JButton();
+        nextButton = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setBackground(new java.awt.Color(51, 51, 51));
@@ -123,16 +130,6 @@ public class ReturnTicket extends javax.swing.JFrame {
         returnDateFormattedTextField.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 returnDateFormattedTextFieldActionPerformed(evt);
-            }
-        });
-
-        ticketCodeLabel.setFont(new java.awt.Font("POI Aeronaut Trial", 1, 14)); // NOI18N
-        ticketCodeLabel.setForeground(new java.awt.Color(153, 153, 153));
-        ticketCodeLabel.setText("Ticket Code");
-
-        ticketCodeTextField.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                ticketCodeTextFieldActionPerformed(evt);
             }
         });
 
@@ -246,6 +243,26 @@ public class ReturnTicket extends javax.swing.JFrame {
             }
         });
 
+        addButton.setFont(new java.awt.Font("POI Aeronaut Trial", 0, 16)); // NOI18N
+        addButton.setText("Add");
+        addButton.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 2, 0, new java.awt.Color(0, 51, 102)));
+        addButton.setContentAreaFilled(false);
+        addButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                addButtonActionPerformed(evt);
+            }
+        });
+
+        nextButton.setFont(new java.awt.Font("POI Aeronaut Trial", 0, 16)); // NOI18N
+        nextButton.setText("Next");
+        nextButton.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 2, 0, new java.awt.Color(0, 51, 102)));
+        nextButton.setContentAreaFilled(false);
+        nextButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                nextButtonActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -259,10 +276,6 @@ public class ReturnTicket extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addComponent(cancelButton, javax.swing.GroupLayout.PREFERRED_SIZE, 87, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(520, 520, 520))
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 906, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                     .addGroup(jPanel1Layout.createSequentialGroup()
@@ -281,23 +294,26 @@ public class ReturnTicket extends javax.swing.JFrame {
                         .addComponent(returnDateFormattedTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(35, 35, 35)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(ticketCodeLabel)
-                        .addGap(18, 18, 18)
-                        .addComponent(ticketCodeTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(validDateLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 103, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(warehousecodeLabel))
-                        .addGap(18, 18, 18)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(warehousecodeTextField)
-                            .addComponent(validDateFormattedTextField, javax.swing.GroupLayout.DEFAULT_SIZE, 100, Short.MAX_VALUE))))
+                    .addComponent(validDateLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 103, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(warehousecodeLabel))
+                .addGap(18, 18, 18)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(warehousecodeTextField)
+                    .addComponent(validDateFormattedTextField, javax.swing.GroupLayout.DEFAULT_SIZE, 100, Short.MAX_VALUE))
                 .addGap(35, 35, 35)
                 .addComponent(cancelLabel)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(cancelToggleButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGap(842, 842, 842))
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 906, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(addButton, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(nextButton, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -307,9 +323,7 @@ public class ReturnTicket extends javax.swing.JFrame {
                         .addGap(60, 60, 60)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(nbrsTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(nbrsLabel)
-                            .addComponent(ticketCodeTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(ticketCodeLabel))
+                            .addComponent(nbrsLabel))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -337,11 +351,17 @@ public class ReturnTicket extends javax.swing.JFrame {
                     .addComponent(returnDateFormattedTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 225, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(60, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 35, Short.MAX_VALUE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(addButton)
+                    .addComponent(nextButton))
+                .addContainerGap())
         );
 
+        // Code adding the component to the parent container - not shown here
+        // Code adding the component to the parent container - not shown here
         LocalDate currentDate = LocalDate.now();
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MM/dd/yyyy");
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
         String formattedDate = currentDate.format(formatter);
         returnDateFormattedTextField.setText(formattedDate);
 
@@ -362,44 +382,24 @@ public class ReturnTicket extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void returnDateFormattedTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_returnDateFormattedTextFieldActionPerformed
+    private void addButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addButtonActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_returnDateFormattedTextFieldActionPerformed
+        // Get the necessary data from the interface
+        String numBRS = nbrsTextField.getText();
+        String codeMag = warehousecodeTextField.getText();
+        String dateReint = returnDateFormattedTextField.getText();
+        String dateValid = validDateFormattedTextField.getText();
+        String valide = (validToggleButton.isSelected()) ? "Yes" : "No";
+        String annule = (cancelToggleButton.isSelected()) ? "Yes" : "No";
 
-    private void ticketCodeTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ticketCodeTextFieldActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_ticketCodeTextFieldActionPerformed
-
-    private void nbrsTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nbrsTextFieldActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_nbrsTextFieldActionPerformed
-
-    private void validDateFormattedTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_validDateFormattedTextFieldActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_validDateFormattedTextFieldActionPerformed
-
-    private void cancelToggleButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cancelToggleButtonActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_cancelToggleButtonActionPerformed
-
-    private void warehousecodeTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_warehousecodeTextFieldActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_warehousecodeTextFieldActionPerformed
-
-    private void printButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_printButtonActionPerformed
-        // TODO add your handling code here:
-        PDFGenerator pdfGenerator = new PDFGenerator();
-    try {
-        String returnDate = returnDateFormattedTextField.getText();
-        String ticketCode = ticketCodeTextField.getText();
-        List<ArticleReturn> returnArticles = this.returnArticles;
-
-        pdfGenerator.generateReturnPDF(returnDate, ticketCode, returnArticles, "return-ticket.pdf");
-        System.out.println("PDF generated successfully!");
-    } catch (IOException e) {
-        System.err.println("Error generating PDF: " + e.getMessage());
-    }
-    }//GEN-LAST:event_printButtonActionPerformed
+        String numSort = createReturnTuple(numBRS, codeMag, dateReint, dateValid, valide, annule);
+        if (numSort != null) {
+            createArticleReturnTuples(dateReint, numSort);
+            JOptionPane.showMessageDialog(this, "Return and Article_Return tuples created successfully!");
+        } else {
+            JOptionPane.showMessageDialog(this, "Error creating Return and Article_Return tuples.", "Error", JOptionPane.ERROR_MESSAGE);
+        }
+    }//GEN-LAST:event_addButtonActionPerformed
 
     private void cancelButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cancelButtonActionPerformed
         // TODO add your handling code here:
@@ -409,6 +409,106 @@ public class ReturnTicket extends javax.swing.JFrame {
         dash.setVisible(true);
     }//GEN-LAST:event_cancelButtonActionPerformed
 
+    private void printButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_printButtonActionPerformed
+        // TODO add your handling code here:
+        PDFGenerator pdfGenerator = new PDFGenerator();
+        try {
+            String returnDate = returnDateFormattedTextField.getText();
+            String nbrs = nbrsTextField.getText();
+            List<ArticleReturn> returnArticles = this.returnArticles;
+
+            pdfGenerator.generateReturnPDF(returnDate, nbrs, returnArticles, "return-ticket.pdf");
+            System.out.println("PDF generated successfully!");
+        } catch (IOException e) {
+            System.err.println("Error generating PDF: " + e.getMessage());
+        }
+    }//GEN-LAST:event_printButtonActionPerformed
+
+    private void warehousecodeTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_warehousecodeTextFieldActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_warehousecodeTextFieldActionPerformed
+
+    private void cancelToggleButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cancelToggleButtonActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_cancelToggleButtonActionPerformed
+
+    private void validDateFormattedTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_validDateFormattedTextFieldActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_validDateFormattedTextFieldActionPerformed
+
+    private void nbrsTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nbrsTextFieldActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_nbrsTextFieldActionPerformed
+
+    private void returnDateFormattedTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_returnDateFormattedTextFieldActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_returnDateFormattedTextFieldActionPerformed
+
+    private void nextButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nextButtonActionPerformed
+        // TODO add your handling code here:
+        DataBaseUtils.displayNextReturn(this, nbrsTextField, warehousecodeTextField,
+                                   returnDateFormattedTextField, validToggleButton, cancelToggleButton,
+                                   return_articlesTable);
+    }//GEN-LAST:event_nextButtonActionPerformed
+    private String createReturnTuple(String numBRS, String codeMag, String dateReint, String dateValid, String valide, String annule) {
+    try {
+        SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
+        java.util.Date dateReintObj = sdf.parse(dateReint);
+        java.sql.Date dateReintSql = new java.sql.Date(dateReintObj.getTime());
+
+        java.util.Date dateValidObj = sdf.parse(dateValid);
+        java.sql.Date dateValidSql = new java.sql.Date(dateValidObj.getTime());
+
+        try (Connection conn = DriverManager.getConnection(DataBaseUtils.getDB_URL(), DataBaseUtils.getDB_USER(), DataBaseUtils.getDB_PASSWORD());
+             PreparedStatement stmt = conn.prepareStatement("INSERT INTO `Return` (num_brs, code_mag, date_reint, date_valide, valide, annule) VALUES (?, ?, ?, ?, ?, ?)")) {
+            stmt.setString(1, numBRS);
+            stmt.setString(2, codeMag);
+            stmt.setDate(3, dateReintSql);
+            stmt.setDate(4, dateValidSql);
+            stmt.setString(5, valide);
+            stmt.setString(6, annule);
+            stmt.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return null;
+        }
+        return numBRS;
+    } catch (ParseException e) {
+        e.printStackTrace();
+        return null;
+    }
+}
+
+private void createArticleReturnTuples(String dateReint, String numBRS) {
+    try {
+        SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
+        java.util.Date date = sdf.parse(dateReint);
+        java.sql.Date dateReintSql = new java.sql.Date(date.getTime());
+
+        try (Connection conn = DriverManager.getConnection(DataBaseUtils.getDB_URL(), DataBaseUtils.getDB_USER(), DataBaseUtils.getDB_PASSWORD());
+             PreparedStatement stmt = conn.prepareStatement("INSERT INTO Article_Return (num_brs, code_art, qte_reint, prix_unit, mont_re, num_sort, pump_anc, qte_stk_anc, qte_stk_nouv, pump_nouv, date_reint, heure_reint) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)")) {
+            for (ArticleReturn article : this.returnArticles) {
+                stmt.setString(1, numBRS);
+                stmt.setString(2, article.getCodeArt());
+                stmt.setInt(3, article.getQteReint());
+                stmt.setInt(4, article.getPrixUnit());
+                stmt.setInt(5, article.getMontRe());
+                stmt.setString(6, article.getNumSort());
+                stmt.setInt(7, article.getPumpAnc());
+                stmt.setInt(8, article.getQteStockAnc());
+                stmt.setInt(9, article.getQteStockNouv());
+                stmt.setInt(10, article.getPumpNouv());
+                stmt.setDate(11, dateReintSql);
+                stmt.setString(12, article.getHeureReint());
+                stmt.executeUpdate();
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    } catch (ParseException e) {
+        e.printStackTrace();
+    }
+}
     /**
      * @param args the command line arguments
      */
@@ -448,6 +548,7 @@ public class ReturnTicket extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton addButton;
     private javax.swing.JButton cancelButton;
     private javax.swing.JLabel cancelLabel;
     private javax.swing.JToggleButton cancelToggleButton;
@@ -457,12 +558,11 @@ public class ReturnTicket extends javax.swing.JFrame {
     private javax.swing.JLabel logoLabel;
     private javax.swing.JLabel nbrsLabel;
     private javax.swing.JTextField nbrsTextField;
+    private javax.swing.JButton nextButton;
     private javax.swing.JButton printButton;
     private javax.swing.JFormattedTextField returnDateFormattedTextField;
     private javax.swing.JLabel returnDateLabel;
     private javax.swing.JTable return_articlesTable;
-    private javax.swing.JLabel ticketCodeLabel;
-    private javax.swing.JTextField ticketCodeTextField;
     private javax.swing.JFormattedTextField validDateFormattedTextField;
     private javax.swing.JLabel validDateLabel;
     private javax.swing.JLabel validLabel;
