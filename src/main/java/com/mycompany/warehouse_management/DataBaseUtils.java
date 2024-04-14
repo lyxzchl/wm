@@ -3,11 +3,15 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
 package com.mycompany.warehouse_management;
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.io.InputStream;
 import java.sql.*;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Properties;
 import javax.swing.JFormattedTextField;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
@@ -20,9 +24,20 @@ import javax.swing.table.DefaultTableModel;
  * @author lyeschl
  */
 public class DataBaseUtils {
-    public static final String DB_URL = System.getenv("DB_URL");
-    public static final String DB_USER = System.getenv("DB_USER");
-    public static final String DB_PASSWORD = System.getenv("DB_PASSWORD");
+    private static final Properties CONFIG = new Properties();
+
+    static {
+        try (InputStream inputStream = new FileInputStream("/run/media/lyeschl/ssd/main/wmdb.propreties")) {
+            CONFIG.load(inputStream);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public static final String DB_URL = CONFIG.getProperty("db.url");
+    public static final String DB_USER = CONFIG.getProperty("db.user");
+    public static final String DB_PASSWORD = CONFIG.getProperty("db.password");
+
 
     public static String getDB_URL() {
         return DB_URL;
