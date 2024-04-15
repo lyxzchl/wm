@@ -47,14 +47,10 @@ public class ReturnSheet extends javax.swing.JFrame {
         Logger.getLogger(ReturnSheet.class.getName()).log(Level.SEVERE, null, ex);
     }
     initComponents();
-    Toolkit toolkit = Toolkit.getDefaultToolkit();
-    Dimension screenSize = toolkit.getScreenSize();
-    int screenWidth = screenSize.width;
-    int screenHeight = screenSize.height;
-
-    int windowWidth = (int) (screenWidth * 0.8);
-    int windowHeight = (int) (screenHeight * 0.8);
-    setSize(windowWidth, windowHeight);
+    int windowWidth = 1130; // Adjust the desired width
+        int windowHeight = 659; // Adjust the desired height
+        setSize(windowWidth, windowHeight);
+        setResizable(false); // Prevent resizing
     setLocationRelativeTo(null);
 
     // Add the listener to the resultsTable
@@ -378,7 +374,7 @@ private boolean getBooleanValue(JTable table, int row, int column) {
                             .addComponent(searchBar, javax.swing.GroupLayout.PREFERRED_SIZE, 377, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                             .addComponent(searchButton, javax.swing.GroupLayout.PREFERRED_SIZE, 103, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addContainerGap(476, Short.MAX_VALUE))
+                            .addContainerGap(568, Short.MAX_VALUE))
                         .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                             .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                                 .addGroup(jPanel1Layout.createSequentialGroup()
@@ -486,7 +482,7 @@ private boolean getBooleanValue(JTable table, int row, int column) {
         // TODO add your handling code here:
         dispose();
         
-        Dashboard db = new Dashboard();
+        DashboardConsult db = new DashboardConsult();
         db.setVisible(true);
     }//GEN-LAST:event_backButtonActionPerformed
 

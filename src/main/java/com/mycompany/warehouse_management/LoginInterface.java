@@ -22,14 +22,10 @@ public class LoginInterface extends javax.swing.JFrame {
      */
     public LoginInterface() {
         initComponents();
-        Toolkit toolkit = Toolkit.getDefaultToolkit();
-        Dimension screenSize = toolkit.getScreenSize();
-        int screenWidth = screenSize.width;
-        int screenHeight = screenSize.height;
-
-        int windowWidth = (int) (screenWidth * 0.8);
-        int windowHeight = (int) (screenHeight * 0.8);
+        int windowWidth = 1130; // Adjust the desired width
+        int windowHeight = 659; // Adjust the desired height
         setSize(windowWidth, windowHeight);
+        setResizable(false); // Prevent resizing
         setLocationRelativeTo(null);
     }
 
@@ -80,8 +76,12 @@ public class LoginInterface extends javax.swing.JFrame {
         usernameField.setBackground(new java.awt.Color(51, 51, 51));
         usernameField.setFont(new java.awt.Font("POI Aeronaut Trial", 0, 18)); // NOI18N
         usernameField.setForeground(new java.awt.Color(153, 153, 153));
-        usernameField.setText("gdt");
         usernameField.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 2, 0, new java.awt.Color(0, 51, 102)));
+        usernameField.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                usernameFieldActionPerformed(evt);
+            }
+        });
 
         passwordLabel.setFont(new java.awt.Font("POI Aeronaut Trial", 0, 14)); // NOI18N
         passwordLabel.setForeground(new java.awt.Color(204, 204, 204));
@@ -156,7 +156,7 @@ public class LoginInterface extends javax.swing.JFrame {
                 .addComponent(passwordLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(passwordField, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 30, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 140, Short.MAX_VALUE)
                 .addComponent(continueButton, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(blockedButton, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -164,7 +164,7 @@ public class LoginInterface extends javax.swing.JFrame {
         );
 
         getContentPane().add(loginPanel);
-        loginPanel.setBounds(780, 40, 290, 440);
+        loginPanel.setBounds(780, 40, 290, 550);
 
         sloganLabel2.setFont(new java.awt.Font("URW Gothic", 1, 36)); // NOI18N
         sloganLabel2.setForeground(new java.awt.Color(255, 255, 255));
@@ -197,7 +197,7 @@ public class LoginInterface extends javax.swing.JFrame {
         backgroundImage.setIcon(new javax.swing.ImageIcon(getClass().getResource("/sunset-gradient-hd-wallpaper(1).png"))); // NOI18N
         backgroundImage.setText("jLabel1");
         getContentPane().add(backgroundImage);
-        backgroundImage.setBounds(0, -10, 1120, 630);
+        backgroundImage.setBounds(0, 0, 1130, 660);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -221,7 +221,7 @@ public class LoginInterface extends javax.swing.JFrame {
             case 0:
                 // User authentication successful
                 // Open the dashboard and close the login interface
-                Dashboard db = new Dashboard();
+                DashboardConsult db = new DashboardConsult();
                 db.setVisible(true);
                 dispose();
                 break;
@@ -251,13 +251,27 @@ public class LoginInterface extends javax.swing.JFrame {
         // TODO add your handling code here:
         try {
         int authResult = DataBaseUtils.authenticateUser(usernameField.getText(), passwordField.getText());
+        String role = DataBaseUtils.getUserRole(usernameField.getText());
+
         switch (authResult) {
             case 0:
                 // User authentication successful
-                // Open the dashboard and close the login interface
-                Dashboard db = new Dashboard();
-                db.setVisible(true);
-                dispose();
+                // Open the appropriate Dashboard based on the user's role
+                switch (role) {
+                    case "consult":
+                        new DashboardConsult().setVisible(true);
+                        break;
+                    case "admin":
+                        new DashboardAdmin().setVisible(true);
+                        break;
+                    case "entry":
+                        new DashboardEntry().setVisible(true);
+                        break;
+                    default:
+                        JOptionPane.showMessageDialog(this, "Invalid user role.", "Error", JOptionPane.ERROR_MESSAGE);
+                        break;
+                }
+                dispose(); // Close the login interface
                 break;
             case 1:
                 // User authentication failed
@@ -280,6 +294,10 @@ public class LoginInterface extends javax.swing.JFrame {
         Logger.getLogger(LoginInterface.class.getName()).log(Level.SEVERE, null, ex);
     }
     }//GEN-LAST:event_continueButtonMouseClicked
+
+    private void usernameFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_usernameFieldActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_usernameFieldActionPerformed
 
     /**
      * @param args the command line arguments

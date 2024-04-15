@@ -43,14 +43,10 @@ public class ExitTicket extends javax.swing.JFrame {
         Logger.getLogger(AdvancedSearch.class.getName()).log(Level.SEVERE, null, ex);
     }
         initComponents();
-        Toolkit toolkit = Toolkit.getDefaultToolkit();
-        Dimension screenSize = toolkit.getScreenSize();
-        int screenWidth = screenSize.width;
-        int screenHeight = screenSize.height;
-
-        int windowWidth = (int) (screenWidth * 0.8);
-        int windowHeight = (int) (screenHeight * 0.8);
+        int windowWidth = 1130; // Adjust the desired width
+        int windowHeight = 659; // Adjust the desired height
         setSize(windowWidth, windowHeight);
+        setResizable(false); // Prevent resizing
         setLocationRelativeTo(null);
     }
     public ExitTicket(List<ArticleExit> exitArticles) {
@@ -466,7 +462,7 @@ public class ExitTicket extends javax.swing.JFrame {
         // TODO add your handling code here:
         dispose();
 
-        Dashboard dash = new Dashboard();
+        DashboardConsult dash = new DashboardConsult();
         dash.setVisible(true);
     }//GEN-LAST:event_cancelButtonActionPerformed
 

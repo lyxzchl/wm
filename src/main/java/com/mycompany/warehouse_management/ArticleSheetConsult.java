@@ -19,12 +19,12 @@ import javax.swing.UIManager;
  *
  * @author lyeschl
  */
-public class ArticleSheet extends javax.swing.JFrame {
+public class ArticleSheetConsult extends javax.swing.JFrame {
     private Article article;
     /**
      * Creates new form Article
      */
-    public ArticleSheet() {
+    public ArticleSheetConsult() {
         try {
         UIManager.setLookAndFeel(new FlatDarkLaf());
 
@@ -34,14 +34,13 @@ public class ArticleSheet extends javax.swing.JFrame {
         Logger.getLogger(AdvancedSearch.class.getName()).log(Level.SEVERE, null, ex);
     }
         initComponents();
-        // You can initialize the text fields with default values or leave them empty
         int windowWidth = 1130; // Adjust the desired width
         int windowHeight = 659; // Adjust the desired height
         setSize(windowWidth, windowHeight);
         setResizable(false); // Prevent resizing
-        setLocationRelativeTo(null);
+        setLocationRelativeTo(null); // Center the window
     }
-    public ArticleSheet(Article article) {
+    public ArticleSheetConsult(Article article) {
                try {
         UIManager.setLookAndFeel(new FlatDarkLaf());
 
@@ -51,14 +50,10 @@ public class ArticleSheet extends javax.swing.JFrame {
         Logger.getLogger(AdvancedSearch.class.getName()).log(Level.SEVERE, null, ex);
     }
         initComponents();
-        Toolkit toolkit = Toolkit.getDefaultToolkit();
-        Dimension screenSize = toolkit.getScreenSize();
-        int screenWidth = screenSize.width;
-        int screenHeight = screenSize.height;
-
-        int windowWidth = (int) (screenWidth * 0.8);
-        int windowHeight = (int) (screenHeight * 0.8);
+        int windowWidth = 1130; // Adjust the desired width
+        int windowHeight = 659; // Adjust the desired height
         setSize(windowWidth, windowHeight);
+        setResizable(false); // Prevent resizing
         setLocationRelativeTo(null);
         articles = new ArrayList<Article>();
         // Populate the text fields with the article's data
@@ -128,7 +123,6 @@ public class ArticleSheet extends javax.swing.JFrame {
         nextButton = new javax.swing.JButton();
         lastButton = new javax.swing.JButton();
         goToLastButton = new javax.swing.JButton();
-        changeButton = new javax.swing.JButton();
         cancelButton = new javax.swing.JButton();
         saveButton = new javax.swing.JButton();
         sheetLogo = new javax.swing.JLabel();
@@ -379,17 +373,6 @@ public class ArticleSheet extends javax.swing.JFrame {
             }
         });
 
-        changeButton.setFont(new java.awt.Font("POI Aeronaut Trial", 0, 16)); // NOI18N
-        changeButton.setForeground(new java.awt.Color(255, 255, 255));
-        changeButton.setText("Change");
-        changeButton.setBorder(null);
-        changeButton.setContentAreaFilled(false);
-        changeButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                changeButtonActionPerformed(evt);
-            }
-        });
-
         cancelButton.setBackground(new java.awt.Color(255, 102, 0));
         cancelButton.setFont(new java.awt.Font("POI Aeronaut Trial", 0, 16)); // NOI18N
         cancelButton.setForeground(new java.awt.Color(255, 255, 255));
@@ -496,9 +479,7 @@ public class ArticleSheet extends javax.swing.JFrame {
                                         .addComponent(nextButton, javax.swing.GroupLayout.PREFERRED_SIZE, 63, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addGap(57, 57, 57)
                                         .addComponent(goToLastButton)
-                                        .addGap(72, 72, 72)
-                                        .addComponent(changeButton)
-                                        .addGap(298, 298, 298)))
+                                        .addGap(422, 422, 422)))
                                 .addGap(0, 0, Short.MAX_VALUE))
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, mainPanelLayout.createSequentialGroup()
                                 .addGap(0, 0, Short.MAX_VALUE)
@@ -506,7 +487,7 @@ public class ArticleSheet extends javax.swing.JFrame {
                                 .addGap(18, 18, 18)
                                 .addComponent(articleSheetLabel)
                                 .addGap(205, 205, 205)))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED, 76, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED, 87, Short.MAX_VALUE)
                         .addComponent(saveButton, javax.swing.GroupLayout.PREFERRED_SIZE, 72, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(34, 34, 34)
                         .addComponent(cancelButton, javax.swing.GroupLayout.PREFERRED_SIZE, 68, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -646,7 +627,6 @@ public class ArticleSheet extends javax.swing.JFrame {
                                 .addGroup(mainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                                     .addComponent(nextButton, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(goToLastButton, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(changeButton, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(lastButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                     .addComponent(goToFirstButton)
                                     .addComponent(saveButton, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -837,37 +817,6 @@ public class ArticleSheet extends javax.swing.JFrame {
 ////        return currentArticle;
 //}
 
-
-    private void changeButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_changeButtonActionPerformed
-        // TODO add your handling code here:
-//        try {
-//        // Get the currently selected article from the list
-//        int selectedIndex = articles.indexOf(getCurrentArticle());
-//        if (selectedIndex >= 0) {
-//            // Update the selected article with the values from the text fields
-//            Article selectedArticle = articles.get(selectedIndex);
-//            selectedArticle.setCodeClass(classTextField.getText());
-//            selectedArticle.setCodeArt(articleCodeTextField.getText());
-//            selectedArticle.setDesigArt(observTextField.getText());
-//            selectedArticle.setUniteMes(mesureUTextField.getText());
-//            selectedArticle.setQteSt(Double.parseDouble(stockQTextField.getText()));
-//            selectedArticle.setCasier(shelfTextField.getText());
-//            selectedArticle.setObservation(observTextField.getText());
-//            selectedArticle.setMort(deadToggleButton.getText().equalsIgnoreCase("Yes"));
-//            selectedArticle.setDormant(dormantToggleButton.getText().equalsIgnoreCase("Yes"));
-//            selectedArticle.setActif(activeToggleButton.getText().equalsIgnoreCase("Yes"));
-//            selectedArticle.setRayon(aisleTextField.getText());
-//            selectedArticle.setStockMini(Double.parseDouble(stockMinTextField.getText()));
-//            selectedArticle.setStockMax(Double.parseDouble(stockMaxTextField.getText()));
-//            selectedArticle.setStockSecu(Double.parseDouble(stockSecTextField.getText()));
-//            selectedArticle.setValeur(Double.parseDouble(valueTextField.getText()));
-//        }
-//    } catch (NumberFormatException ex) {
-//        // Handle any errors in parsing the numeric values
-//        JOptionPane.showMessageDialog(this, "Please enter valid numeric values.", "Error", JOptionPane.ERROR_MESSAGE);
-//    }
-
-    }//GEN-LAST:event_changeButtonActionPerformed
 //
     private void saveButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_saveButtonActionPerformed
         // TODO add your handling code here:
@@ -948,21 +897,23 @@ public class ArticleSheet extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(ArticleSheet.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(ArticleSheetConsult.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(ArticleSheet.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(ArticleSheetConsult.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(ArticleSheet.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(ArticleSheetConsult.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(ArticleSheet.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(ArticleSheetConsult.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
+        //</editor-fold>
         //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new ArticleSheet().setVisible(true);
+                new ArticleSheetConsult().setVisible(true);
             }
         });
     }
@@ -976,7 +927,6 @@ public class ArticleSheet extends javax.swing.JFrame {
     private javax.swing.JTextField articleCodeTextField;
     private javax.swing.JLabel articleSheetLabel;
     private javax.swing.JButton cancelButton;
-    private javax.swing.JButton changeButton;
     private javax.swing.JLabel classLabel;
     private javax.swing.JTextField classTextField;
     private javax.swing.JLabel deadLabel;

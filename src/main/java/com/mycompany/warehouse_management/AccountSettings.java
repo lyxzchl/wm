@@ -17,15 +17,14 @@ public class AccountSettings extends javax.swing.JFrame {
      */
     public AccountSettings() {
         initComponents();
-        Toolkit toolkit = Toolkit.getDefaultToolkit();
-        Dimension screenSize = toolkit.getScreenSize();
-        int screenWidth = screenSize.width;
-        int screenHeight = screenSize.height;
+        
+        
 
-        int windowWidth = (int) (screenWidth * 0.8);
-        int windowHeight = (int) (screenHeight * 0.8);
+        int windowWidth = 1130; // Adjust the desired width
+        int windowHeight = 659; // Adjust the desired height
         setSize(windowWidth, windowHeight);
-        setLocationRelativeTo(null);
+        setResizable(false); // Prevent resizing
+        setLocationRelativeTo(null); // Center the window
         
     }
 
@@ -106,7 +105,7 @@ public class AccountSettings extends javax.swing.JFrame {
                     .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 191, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jPasswordField1, javax.swing.GroupLayout.PREFERRED_SIZE, 181, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel3))
-                .addContainerGap(129, Short.MAX_VALUE))
+                .addContainerGap(913, Short.MAX_VALUE))
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
@@ -168,7 +167,7 @@ public class AccountSettings extends javax.swing.JFrame {
         // TODO add your handling code here:
         dispose();
 
-        Dashboard db = new Dashboard();
+        DashboardConsult db = new DashboardConsult();
         db.setVisible(true);
     }//GEN-LAST:event_backButtonActionPerformed
 

@@ -1,14 +1,24 @@
 package com.mycompany.warehouse_management;
 
 import com.formdev.flatlaf.FlatDarkLaf;
+import java.awt.Color;
 import java.awt.Dimension;
+import java.awt.Font;
+import java.awt.GradientPaint;
+import java.awt.Graphics;
+import java.awt.Graphics2D;
+import java.awt.GridLayout;
+import java.awt.RenderingHints;
 import java.awt.Toolkit;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.BorderFactory;
 import javax.swing.JOptionPane;
+import javax.swing.JTable;
 import javax.swing.UIManager;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.JTableHeader;
 
 
 //import com.apache.commons.dbutils.DbUtils; // Assuming you're using DbUtils for resultSetToTableModel
@@ -22,13 +32,13 @@ import javax.swing.table.DefaultTableModel;
  *
  * @author lyeschl
  */
-public class Dashboard extends javax.swing.JFrame {
-    
+public class DashboardConsult extends javax.swing.JFrame {
+    private CustomPanel customPanel;
     /**
      * Creates new form Dashboard
      */
 
-    public Dashboard() {
+    public DashboardConsult() {
         try {
         UIManager.setLookAndFeel(new FlatDarkLaf());
 
@@ -38,16 +48,13 @@ public class Dashboard extends javax.swing.JFrame {
         Logger.getLogger(AdvancedSearch.class.getName()).log(Level.SEVERE, null, ex);
     }
         initComponents();
-        Toolkit toolkit = Toolkit.getDefaultToolkit();
-        Dimension screenSize = toolkit.getScreenSize();
-        int screenWidth = screenSize.width;
-        int screenHeight = screenSize.height;
-
-        int windowWidth = (int) (screenWidth * 0.8);
-        int windowHeight = (int) (screenHeight * 0.8);
+        int windowWidth = 1130; // Adjust the desired width
+        int windowHeight = 659; // Adjust the desired height
         setSize(windowWidth, windowHeight);
+        setResizable(false); // Prevent resizing
         setLocationRelativeTo(null);
-
+        DataBaseUtils.populateArticleTableWithoutSearch(articleTable);
+        DataBaseUtils.populateMoveTable(movesTable);
     }
 
     
@@ -67,21 +74,21 @@ public class Dashboard extends javax.swing.JFrame {
         jPanel2 = new javax.swing.JPanel();
         accountSettingsButton = new javax.swing.JToggleButton();
         advancedSearchButton = new javax.swing.JToggleButton();
-        exitTicketButton = new javax.swing.JToggleButton();
-        returnTicketButton = new javax.swing.JToggleButton();
         manageArticlesButton = new javax.swing.JToggleButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         movesTable = new javax.swing.JTable();
         movesLabel = new javax.swing.JLabel();
         jScrollPane3 = new javax.swing.JScrollPane();
         articleTable = new javax.swing.JTable();
-        jLabel3 = new javax.swing.JLabel();
-        newMove = new javax.swing.JToggleButton();
+        articlesLabel = new javax.swing.JLabel();
         dashboardLabel = new javax.swing.JLabel();
         welcomeLabel = new javax.swing.JLabel();
         logoLabel1 = new javax.swing.JLabel();
-        jLabel1 = new javax.swing.JLabel();
         dashboardLogo = new javax.swing.JLabel();
+        totalArticlesLabel = new javax.swing.JLabel();
+        totalExitsLabel = new javax.swing.JLabel();
+        totalReturnsLabel = new javax.swing.JLabel();
+        backgroundImageLabel = new javax.swing.JLabel();
 
         exitTicketOption.setText("Exit Ticket");
         exitTicketOption.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -122,30 +129,6 @@ public class Dashboard extends javax.swing.JFrame {
             }
         });
 
-        exitTicketButton.setBackground(new java.awt.Color(51, 51, 51));
-        exitTicketButton.setFont(new java.awt.Font("POI Aeronaut Trial", 1, 14)); // NOI18N
-        exitTicketButton.setForeground(new java.awt.Color(153, 153, 153));
-        exitTicketButton.setText("Create Exit Ticket");
-        exitTicketButton.setBorder(javax.swing.BorderFactory.createMatteBorder(2, 2, 2, 2, new java.awt.Color(0, 51, 102)));
-        exitTicketButton.setContentAreaFilled(false);
-        exitTicketButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                exitTicketButtonActionPerformed(evt);
-            }
-        });
-
-        returnTicketButton.setBackground(new java.awt.Color(51, 51, 51));
-        returnTicketButton.setFont(new java.awt.Font("POI Aeronaut Trial", 1, 14)); // NOI18N
-        returnTicketButton.setForeground(new java.awt.Color(153, 153, 153));
-        returnTicketButton.setText("Create Return Ticket");
-        returnTicketButton.setBorder(javax.swing.BorderFactory.createMatteBorder(2, 2, 2, 2, new java.awt.Color(0, 51, 102)));
-        returnTicketButton.setContentAreaFilled(false);
-        returnTicketButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                returnTicketButtonActionPerformed(evt);
-            }
-        });
-
         manageArticlesButton.setBackground(new java.awt.Color(51, 51, 51));
         manageArticlesButton.setFont(new java.awt.Font("POI Aeronaut Trial", 1, 14)); // NOI18N
         manageArticlesButton.setForeground(new java.awt.Color(153, 153, 153));
@@ -165,10 +148,8 @@ public class Dashboard extends javax.swing.JFrame {
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(returnTicketButton, javax.swing.GroupLayout.DEFAULT_SIZE, 228, Short.MAX_VALUE)
-                    .addComponent(advancedSearchButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(advancedSearchButton, javax.swing.GroupLayout.DEFAULT_SIZE, 188, Short.MAX_VALUE)
                     .addComponent(manageArticlesButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(exitTicketButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(accountSettingsButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
@@ -179,17 +160,13 @@ public class Dashboard extends javax.swing.JFrame {
                 .addComponent(advancedSearchButton, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(manageArticlesButton, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 102, Short.MAX_VALUE)
-                .addComponent(exitTicketButton, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(returnTicketButton, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(163, 163, 163)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 370, Short.MAX_VALUE)
                 .addComponent(accountSettingsButton, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(37, 37, 37))
         );
 
         getContentPane().add(jPanel2);
-        jPanel2.setBounds(820, 20, 240, 560);
+        jPanel2.setBounds(920, 50, 200, 570);
 
         movesTable.setForeground(new java.awt.Color(153, 204, 255));
         movesTable.setModel(new javax.swing.table.DefaultTableModel(
@@ -209,16 +186,17 @@ public class Dashboard extends javax.swing.JFrame {
         jScrollPane1.setViewportView(movesTable);
 
         getContentPane().add(jScrollPane1);
-        jScrollPane1.setBounds(20, 180, 320, 120);
+        jScrollPane1.setBounds(20, 140, 430, 230);
 
         movesLabel.setBackground(new java.awt.Color(255, 255, 255));
         movesLabel.setFont(new java.awt.Font("POI Aeronaut Trial", 1, 18)); // NOI18N
         movesLabel.setForeground(new java.awt.Color(255, 255, 255));
         movesLabel.setText("Movements");
         getContentPane().add(movesLabel);
-        movesLabel.setBounds(30, 144, 100, 20);
+        movesLabel.setBounds(30, 100, 100, 20);
 
-        articleTable.setForeground(new java.awt.Color(153, 204, 255));
+        articleTable.setFont(new java.awt.Font("POI Aeronaut Trial", 0, 16)); // NOI18N
+        articleTable.setForeground(new java.awt.Color(255, 255, 255));
         articleTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
@@ -239,40 +217,31 @@ public class Dashboard extends javax.swing.JFrame {
             }
         });
         jScrollPane3.setViewportView(articleTable);
+        // Customize the articleTable
+        articleTable.setTableHeader(new JTableHeader(articleTable.getColumnModel()));
+        articleTable.getTableHeader().setBackground(new Color(51, 51, 51));
+        articleTable.getTableHeader().setForeground(new Color(153, 153, 153));
+        articleTable.getTableHeader().setFont(new Font("POI Aeronaut Trial", Font.BOLD, 14));
+        articleTable.setRowHeight(30);
+        articleTable.setGridColor(new Color(51, 102, 255));
+        articleTable.setSelectionBackground(new Color(102, 153, 255));
+        articleTable.setSelectionForeground(new Color(102, 102, 255));
 
         getContentPane().add(jScrollPane3);
-        jScrollPane3.setBounds(20, 350, 320, 130);
+        jScrollPane3.setBounds(20, 420, 440, 150);
 
-        jLabel3.setFont(new java.awt.Font("POI Aeronaut Trial", 1, 18)); // NOI18N
-        jLabel3.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel3.setText("Articles");
-        getContentPane().add(jLabel3);
-        jLabel3.setBounds(30, 310, 60, 30);
-
-        newMove.setBackground(new java.awt.Color(51, 51, 51));
-        newMove.setFont(new java.awt.Font("POI Aeronaut Trial", 1, 14)); // NOI18N
-        newMove.setForeground(new java.awt.Color(153, 153, 153));
-        newMove.setText("New Move +");
-        newMove.setBorder(javax.swing.BorderFactory.createMatteBorder(2, 2, 2, 2, new java.awt.Color(0, 51, 102)));
-        newMove.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mousePressed(java.awt.event.MouseEvent evt) {
-                newMoveMousePressed(evt);
-            }
-        });
-        newMove.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                newMoveActionPerformed(evt);
-            }
-        });
-        getContentPane().add(newMove);
-        newMove.setBounds(20, 80, 110, 40);
+        articlesLabel.setFont(new java.awt.Font("POI Aeronaut Trial", 1, 18)); // NOI18N
+        articlesLabel.setForeground(new java.awt.Color(255, 255, 255));
+        articlesLabel.setText("Articles");
+        getContentPane().add(articlesLabel);
+        articlesLabel.setBounds(30, 390, 60, 30);
 
         dashboardLabel.setBackground(new java.awt.Color(255, 255, 255));
         dashboardLabel.setFont(new java.awt.Font("POI Aeronaut Trial", 1, 36)); // NOI18N
         dashboardLabel.setForeground(new java.awt.Color(255, 255, 255));
         dashboardLabel.setText("Dashboard");
         getContentPane().add(dashboardLabel);
-        dashboardLabel.setBounds(20, 10, 190, 40);
+        dashboardLabel.setBounds(50, 10, 190, 40);
 
         welcomeLabel.setBackground(new java.awt.Color(255, 255, 255));
         welcomeLabel.setFont(new java.awt.Font("POI Aeronaut Trial", 1, 36)); // NOI18N
@@ -284,35 +253,56 @@ public class Dashboard extends javax.swing.JFrame {
         logoLabel1.setBackground(new java.awt.Color(255, 255, 255));
         logoLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/output-onlinepngtools(1).png"))); // NOI18N
         getContentPane().add(logoLabel1);
-        logoLabel1.setBounds(10, 550, 60, 65);
-
-        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/sunset-gradient-hd-wallpaper(1).png"))); // NOI18N
-        jLabel1.setText("jLabel1");
-        getContentPane().add(jLabel1);
-        jLabel1.setBounds(0, 0, 1100, 640);
+        logoLabel1.setBounds(10, 590, 60, 65);
 
         dashboardLogo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/dashboard_icon.png"))); // NOI18N
         getContentPane().add(dashboardLogo);
-        dashboardLogo.setBounds(30, 20, 30, 30);
+        dashboardLogo.setBounds(10, 10, 30, 30);
+
+        totalArticlesLabel.setFont(new java.awt.Font("POI Aeronaut Trial", 0, 16)); // NOI18N
+        int totalArticles = DataBaseUtils.getTotalArticles();
+        totalArticlesLabel.setText("Total Articles: " + totalArticles);
+        getContentPane().add(totalArticlesLabel);
+        totalArticlesLabel.setBounds(500, 60, 120, 30);
+
+        int totalExits = DataBaseUtils.getTotalExits();
+        totalExitsLabel.setFont(new java.awt.Font("POI Aeronaut Trial", 0, 16)); // NOI18N
+        totalExitsLabel.setText("Total Exits: " + totalExits);
+        getContentPane().add(totalExitsLabel);
+        totalExitsLabel.setBounds(620, 60, 120, 30);
+
+        int totalReturns = DataBaseUtils.getTotalReturns();
+        totalReturnsLabel.setFont(new java.awt.Font("POI Aeronaut Trial", 0, 16)); // NOI18N
+        totalReturnsLabel.setText("Total Returns: " + totalReturns);
+        getContentPane().add(totalReturnsLabel);
+        totalReturnsLabel.setBounds(740, 60, 130, 30);
+
+        backgroundImageLabel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/sunset-gradient-hd-wallpaper(1).png"))); // NOI18N
+        backgroundImageLabel.setText("jLabel1");
+        getContentPane().add(backgroundImageLabel);
+        backgroundImageLabel.setBounds(-10, -10, 1340, 760);
+        // Remove the backgroundImageLabel
+        getContentPane().remove(backgroundImageLabel);
+
+        // Create and add the CustomPanel
+        customPanel = new CustomPanel();
+        customPanel.setBounds(0, 0, 1340, 760);
+        getContentPane().add(customPanel);
+        customPanel.setLayout(null);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
+    
+    
+    
+            
+            
     private void exitTicketOptionMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_exitTicketOptionMouseClicked
         // TODO add your handling code here:
         dispose();
         ExitTicket eti = new ExitTicket();
         eti.setVisible(true);
     }//GEN-LAST:event_exitTicketOptionMouseClicked
-
-    private void newMoveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_newMoveActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_newMoveActionPerformed
-
-    private void newMoveMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_newMoveMousePressed
-        // TODO add your handling code here:
-        jPopupMenu2.show(newMove, 0, newMove.getHeight());
-    }//GEN-LAST:event_newMoveMousePressed
 
     private void advancedSearchButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_advancedSearchButtonActionPerformed
         // TODO add your handling code here:
@@ -329,20 +319,6 @@ public class Dashboard extends javax.swing.JFrame {
         as.setVisible(true);
     }//GEN-LAST:event_accountSettingsButtonActionPerformed
 
-    private void exitTicketButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_exitTicketButtonActionPerformed
-        // TODO add your handling code here:
-        dispose();
-        ExitTicket et = new ExitTicket();
-        et.setVisible(true);
-    }//GEN-LAST:event_exitTicketButtonActionPerformed
-
-    private void returnTicketButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_returnTicketButtonActionPerformed
-        // TODO add your handling code here:
-        dispose();
-        ReturnTicket rt = new ReturnTicket();
-        rt.setVisible(true);
-    }//GEN-LAST:event_returnTicketButtonActionPerformed
-
     private void articleTableMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_articleTableMouseClicked
         // TODO add your handling code here:
     }//GEN-LAST:event_articleTableMouseClicked
@@ -350,7 +326,7 @@ public class Dashboard extends javax.swing.JFrame {
     private void manageArticlesButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_manageArticlesButtonActionPerformed
         // TODO add your handling code here:
         dispose();
-        ArticleSheet as = new ArticleSheet();
+        ArticleSheetConsult as = new ArticleSheetConsult();
         as.setVisible(true);
     }//GEN-LAST:event_manageArticlesButtonActionPerformed
 
@@ -371,20 +347,21 @@ public class Dashboard extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(Dashboard.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(DashboardConsult.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(Dashboard.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(DashboardConsult.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(Dashboard.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(DashboardConsult.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(Dashboard.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(DashboardConsult.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new Dashboard().setVisible(true);
+                new DashboardConsult().setVisible(true);
                 
             }
         });
@@ -394,12 +371,11 @@ public class Dashboard extends javax.swing.JFrame {
     private javax.swing.JToggleButton accountSettingsButton;
     private javax.swing.JToggleButton advancedSearchButton;
     private javax.swing.JTable articleTable;
+    private javax.swing.JLabel articlesLabel;
+    private javax.swing.JLabel backgroundImageLabel;
     private javax.swing.JLabel dashboardLabel;
     private javax.swing.JLabel dashboardLogo;
-    private javax.swing.JToggleButton exitTicketButton;
     private javax.swing.JMenuItem exitTicketOption;
-    private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel3;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPopupMenu jPopupMenu2;
     private javax.swing.JScrollPane jScrollPane1;
@@ -408,9 +384,10 @@ public class Dashboard extends javax.swing.JFrame {
     private javax.swing.JToggleButton manageArticlesButton;
     private javax.swing.JLabel movesLabel;
     private javax.swing.JTable movesTable;
-    private javax.swing.JToggleButton newMove;
-    private javax.swing.JToggleButton returnTicketButton;
     private javax.swing.JMenuItem returnTicketOption;
+    private javax.swing.JLabel totalArticlesLabel;
+    private javax.swing.JLabel totalExitsLabel;
+    private javax.swing.JLabel totalReturnsLabel;
     private javax.swing.JLabel welcomeLabel;
     // End of variables declaration//GEN-END:variables
 }

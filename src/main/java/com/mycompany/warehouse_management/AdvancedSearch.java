@@ -38,14 +38,10 @@ public class AdvancedSearch extends javax.swing.JFrame {
         Logger.getLogger(AdvancedSearch.class.getName()).log(Level.SEVERE, null, ex);
     }
     initComponents();
-    Toolkit toolkit = Toolkit.getDefaultToolkit();
-    Dimension screenSize = toolkit.getScreenSize();
-    int screenWidth = screenSize.width;
-    int screenHeight = screenSize.height;
-
-    int windowWidth = (int) (screenWidth * 0.8);
-    int windowHeight = (int) (screenHeight * 0.8);
-    setSize(windowWidth, windowHeight);
+    int windowWidth = 1130; // Adjust the desired width
+        int windowHeight = 659; // Adjust the desired height
+        setSize(windowWidth, windowHeight);
+        setResizable(false); // Prevent resizing
     setLocationRelativeTo(null);
 
     // Add the listener to the resultsTable
@@ -486,106 +482,104 @@ private boolean getBooleanValue(JTable table, int row, int column) {
                     .addGap(18, 18, 18)
                     .addComponent(articleCountTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGap(49, 49, 49))
+                .addGroup(jPanel1Layout.createSequentialGroup()
+                    .addGap(161, 161, 161)
+                    .addComponent(searchLogoLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(jPanel1Layout.createSequentialGroup()
+                            .addComponent(searchBar, javax.swing.GroupLayout.PREFERRED_SIZE, 466, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGap(38, 38, 38)
+                            .addComponent(searchButton, javax.swing.GroupLayout.PREFERRED_SIZE, 149, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGroup(jPanel1Layout.createSequentialGroup()
+                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                .addGroup(jPanel1Layout.createSequentialGroup()
+                                    .addComponent(valueRadio)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                    .addComponent(codeRadio)
+                                    .addGap(9, 9, 9)
+                                    .addComponent(classRadio)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                    .addComponent(desigRadio)
+                                    .addGap(26, 26, 26)
+                                    .addComponent(stockMaxRadio)
+                                    .addGap(12, 12, 12)
+                                    .addComponent(measureUnitRadio)
+                                    .addGap(28, 28, 28)
+                                    .addComponent(rayonRadio))
+                                .addGroup(jPanel1Layout.createSequentialGroup()
+                                    .addComponent(stockSecRadio)
+                                    .addGap(25, 25, 25)
+                                    .addComponent(stockQRadio)
+                                    .addGap(18, 18, 18)
+                                    .addComponent(observRadio)
+                                    .addGap(18, 18, 18)
+                                    .addComponent(activeRadio)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                    .addComponent(stockMinRadio)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                    .addComponent(dormantRadio)))
+                            .addGap(26, 26, 26)
+                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(deadRadio)
+                                .addComponent(casierRadio))))
+                    .addContainerGap(284, Short.MAX_VALUE))
                 .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                     .addGap(20, 20, 20)
-                    .addComponent(backButton, javax.swing.GroupLayout.PREFERRED_SIZE, 124, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGap(203, 203, 203)
-                    .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 294, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(logoLabel)
+                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                        .addComponent(jScrollPane2)
+                        .addGroup(jPanel1Layout.createSequentialGroup()
+                            .addComponent(backButton, javax.swing.GroupLayout.PREFERRED_SIZE, 124, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGap(203, 203, 203)
+                            .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 294, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(logoLabel)))
                     .addGap(14, 14, 14))
-                .addGroup(jPanel1Layout.createSequentialGroup()
-                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                        .addGroup(jPanel1Layout.createSequentialGroup()
-                            .addGap(185, 185, 185)
-                            .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 661, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGroup(jPanel1Layout.createSequentialGroup()
-                            .addGap(155, 155, 155)
-                            .addComponent(searchLogoLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addGroup(jPanel1Layout.createSequentialGroup()
-                                    .addComponent(searchBar, javax.swing.GroupLayout.PREFERRED_SIZE, 466, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(searchButton, javax.swing.GroupLayout.PREFERRED_SIZE, 149, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGroup(jPanel1Layout.createSequentialGroup()
-                                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                        .addGroup(jPanel1Layout.createSequentialGroup()
-                                            .addComponent(valueRadio)
-                                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                            .addComponent(codeRadio)
-                                            .addGap(9, 9, 9)
-                                            .addComponent(classRadio)
-                                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                            .addComponent(desigRadio)
-                                            .addGap(26, 26, 26)
-                                            .addComponent(stockMaxRadio)
-                                            .addGap(12, 12, 12)
-                                            .addComponent(measureUnitRadio)
-                                            .addGap(28, 28, 28)
-                                            .addComponent(rayonRadio)
-                                            .addGap(34, 34, 34))
-                                        .addGroup(jPanel1Layout.createSequentialGroup()
-                                            .addComponent(stockSecRadio)
-                                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                            .addComponent(stockQRadio)
-                                            .addGap(18, 18, 18)
-                                            .addComponent(observRadio)
-                                            .addGap(18, 18, 18)
-                                            .addComponent(activeRadio)
-                                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                            .addComponent(stockMinRadio)
-                                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                            .addComponent(dormantRadio)
-                                            .addGap(26, 26, 26)))
-                                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                        .addComponent(deadRadio)
-                                        .addComponent(casierRadio))))))
-                    .addContainerGap(180, Short.MAX_VALUE))
             );
             jPanel1Layout.setVerticalGroup(
                 jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(jPanel1Layout.createSequentialGroup()
                     .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                         .addGroup(jPanel1Layout.createSequentialGroup()
-                            .addContainerGap()
-                            .addComponent(logoLabel))
-                        .addGroup(jPanel1Layout.createSequentialGroup()
                             .addGap(17, 17, 17)
                             .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                                 .addComponent(jLabel1)
                                 .addComponent(backButton, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGap(53, 53, 53)
                             .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                 .addGroup(jPanel1Layout.createSequentialGroup()
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(searchLogoLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGroup(jPanel1Layout.createSequentialGroup()
-                                    .addGap(53, 53, 53)
                                     .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                                         .addComponent(searchBar)
-                                        .addComponent(searchButton, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                            .addGap(25, 25, 25)
-                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                .addComponent(casierRadio)
-                                .addComponent(rayonRadio)
-                                .addComponent(measureUnitRadio)
-                                .addComponent(stockMaxRadio)
-                                .addComponent(desigRadio)
-                                .addComponent(classRadio)
-                                .addComponent(codeRadio)
-                                .addComponent(valueRadio))
-                            .addGap(21, 21, 21)
-                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                .addComponent(observRadio)
-                                .addComponent(activeRadio)
-                                .addComponent(dormantRadio)
-                                .addComponent(deadRadio)
-                                .addComponent(stockSecRadio)
-                                .addComponent(stockMinRadio)
-                                .addComponent(stockQRadio))
-                            .addGap(18, 18, 18)
-                            .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 267, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addGap(9, 9, 9)
+                                        .addComponent(searchButton, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addGap(18, 18, 18)
+                                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                        .addComponent(casierRadio)
+                                        .addComponent(rayonRadio)
+                                        .addComponent(measureUnitRadio)
+                                        .addComponent(stockMaxRadio)
+                                        .addComponent(desigRadio)
+                                        .addComponent(classRadio)
+                                        .addComponent(codeRadio)
+                                        .addComponent(valueRadio))
+                                    .addGap(21, 21, 21)
+                                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                        .addComponent(observRadio)
+                                        .addComponent(activeRadio)
+                                        .addComponent(dormantRadio)
+                                        .addComponent(deadRadio)
+                                        .addComponent(stockSecRadio)
+                                        .addComponent(stockMinRadio)
+                                        .addComponent(stockQRadio))
+                                    .addGap(23, 23, 23))
+                                .addGroup(jPanel1Layout.createSequentialGroup()
+                                    .addComponent(searchLogoLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                            .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 360, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGap(9, 9, 9))
+                        .addGroup(jPanel1Layout.createSequentialGroup()
+                            .addContainerGap()
+                            .addComponent(logoLabel)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                     .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(articleCount, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(articleCountTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -596,17 +590,11 @@ private boolean getBooleanValue(JTable table, int row, int column) {
             getContentPane().setLayout(layout);
             layout.setHorizontalGroup(
                 layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                    .addContainerGap()
-                    .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addContainerGap())
+                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             );
             layout.setVerticalGroup(
                 layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                    .addContainerGap()
-                    .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addContainerGap())
+                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             );
 
             pack();
@@ -669,15 +657,17 @@ private boolean getBooleanValue(JTable table, int row, int column) {
         }
 
         if (!searchValue.isEmpty()) {
-        if (!searchColumn.isEmpty()) {
-            DataBaseUtils.populateArticleTable(resultsTable, searchColumn, searchValue);
-        } else {
-            // If no radio button is selected, search in all columns
-            DataBaseUtils.populateArticleTable(resultsTable, searchValue);
-        }
+            if (!searchColumn.isEmpty()) {
+                DataBaseUtils.populateArticleTable(resultsTable, searchColumn, searchValue);
+            } else {
+                // If no radio button is selected, search in all columns
+                DataBaseUtils.populateArticleTable(resultsTable, searchValue);
+            } 
         resultsTable.revalidate();
         resultsTable.repaint();
-    }
+        } else {
+            DataBaseUtils.populateArticleTableWithoutSearch(resultsTable);    
+        }
         // Get the count of articles
         int articleCount;
         try {
@@ -695,7 +685,7 @@ private boolean getBooleanValue(JTable table, int row, int column) {
         // TODO add your handling code here:
         dispose();
         
-        Dashboard db = new Dashboard();
+        DashboardConsult db = new DashboardConsult();
         db.setVisible(true);
     }//GEN-LAST:event_backButtonActionPerformed
 

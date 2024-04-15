@@ -52,7 +52,7 @@ public class DataBaseUtils {
     }
     
     public static int authenticateUser(String username, String password) throws SQLException {
-    String query = "SELECT password, active, failed_attempts FROM users WHERE BINARY username = ?";
+    String query = "SELECT password, active, failed_attempts, role FROM users WHERE BINARY username = ?";
     try (Connection conn = DriverManager.getConnection(DB_URL, DB_USER, DB_PASSWORD);
          PreparedStatement stmt = conn.prepareStatement(query)) {
         stmt.setString(1, username);
@@ -60,6 +60,7 @@ public class DataBaseUtils {
         if (rs.next()) {
             boolean isActive = rs.getBoolean("active");
             int failedAttempts = rs.getInt("failed_attempts");
+            String role = rs.getString("role");
             if (!isActive) {
                 // Account is not active, return 2
                 return 2;
@@ -76,13 +77,27 @@ public class DataBaseUtils {
                 updateFailedAttempts(conn, username, false);
                 return 1;
             }
-            // Authentication successful, return 0
-            return 0;
+//            // Authentication successful, return the user's role
+//            return role.equals("consult") ? 0 : role.equals("admin") ? 1 : role.equals("entry") ? 2 : -1;
         }
         // Username not found, return -1
         return -1;
     }
 }
+    public static String getUserRole(String username) throws SQLException {
+    String query = "SELECT role FROM users WHERE BINARY username = ?";
+    try (Connection conn = DriverManager.getConnection(DB_URL, DB_USER, DB_PASSWORD);
+         PreparedStatement stmt = conn.prepareStatement(query)) {
+        stmt.setString(1, username);
+        ResultSet rs = stmt.executeQuery();
+        if (rs.next()) {
+            return rs.getString("role");
+        }
+        // Username not found, return null
+        return null;
+    }
+}
+
     private static void updateFailedAttempts(Connection conn, String username, boolean lockAccount) throws SQLException {
     String query = "UPDATE users SET failed_attempts = ?, active = ? WHERE username = ?";
     try (PreparedStatement stmt = conn.prepareStatement(query)) {
@@ -177,6 +192,72 @@ private static int getCurrentFailedAttempts(Connection conn, String username) th
         stmt.setString(5, "%" + searchValue + "%");
         stmt.setString(6, "%" + searchValue + "%");
         stmt.setString(7, "%" + searchValue + "%");
+
+        ResultSet rs = stmt.executeQuery();
+
+        // Get the metadata of the result set
+        ResultSetMetaData metaData = rs.getMetaData();
+        int columnCount = metaData.getColumnCount();
+
+        // Create a default table model to store the data
+        DefaultTableModel model = new DefaultTableModel();
+
+        // Add column names
+        for (int i = 1; i <= columnCount; i++) {
+            model.addColumn(metaData.getColumnName(i));
+        }
+
+        // Add data rows
+        while (rs.next()) {
+            Object[] row = new Object[columnCount];
+            for (int i = 1; i <= columnCount; i++) {
+                row[i - 1] = rs.getObject(i);
+            }
+            model.addRow(row);
+        }
+
+        // Set the table model
+        table.setModel(model);
+    } catch (SQLException ex) {
+        ex.printStackTrace();
+    }
+}
+    public static void populateArticleTableWithoutSearch(JTable table) {
+    try (Connection conn = DriverManager.getConnection(DB_URL, DB_USER, DB_PASSWORD);
+         PreparedStatement stmt = conn.prepareStatement("SELECT * FROM Article")) {
+
+        ResultSet rs = stmt.executeQuery();
+
+        // Get the metadata of the result set
+        ResultSetMetaData metaData = rs.getMetaData();
+        int columnCount = metaData.getColumnCount();
+
+        // Create a default table model to store the data
+        DefaultTableModel model = new DefaultTableModel();
+
+        // Add column names
+        for (int i = 1; i <= columnCount; i++) {
+            model.addColumn(metaData.getColumnName(i));
+        }
+
+        // Add data rows
+        while (rs.next()) {
+            Object[] row = new Object[columnCount];
+            for (int i = 1; i <= columnCount; i++) {
+                row[i - 1] = rs.getObject(i);
+            }
+            model.addRow(row);
+        }
+
+        // Set the table model
+        table.setModel(model);
+    } catch (SQLException ex) {
+        ex.printStackTrace();
+    }
+}
+    public static void populateMoveTable(JTable table) {
+    try (Connection conn = DriverManager.getConnection(DB_URL, DB_USER, DB_PASSWORD);
+         PreparedStatement stmt = conn.prepareStatement("SELECT * FROM Move")) {
 
         ResultSet rs = stmt.executeQuery();
 
@@ -668,5 +749,60 @@ private static int getStockMin(Connection conn, String codeArt) {
         // Implement a logic to generate a unique number for the sort
         return "SORT-" + System.currentTimeMillis();
     }
+//    Stats for Dashboard
+    public static int getTotalArticles() {
+    int totalArticles = 0;
+    try (Connection conn = DriverManager.getConnection(DB_URL, DB_USER, DB_PASSWORD);
+         PreparedStatement stmt = conn.prepareStatement("SELECT COUNT(*) FROM Article")) {
+        ResultSet rs = stmt.executeQuery();
+        if (rs.next()) {
+            totalArticles = rs.getInt(1);
+        }
+    } catch (SQLException ex) {
+        ex.printStackTrace();
+    }
+    return totalArticles;
+}
+
+public static int getTotalExits() {
+    int totalExits = 0;
+    try (Connection conn = DriverManager.getConnection(DB_URL, DB_USER, DB_PASSWORD);
+         PreparedStatement stmt = conn.prepareStatement("SELECT COUNT(*) FROM `Exit`")) {
+        ResultSet rs = stmt.executeQuery();
+        if (rs.next()) {
+            totalExits = rs.getInt(1);
+        }
+    } catch (SQLException ex) {
+        ex.printStackTrace();
+    }
+    return totalExits;
+}
+
+public static int getTotalReturns() {
+    int totalReturns = 0;
+    try (Connection conn = DriverManager.getConnection(DB_URL, DB_USER, DB_PASSWORD);
+         PreparedStatement stmt = conn.prepareStatement("SELECT COUNT(*) FROM `Return`")) {
+        ResultSet rs = stmt.executeQuery();
+        if (rs.next()) {
+            totalReturns = rs.getInt(1);
+        }
+    } catch (SQLException ex) {
+        ex.printStackTrace();
+    }
+    return totalReturns;
+}
+    public static int getTotalUsers() {
+    int totalUsers = 0;
+    try (Connection conn = DriverManager.getConnection(DB_URL, DB_USER, DB_PASSWORD);
+         PreparedStatement stmt = conn.prepareStatement("SELECT COUNT(*) FROM users")) {
+        ResultSet rs = stmt.executeQuery();
+        if (rs.next()) {
+            totalUsers = rs.getInt(1);
+        }
+    } catch (SQLException ex) {
+        ex.printStackTrace();
+    }
+    return totalUsers;
+}
 }
 
