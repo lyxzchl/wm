@@ -215,36 +215,7 @@ public class LoginInterface extends javax.swing.JFrame {
     }//GEN-LAST:event_passwordFieldActionPerformed
 
     private void continueButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_continueButtonActionPerformed
-        try {
-        int authResult = DataBaseUtils.authenticateUser(usernameField.getText(), passwordField.getText());
-        switch (authResult) {
-            case 0:
-                // User authentication successful
-                // Open the dashboard and close the login interface
-                DashboardConsult db = new DashboardConsult();
-                db.setVisible(true);
-                dispose();
-                break;
-            case 1:
-                // User authentication failed
-                JOptionPane.showMessageDialog(this, "Invalid username or password.", "Error", JOptionPane.ERROR_MESSAGE);
-                break;
-            case 2:
-                // Account is not active
-                JOptionPane.showMessageDialog(this, "Your account is currently inactive. Please contact the administrator.", "Error", JOptionPane.ERROR_MESSAGE);
-                break;
-            case 3:
-                // Account is locked
-                JOptionPane.showMessageDialog(this, "Your account has been locked due to too many failed attempts. Please contact the administrator.", "Error", JOptionPane.ERROR_MESSAGE);
-                break;
-            case -1:
-                // Username not found
-                JOptionPane.showMessageDialog(this, "Invalid username or password.", "Error", JOptionPane.ERROR_MESSAGE);
-                break;
-        }
-    } catch (SQLException ex) {
-        Logger.getLogger(LoginInterface.class.getName()).log(Level.SEVERE, null, ex);
-    }
+        
     }//GEN-LAST:event_continueButtonActionPerformed
 
     private void continueButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_continueButtonMouseClicked

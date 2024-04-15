@@ -77,8 +77,8 @@ public class DataBaseUtils {
                 updateFailedAttempts(conn, username, false);
                 return 1;
             }
-//            // Authentication successful, return the user's role
-//            return role.equals("consult") ? 0 : role.equals("admin") ? 1 : role.equals("entry") ? 2 : -1;
+            // Authentication successful, return the user's role
+            return 0;
         }
         // Username not found, return -1
         return -1;
