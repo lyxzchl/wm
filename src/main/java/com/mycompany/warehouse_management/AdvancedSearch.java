@@ -43,7 +43,7 @@ public class AdvancedSearch extends javax.swing.JFrame {
         setSize(windowWidth, windowHeight);
         setResizable(false); // Prevent resizing
     setLocationRelativeTo(null);
-
+    DataBaseUtils.populateArticleTableWithoutSearch(resultsTable);
     // Add the listener to the resultsTable
     resultsTable.getSelectionModel().addListSelectionListener(new ListSelectionListener() {
     @Override
@@ -55,9 +55,9 @@ public class AdvancedSearch extends javax.swing.JFrame {
                 DefaultTableModel model = (DefaultTableModel) resultsTable.getModel();
                 String codeArt = (String) model.getValueAt(selectedRow, 0);
                 String desigArt = (String) model.getValueAt(selectedRow, 1);
-                double qteSt = ((Number) model.getValueAt(selectedRow, 4)).doubleValue();
                 String codeClass = (String) model.getValueAt(selectedRow, 2);
                 String uniteMes = (String) model.getValueAt(selectedRow, 3);
+                double qteSt = ((Number) model.getValueAt(selectedRow, 4)).doubleValue();
                 String casier = (String) model.getValueAt(selectedRow, 5);
                 double stockMini = ((Number) model.getValueAt(selectedRow, 6)).doubleValue();
                 double stockMax = ((Number) model.getValueAt(selectedRow, 7)).doubleValue();

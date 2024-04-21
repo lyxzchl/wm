@@ -64,7 +64,7 @@ public class ArticleSheet extends javax.swing.JFrame {
         // Populate the text fields with the article's data
         classTextField.setText(article.getCodeClass());
         articleCodeTextField.setText(article.getCodeArt());
-        observTextField.setText(article.getDesigArt());
+        desigTextField.setText(article.getDesigArt());
         mesureUTextField.setText(article.getUniteMes());
         stockQTextField.setText(String.valueOf(article.getQteSt()));
         shelfTextField.setText(article.getCasier());

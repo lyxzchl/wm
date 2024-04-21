@@ -804,5 +804,39 @@ public static int getTotalReturns() {
     }
     return totalUsers;
 }
+//    Reactivate Accounts
+    public static User getUserByUsername(String username) {
+        User user = null;
+
+        try (Connection conn = DriverManager.getConnection(DB_URL, DB_USER, DB_PASSWORD);
+             PreparedStatement stmt = conn.prepareStatement("SELECT * FROM users WHERE username = ?")) {
+            stmt.setString(1, username);
+            try (ResultSet rs = stmt.executeQuery()) {
+                if (rs.next()) {
+                    user = new User();
+                    user.setId(rs.getInt("id"));
+                    user.setUsername(rs.getString("username"));
+                    user.setPassword(rs.getString("password"));
+                    user.setActive(rs.getBoolean("is_active"));
+                }
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return user;
+    }
+    public static void saveReactivationRequest(AccountReactivationRequest request) {
+        try (Connection conn = DriverManager.getConnection(DB_URL, DB_USER, DB_PASSWORD);
+             PreparedStatement stmt = conn.prepareStatement("INSERT INTO account_reactivation_requests (user_id, request_date, status, admin_notes) VALUES (?, ?, ?, ?)")) {
+            stmt.setInt(1, request.getUserId());
+            stmt.setTimestamp(2, new Timestamp(request.getRequestDate().getTime()));
+            stmt.setString(3, request.getStatus());
+            stmt.setString(4, request.getAdminNotes());
+            stmt.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
 }
 

@@ -3,13 +3,16 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
 package com.mycompany.warehouse_management;
+import com.formdev.flatlaf.FlatDarkLaf;
 import java.awt.Dimension;
 import java.awt.Toolkit;
 import java.awt.FontFormatException;
 import java.sql.SQLException;
+import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
+import javax.swing.UIManager;
 
 /**
  *
@@ -21,6 +24,14 @@ public class LoginInterface extends javax.swing.JFrame {
      * Creates new form LoginInterface2
      */
     public LoginInterface() {
+        try {
+        UIManager.setLookAndFeel(new FlatDarkLaf());
+
+        
+        
+    } catch (Exception ex) {
+        Logger.getLogger(AdvancedSearch.class.getName()).log(Level.SEVERE, null, ex);
+    }
         initComponents();
         int windowWidth = 1130; // Adjust the desired width
         int windowHeight = 659; // Adjust the desired height
@@ -71,7 +82,7 @@ public class LoginInterface extends javax.swing.JFrame {
 
         usernameLabel.setFont(new java.awt.Font("POI Aeronaut Trial", 0, 18)); // NOI18N
         usernameLabel.setForeground(new java.awt.Color(204, 204, 204));
-        usernameLabel.setText("username");
+        usernameLabel.setText("Username");
 
         usernameField.setBackground(new java.awt.Color(51, 51, 51));
         usernameField.setFont(new java.awt.Font("POI Aeronaut Trial", 0, 18)); // NOI18N
@@ -83,9 +94,9 @@ public class LoginInterface extends javax.swing.JFrame {
             }
         });
 
-        passwordLabel.setFont(new java.awt.Font("POI Aeronaut Trial", 0, 14)); // NOI18N
+        passwordLabel.setFont(new java.awt.Font("POI Aeronaut Trial", 0, 18)); // NOI18N
         passwordLabel.setForeground(new java.awt.Color(204, 204, 204));
-        passwordLabel.setText("password");
+        passwordLabel.setText("Password");
 
         passwordField.setBackground(new java.awt.Color(51, 51, 51));
         passwordField.setFont(new java.awt.Font("Serif", 0, 18)); // NOI18N
@@ -101,8 +112,7 @@ public class LoginInterface extends javax.swing.JFrame {
         continueButton.setFont(new java.awt.Font("POI Aeronaut Trial", 1, 14)); // NOI18N
         continueButton.setForeground(new java.awt.Color(153, 153, 153));
         continueButton.setText("Continue");
-        continueButton.setBorder(javax.swing.BorderFactory.createMatteBorder(2, 2, 2, 2, new java.awt.Color(0, 51, 102)));
-        continueButton.setContentAreaFilled(false);
+        continueButton.setBorder(null);
         continueButton.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 continueButtonMouseClicked(evt);
@@ -122,7 +132,11 @@ public class LoginInterface extends javax.swing.JFrame {
         blockedButton.setForeground(new java.awt.Color(153, 153, 153));
         blockedButton.setText("Account Blocked ?");
         blockedButton.setBorder(null);
-        blockedButton.setContentAreaFilled(false);
+        blockedButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                blockedButtonActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout loginPanelLayout = new javax.swing.GroupLayout(loginPanel);
         loginPanel.setLayout(loginPanelLayout);
@@ -180,7 +194,7 @@ public class LoginInterface extends javax.swing.JFrame {
 
         logoLabel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/output-onlinepngtools(1).png"))); // NOI18N
         getContentPane().add(logoLabel);
-        logoLabel.setBounds(10, 550, 50, 65);
+        logoLabel.setBounds(0, 590, 50, 65);
 
         sloganLabel1.setFont(new java.awt.Font("URW Gothic", 1, 36)); // NOI18N
         sloganLabel1.setForeground(new java.awt.Color(255, 255, 255));
@@ -269,6 +283,38 @@ public class LoginInterface extends javax.swing.JFrame {
     private void usernameFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_usernameFieldActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_usernameFieldActionPerformed
+
+    private void blockedButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_blockedButtonActionPerformed
+        // TODO add your handling code here:
+        // Get the values from the username and password fields
+    String username = usernameField.getText();
+    String password = passwordField.getText();
+
+    try {
+        // Check if the user account exists and is inactive
+        User user = DataBaseUtils.getUserByUsername(username);
+        if (user != null && !user.isActive()) {
+            // Create a new reactivation request
+            AccountReactivationRequest request = new AccountReactivationRequest();
+            request.setUserId(user.getId());
+            request.setRequestDate(new Date());
+            request.setStatus("pending");
+
+            // Save the reactivation request to the database
+            DataBaseUtils.saveReactivationRequest(request);
+
+            // Display a success message to the user
+            JOptionPane.showMessageDialog(this, "Your account reactivation request has been submitted. The administrator will review it shortly.");
+        } else {
+            // Display an error message if the account doesn't exist or is already active
+            JOptionPane.showMessageDialog(this, "The account you entered does not exist or is already active.");
+        }
+    } catch (Exception e) {
+        // Handle any exceptions that occur during the process
+        JOptionPane.showMessageDialog(this, "An error occurred while processing your request. Please try again later.");
+        e.printStackTrace();
+    }
+    }//GEN-LAST:event_blockedButtonActionPerformed
 
     /**
      * @param args the command line arguments

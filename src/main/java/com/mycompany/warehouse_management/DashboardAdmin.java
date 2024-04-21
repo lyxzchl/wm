@@ -211,7 +211,7 @@ public class DashboardAdmin extends javax.swing.JFrame {
         newMove.setBackground(new java.awt.Color(51, 51, 51));
         newMove.setFont(new java.awt.Font("POI Aeronaut Trial", 1, 14)); // NOI18N
         newMove.setForeground(new java.awt.Color(153, 153, 153));
-        newMove.setText("New Move +");
+        newMove.setText("New User +");
         newMove.setBorder(javax.swing.BorderFactory.createMatteBorder(2, 2, 2, 2, new java.awt.Color(0, 51, 102)));
         newMove.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
@@ -253,19 +253,19 @@ public class DashboardAdmin extends javax.swing.JFrame {
         int totalUsers = DataBaseUtils.getTotalUsers();
         totalUsersLabel.setText("Total Users: " + totalUsers);
         getContentPane().add(totalUsersLabel);
-        totalUsersLabel.setBounds(500, 60, 120, 30);
+        totalUsersLabel.setBounds(390, 60, 140, 30);
 
         int totalExits = DataBaseUtils.getTotalExits();
         totalExitsLabel.setFont(new java.awt.Font("POI Aeronaut Trial", 0, 16)); // NOI18N
-        totalExitsLabel.setText("Total Exits: " + totalExits);
+        totalExitsLabel.setText("Total Active Accounts: " + totalExits);
         getContentPane().add(totalExitsLabel);
-        totalExitsLabel.setBounds(620, 60, 120, 30);
+        totalExitsLabel.setBounds(530, 60, 160, 30);
 
         int totalReturns = DataBaseUtils.getTotalReturns();
         totalReturnsLabel.setFont(new java.awt.Font("POI Aeronaut Trial", 0, 16)); // NOI18N
-        totalReturnsLabel.setText("Total Returns: " + totalReturns);
+        totalReturnsLabel.setText("Total Inactive Accounts: " + totalReturns);
         getContentPane().add(totalReturnsLabel);
-        totalReturnsLabel.setBounds(740, 60, 130, 30);
+        totalReturnsLabel.setBounds(710, 60, 170, 30);
 
         backgroundImageLabel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/sunset-gradient-hd-wallpaper(1).png"))); // NOI18N
         backgroundImageLabel.setText("jLabel1");

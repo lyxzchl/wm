@@ -273,7 +273,7 @@
         <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
           <Color blue="99" green="99" red="99" type="rgb"/>
         </Property>
-        <Property name="text" type="java.lang.String" value="New Move +"/>
+        <Property name="text" type="java.lang.String" value="New User +"/>
         <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
           <Border info="org.netbeans.modules.form.compat2.border.MatteColorBorderInfo">
             <MatteColorBorder bottom="2" left="2" right="2" top="2">
@@ -368,7 +368,7 @@
       </Properties>
       <Constraints>
         <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-          <AbsoluteConstraints x="500" y="60" width="120" height="30"/>
+          <AbsoluteConstraints x="390" y="60" width="140" height="30"/>
         </Constraint>
       </Constraints>
     </Component>
@@ -378,7 +378,7 @@
           <Font name="POI Aeronaut Trial" size="16" style="0"/>
         </Property>
         <Property name="text" type="java.lang.String" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
-          <Connection code="&quot;Total Exits: &quot; + totalExits" type="code"/>
+          <Connection code="&quot;Total Active Accounts: &quot; + totalExits" type="code"/>
         </Property>
       </Properties>
       <AuxValues>
@@ -386,7 +386,7 @@
       </AuxValues>
       <Constraints>
         <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-          <AbsoluteConstraints x="620" y="60" width="120" height="30"/>
+          <AbsoluteConstraints x="530" y="60" width="160" height="30"/>
         </Constraint>
       </Constraints>
     </Component>
@@ -396,7 +396,7 @@
           <Font name="POI Aeronaut Trial" size="16" style="0"/>
         </Property>
         <Property name="text" type="java.lang.String" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
-          <Connection code="&quot;Total Returns: &quot; + totalReturns" type="code"/>
+          <Connection code="&quot;Total Inactive Accounts: &quot; + totalReturns" type="code"/>
         </Property>
       </Properties>
       <AuxValues>
@@ -404,7 +404,7 @@
       </AuxValues>
       <Constraints>
         <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-          <AbsoluteConstraints x="740" y="60" width="130" height="30"/>
+          <AbsoluteConstraints x="710" y="60" width="170" height="30"/>
         </Constraint>
       </Constraints>
     </Component>

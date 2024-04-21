@@ -68,6 +68,7 @@ public class DashboardEntry extends javax.swing.JFrame {
         exitTicketButton = new javax.swing.JToggleButton();
         returnTicketButton = new javax.swing.JToggleButton();
         manageArticlesButton = new javax.swing.JToggleButton();
+        makeAMoveLabel = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         movesTable = new javax.swing.JTable();
         movesLabel = new javax.swing.JLabel();
@@ -125,7 +126,7 @@ public class DashboardEntry extends javax.swing.JFrame {
         exitTicketButton.setBackground(new java.awt.Color(51, 51, 51));
         exitTicketButton.setFont(new java.awt.Font("POI Aeronaut Trial", 1, 14)); // NOI18N
         exitTicketButton.setForeground(new java.awt.Color(153, 153, 153));
-        exitTicketButton.setText("Create Exit Ticket");
+        exitTicketButton.setText("Make an Exit");
         exitTicketButton.setBorder(javax.swing.BorderFactory.createMatteBorder(2, 2, 2, 2, new java.awt.Color(0, 51, 102)));
         exitTicketButton.setContentAreaFilled(false);
         exitTicketButton.addActionListener(new java.awt.event.ActionListener() {
@@ -137,7 +138,7 @@ public class DashboardEntry extends javax.swing.JFrame {
         returnTicketButton.setBackground(new java.awt.Color(51, 51, 51));
         returnTicketButton.setFont(new java.awt.Font("POI Aeronaut Trial", 1, 14)); // NOI18N
         returnTicketButton.setForeground(new java.awt.Color(153, 153, 153));
-        returnTicketButton.setText("Create Return Ticket");
+        returnTicketButton.setText("Make a Return");
         returnTicketButton.setBorder(javax.swing.BorderFactory.createMatteBorder(2, 2, 2, 2, new java.awt.Color(0, 51, 102)));
         returnTicketButton.setContentAreaFilled(false);
         returnTicketButton.addActionListener(new java.awt.event.ActionListener() {
@@ -158,6 +159,10 @@ public class DashboardEntry extends javax.swing.JFrame {
             }
         });
 
+        makeAMoveLabel.setFont(new java.awt.Font("POI Aeronaut Trial", 0, 16)); // NOI18N
+        makeAMoveLabel.setForeground(new java.awt.Color(102, 102, 102));
+        makeAMoveLabel.setText("- Make a Move");
+
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
@@ -171,6 +176,10 @@ public class DashboardEntry extends javax.swing.JFrame {
                     .addComponent(exitTicketButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(accountSettingsButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addGap(18, 18, 18)
+                .addComponent(makeAMoveLabel)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -179,7 +188,9 @@ public class DashboardEntry extends javax.swing.JFrame {
                 .addComponent(advancedSearchButton, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(manageArticlesButton, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 132, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 109, Short.MAX_VALUE)
+                .addComponent(makeAMoveLabel)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(exitTicketButton, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(returnTicketButton, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -407,6 +418,7 @@ public class DashboardEntry extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JLabel logoLabel1;
+    private javax.swing.JLabel makeAMoveLabel;
     private javax.swing.JToggleButton manageArticlesButton;
     private javax.swing.JLabel movesLabel;
     private javax.swing.JTable movesTable;
