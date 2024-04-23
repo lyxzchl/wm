@@ -257,7 +257,7 @@ private static int getCurrentFailedAttempts(Connection conn, String username) th
 }
     public static void populateMoveTable(JTable table) {
     try (Connection conn = DriverManager.getConnection(DB_URL, DB_USER, DB_PASSWORD);
-         PreparedStatement stmt = conn.prepareStatement("SELECT * FROM Move")) {
+         PreparedStatement stmt = conn.prepareStatement("SELECT * FROM Article_Move")) {
 
         ResultSet rs = stmt.executeQuery();
 

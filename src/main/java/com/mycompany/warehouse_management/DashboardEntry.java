@@ -63,12 +63,13 @@ public class DashboardEntry extends javax.swing.JFrame {
         exitTicketOption = new javax.swing.JMenuItem();
         returnTicketOption = new javax.swing.JMenuItem();
         jPanel2 = new javax.swing.JPanel();
-        accountSettingsButton = new javax.swing.JToggleButton();
+        stockSheetButton = new javax.swing.JToggleButton();
         advancedSearchButton = new javax.swing.JToggleButton();
         exitTicketButton = new javax.swing.JToggleButton();
         returnTicketButton = new javax.swing.JToggleButton();
         manageArticlesButton = new javax.swing.JToggleButton();
         makeAMoveLabel = new javax.swing.JLabel();
+        accountSettingsButton = new javax.swing.JToggleButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         movesTable = new javax.swing.JTable();
         movesLabel = new javax.swing.JLabel();
@@ -99,15 +100,15 @@ public class DashboardEntry extends javax.swing.JFrame {
 
         jPanel2.setBackground(new java.awt.Color(51, 51, 51));
 
-        accountSettingsButton.setBackground(new java.awt.Color(51, 51, 51));
-        accountSettingsButton.setFont(new java.awt.Font("POI Aeronaut Trial", 1, 14)); // NOI18N
-        accountSettingsButton.setForeground(new java.awt.Color(153, 153, 153));
-        accountSettingsButton.setText("Account");
-        accountSettingsButton.setBorder(javax.swing.BorderFactory.createMatteBorder(2, 2, 2, 2, new java.awt.Color(0, 51, 102)));
-        accountSettingsButton.setContentAreaFilled(false);
-        accountSettingsButton.addActionListener(new java.awt.event.ActionListener() {
+        stockSheetButton.setBackground(new java.awt.Color(51, 51, 51));
+        stockSheetButton.setFont(new java.awt.Font("POI Aeronaut Trial", 1, 14)); // NOI18N
+        stockSheetButton.setForeground(new java.awt.Color(153, 153, 153));
+        stockSheetButton.setText("Stock Sheet");
+        stockSheetButton.setBorder(javax.swing.BorderFactory.createMatteBorder(2, 2, 2, 2, new java.awt.Color(0, 51, 102)));
+        stockSheetButton.setContentAreaFilled(false);
+        stockSheetButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                accountSettingsButtonActionPerformed(evt);
+                stockSheetButtonActionPerformed(evt);
             }
         });
 
@@ -163,6 +164,18 @@ public class DashboardEntry extends javax.swing.JFrame {
         makeAMoveLabel.setForeground(new java.awt.Color(102, 102, 102));
         makeAMoveLabel.setText("- Make a Move");
 
+        accountSettingsButton.setBackground(new java.awt.Color(51, 51, 51));
+        accountSettingsButton.setFont(new java.awt.Font("POI Aeronaut Trial", 1, 14)); // NOI18N
+        accountSettingsButton.setForeground(new java.awt.Color(153, 153, 153));
+        accountSettingsButton.setText("Account");
+        accountSettingsButton.setBorder(javax.swing.BorderFactory.createMatteBorder(2, 2, 2, 2, new java.awt.Color(0, 51, 102)));
+        accountSettingsButton.setContentAreaFilled(false);
+        accountSettingsButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                accountSettingsButtonActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
@@ -174,12 +187,17 @@ public class DashboardEntry extends javax.swing.JFrame {
                     .addComponent(advancedSearchButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(manageArticlesButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(exitTicketButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(accountSettingsButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(stockSheetButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addGap(18, 18, 18)
                 .addComponent(makeAMoveLabel)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(jPanel2Layout.createSequentialGroup()
+                    .addContainerGap()
+                    .addComponent(accountSettingsButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addContainerGap()))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -188,15 +206,20 @@ public class DashboardEntry extends javax.swing.JFrame {
                 .addComponent(advancedSearchButton, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(manageArticlesButton, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 109, Short.MAX_VALUE)
+                .addGap(18, 18, 18)
+                .addComponent(stockSheetButton, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 53, Short.MAX_VALUE)
                 .addComponent(makeAMoveLabel)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(exitTicketButton, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(returnTicketButton, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(163, 163, 163)
-                .addComponent(accountSettingsButton, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(37, 37, 37))
+                .addGap(238, 238, 238))
+            .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                    .addContainerGap(525, Short.MAX_VALUE)
+                    .addComponent(accountSettingsButton, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGap(27, 27, 27)))
         );
 
         getContentPane().add(jPanel2);
@@ -332,12 +355,12 @@ public class DashboardEntry extends javax.swing.JFrame {
         advs.setVisible(true);
     }//GEN-LAST:event_advancedSearchButtonActionPerformed
 
-    private void accountSettingsButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_accountSettingsButtonActionPerformed
+    private void stockSheetButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_stockSheetButtonActionPerformed
         // TODO add your handling code here:
         dispose();
-        AccountSettings as = new AccountSettings();
-        as.setVisible(true);
-    }//GEN-LAST:event_accountSettingsButtonActionPerformed
+        StockSheet ss = new StockSheet();
+        ss.setVisible(true);
+    }//GEN-LAST:event_stockSheetButtonActionPerformed
 
     private void exitTicketButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_exitTicketButtonActionPerformed
         // TODO add your handling code here:
@@ -363,6 +386,13 @@ public class DashboardEntry extends javax.swing.JFrame {
         ArticleSheetConsult as = new ArticleSheetConsult();
         as.setVisible(true);
     }//GEN-LAST:event_manageArticlesButtonActionPerformed
+
+    private void accountSettingsButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_accountSettingsButtonActionPerformed
+        // TODO add your handling code here:
+        dispose();
+        AccountSettings as = new AccountSettings();
+        as.setVisible(true);
+    }//GEN-LAST:event_accountSettingsButtonActionPerformed
 
     /**
      * @param args the command line arguments
@@ -424,6 +454,7 @@ public class DashboardEntry extends javax.swing.JFrame {
     private javax.swing.JTable movesTable;
     private javax.swing.JToggleButton returnTicketButton;
     private javax.swing.JMenuItem returnTicketOption;
+    private javax.swing.JToggleButton stockSheetButton;
     private javax.swing.JLabel totalArticlesLabel;
     private javax.swing.JLabel totalExitsLabel;
     private javax.swing.JLabel totalReturnsLabel;
