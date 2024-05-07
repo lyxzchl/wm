@@ -284,12 +284,11 @@ private boolean getBooleanValue(JTable table, int row, int column) {
 
             logoLabel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/output-onlinepngtools(1).png"))); // NOI18N
 
-            backButton.setBackground(new java.awt.Color(51, 51, 51));
+            backButton.setBackground(new java.awt.Color(0, 51, 102));
             backButton.setFont(new java.awt.Font("POI Aeronaut Trial", 1, 12)); // NOI18N
             backButton.setForeground(new java.awt.Color(153, 153, 153));
             backButton.setText("<<Back");
             backButton.setBorder(javax.swing.BorderFactory.createMatteBorder(2, 2, 2, 2, new java.awt.Color(0, 51, 102)));
-            backButton.setContentAreaFilled(false);
             backButton.addActionListener(new java.awt.event.ActionListener() {
                 public void actionPerformed(java.awt.event.ActionEvent evt) {
                     backButtonActionPerformed(evt);
@@ -317,7 +316,7 @@ private boolean getBooleanValue(JTable table, int row, int column) {
             articleCountTextField.setBackground(new java.awt.Color(51, 51, 51));
             articleCountTextField.setFont(new java.awt.Font("POI Aeronaut Trial", 0, 11)); // NOI18N
             articleCountTextField.setForeground(new java.awt.Color(153, 153, 153));
-            articleCountTextField.setText("69420");
+            articleCountTextField.setText("11");
             articleCountTextField.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 2, 0, new java.awt.Color(0, 51, 102)));
             articleCountTextField.addActionListener(new java.awt.event.ActionListener() {
                 public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -325,12 +324,11 @@ private boolean getBooleanValue(JTable table, int row, int column) {
                 }
             });
 
-            searchButton.setBackground(new java.awt.Color(51, 51, 51));
+            searchButton.setBackground(new java.awt.Color(0, 51, 102));
             searchButton.setFont(new java.awt.Font("POI Aeronaut Trial", 0, 11)); // NOI18N
             searchButton.setForeground(new java.awt.Color(153, 153, 153));
             searchButton.setText("Search");
             searchButton.setBorder(javax.swing.BorderFactory.createMatteBorder(2, 2, 2, 2, new java.awt.Color(0, 51, 102)));
-            searchButton.setContentAreaFilled(false);
             searchButton.addActionListener(new java.awt.event.ActionListener() {
                 public void actionPerformed(java.awt.event.ActionEvent evt) {
                     searchButtonActionPerformed(evt);
