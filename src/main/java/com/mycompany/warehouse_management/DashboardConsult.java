@@ -33,7 +33,7 @@ import javax.swing.table.JTableHeader;
  * @author lyeschl
  */
 public class DashboardConsult extends javax.swing.JFrame {
-    private CustomPanel customPanel;
+//    private CustomPanel customPanel;
     /**
      * Creates new form Dashboard
      */
@@ -45,7 +45,7 @@ public class DashboardConsult extends javax.swing.JFrame {
         
         
     } catch (Exception ex) {
-        Logger.getLogger(AdvancedSearch.class.getName()).log(Level.SEVERE, null, ex);
+        Logger.getLogger(AdvancedSearchConsult.class.getName()).log(Level.SEVERE, null, ex);
     }
         initComponents();
         int windowWidth = 1130; // Adjust the desired width
@@ -55,6 +55,11 @@ public class DashboardConsult extends javax.swing.JFrame {
         setLocationRelativeTo(null);
         DataBaseUtils.populateArticleTableWithoutSearch(articleTable);
         DataBaseUtils.populateMoveTable(movesTable);
+        
+//        CustomPanel customPanel = new CustomPanel();
+
+        // Add the CustomPanel to the frame
+//        add(customPanel);
     }
 
     
@@ -85,9 +90,6 @@ public class DashboardConsult extends javax.swing.JFrame {
         welcomeLabel = new javax.swing.JLabel();
         logoLabel1 = new javax.swing.JLabel();
         dashboardLogo = new javax.swing.JLabel();
-        totalArticlesLabel = new javax.swing.JLabel();
-        totalExitsLabel = new javax.swing.JLabel();
-        totalReturnsLabel = new javax.swing.JLabel();
         backgroundImageLabel = new javax.swing.JLabel();
 
         exitTicketOption.setText("Exit Ticket");
@@ -166,7 +168,7 @@ public class DashboardConsult extends javax.swing.JFrame {
         );
 
         getContentPane().add(jPanel2);
-        jPanel2.setBounds(920, 50, 200, 570);
+        jPanel2.setBounds(920, 30, 200, 570);
 
         movesTable.setForeground(new java.awt.Color(153, 204, 255));
         movesTable.setModel(new javax.swing.table.DefaultTableModel(
@@ -186,7 +188,7 @@ public class DashboardConsult extends javax.swing.JFrame {
         jScrollPane1.setViewportView(movesTable);
 
         getContentPane().add(jScrollPane1);
-        jScrollPane1.setBounds(20, 140, 430, 230);
+        jScrollPane1.setBounds(30, 130, 480, 240);
 
         movesLabel.setBackground(new java.awt.Color(255, 255, 255));
         movesLabel.setFont(new java.awt.Font("POI Aeronaut Trial", 1, 18)); // NOI18N
@@ -228,7 +230,7 @@ public class DashboardConsult extends javax.swing.JFrame {
         articleTable.setSelectionForeground(new Color(102, 102, 255));
 
         getContentPane().add(jScrollPane3);
-        jScrollPane3.setBounds(20, 420, 440, 150);
+        jScrollPane3.setBounds(30, 420, 480, 160);
 
         articlesLabel.setFont(new java.awt.Font("POI Aeronaut Trial", 1, 18)); // NOI18N
         articlesLabel.setForeground(new java.awt.Color(255, 255, 255));
@@ -259,36 +261,18 @@ public class DashboardConsult extends javax.swing.JFrame {
         getContentPane().add(dashboardLogo);
         dashboardLogo.setBounds(10, 10, 30, 30);
 
-        totalArticlesLabel.setFont(new java.awt.Font("POI Aeronaut Trial", 0, 16)); // NOI18N
-        int totalArticles = DataBaseUtils.getTotalArticles();
-        totalArticlesLabel.setText("Total Articles: " + totalArticles);
-        getContentPane().add(totalArticlesLabel);
-        totalArticlesLabel.setBounds(500, 60, 120, 30);
-
-        int totalExits = DataBaseUtils.getTotalExits();
-        totalExitsLabel.setFont(new java.awt.Font("POI Aeronaut Trial", 0, 16)); // NOI18N
-        totalExitsLabel.setText("Total Exits: " + totalExits);
-        getContentPane().add(totalExitsLabel);
-        totalExitsLabel.setBounds(620, 60, 120, 30);
-
-        int totalReturns = DataBaseUtils.getTotalReturns();
-        totalReturnsLabel.setFont(new java.awt.Font("POI Aeronaut Trial", 0, 16)); // NOI18N
-        totalReturnsLabel.setText("Total Returns: " + totalReturns);
-        getContentPane().add(totalReturnsLabel);
-        totalReturnsLabel.setBounds(740, 60, 130, 30);
-
         backgroundImageLabel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/sunset-gradient-hd-wallpaper(1).png"))); // NOI18N
         backgroundImageLabel.setText("jLabel1");
         getContentPane().add(backgroundImageLabel);
-        backgroundImageLabel.setBounds(-10, -10, 1340, 760);
-        // Remove the backgroundImageLabel
-        getContentPane().remove(backgroundImageLabel);
-
-        // Create and add the CustomPanel
-        customPanel = new CustomPanel();
-        customPanel.setBounds(0, 0, 1340, 760);
-        getContentPane().add(customPanel);
-        customPanel.setLayout(null);
+        backgroundImageLabel.setBounds(0, 0, 1340, 760);
+        //// Remove the backgroundImageLabel
+        //    getContentPane().remove(backgroundImageLabel);
+        //
+        //    // Create and add the CustomPanel
+        //    customPanel = new CustomPanel();
+        //    customPanel.setBounds(0, 0, 1340, 760);
+        //    getContentPane().add(customPanel);
+        //    customPanel.setLayout(null);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -308,7 +292,7 @@ public class DashboardConsult extends javax.swing.JFrame {
         // TODO add your handling code here:
         dispose();
 
-        AdvancedSearch advs = new AdvancedSearch();
+        AdvancedSearchConsult advs = new AdvancedSearchConsult();
         advs.setVisible(true);
     }//GEN-LAST:event_advancedSearchButtonActionPerformed
 
@@ -385,9 +369,6 @@ public class DashboardConsult extends javax.swing.JFrame {
     private javax.swing.JLabel movesLabel;
     private javax.swing.JTable movesTable;
     private javax.swing.JMenuItem returnTicketOption;
-    private javax.swing.JLabel totalArticlesLabel;
-    private javax.swing.JLabel totalExitsLabel;
-    private javax.swing.JLabel totalReturnsLabel;
     private javax.swing.JLabel welcomeLabel;
     // End of variables declaration//GEN-END:variables
 }

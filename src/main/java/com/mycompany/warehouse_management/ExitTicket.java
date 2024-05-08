@@ -40,7 +40,7 @@ public class ExitTicket extends javax.swing.JFrame {
         
         
     } catch (Exception ex) {
-        Logger.getLogger(AdvancedSearch.class.getName()).log(Level.SEVERE, null, ex);
+        Logger.getLogger(AdvancedSearchConsult.class.getName()).log(Level.SEVERE, null, ex);
     }
         initComponents();
         int windowWidth = 1130; // Adjust the desired width
@@ -465,7 +465,7 @@ public class ExitTicket extends javax.swing.JFrame {
         // TODO add your handling code here:
         dispose();
 
-        DashboardConsult dash = new DashboardConsult();
+        DashboardEntry dash = new DashboardEntry();
         dash.setVisible(true);
     }//GEN-LAST:event_cancelButtonActionPerformed
 

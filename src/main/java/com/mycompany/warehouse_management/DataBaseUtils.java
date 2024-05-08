@@ -288,8 +288,39 @@ private static int getCurrentFailedAttempts(Connection conn, String username) th
         ex.printStackTrace();
     }
 }
+    public static void populateUsersTable(JTable table) {
+    try (Connection conn = DriverManager.getConnection(DB_URL, DB_USER, DB_PASSWORD);
+         PreparedStatement stmt = conn.prepareStatement("SELECT * FROM users")) {
 
+        ResultSet rs = stmt.executeQuery();
 
+        // Get the metadata of the result set
+        ResultSetMetaData metaData = rs.getMetaData();
+        int columnCount = metaData.getColumnCount();
+
+        // Create a default table model to store the data
+        DefaultTableModel model = new DefaultTableModel();
+
+        // Add column names
+        for (int i = 1; i <= columnCount; i++) {
+            model.addColumn(metaData.getColumnName(i));
+        }
+
+        // Add data rows
+        while (rs.next()) {
+            Object[] row = new Object[columnCount];
+            for (int i = 1; i <= columnCount; i++) {
+                row[i - 1] = rs.getObject(i);
+            }
+            model.addRow(row);
+        }
+
+        // Set the table model
+        table.setModel(model);
+    } catch (SQLException ex) {
+        ex.printStackTrace();
+    }
+    }
     public static int countArticles() throws SQLException {
         int count = 0;
         try (Connection conn = DriverManager.getConnection(DB_URL, DB_USER, DB_PASSWORD);
@@ -837,6 +868,47 @@ public static int getTotalReturns() {
         } catch (SQLException e) {
             e.printStackTrace();
         }
+    }
+    public static int getTotalArticles(Connection connection) {
+        String query = "SELECT COUNT(*) AS total_articles FROM Article";
+        return executeIntQuery(connection, query, "total_articles");
+    }
+
+    public static int getActiveArticles(Connection connection) {
+        String query = "SELECT COUNT(*) AS active_articles FROM Article WHERE actif = 1";
+        return executeIntQuery(connection, query, "active_articles");
+    }
+
+    public static int getDormantArticles(Connection connection) {
+        String query = "SELECT COUNT(*) AS dormant_articles FROM Article WHERE dormant = 1";
+        return executeIntQuery(connection, query, "dormant_articles");
+    }
+
+    public static int getStockSecure(Connection connection) {
+        String query = "SELECT stock_secu FROM Article LIMIT 1";
+        return executeIntQuery(connection, query, "stock_secu");
+    }
+
+    public static int getStockMin(Connection connection) {
+        String query = "SELECT stock_mini FROM Article LIMIT 1";
+        return executeIntQuery(connection, query, "stock_mini");
+    }
+
+    public static int getStockMax(Connection connection) {
+        String query = "SELECT stock_max FROM Article LIMIT 1";
+        return executeIntQuery(connection, query, "stock_max");
+    }
+
+    private static int executeIntQuery(Connection connection, String query, String columnName) {
+        try (PreparedStatement statement = connection.prepareStatement(query);
+             ResultSet resultSet = statement.executeQuery()) {
+            if (resultSet.next()) {
+                return resultSet.getInt(columnName);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return 0;
     }
 }
 

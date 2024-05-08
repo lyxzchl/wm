@@ -518,7 +518,7 @@
         <Property name="text" type="java.lang.String" value="jLabel1"/>
       </Properties>
       <AuxValues>
-        <AuxValue name="JavaCodeGenerator_AddingCodePost" type="java.lang.String" value="// Remove the backgroundImageLabel&#xa;    getContentPane().remove(backgroundImageLabel);&#xa;&#xa;    // Create and add the CustomPanel&#xa;    customPanel = new CustomPanel();&#xa;    customPanel.setBounds(0, 0, 1340, 760);&#xa;    getContentPane().add(customPanel);&#xa;    customPanel.setLayout(null);"/>
+        <AuxValue name="JavaCodeGenerator_AddingCodePost" type="java.lang.String" value="// Remove the backgroundImageLabel&#xa;//    getContentPane().remove(backgroundImageLabel);&#xa;&#xa;    // Create and add the CustomPanel&#xa;//    customPanel = new CustomPanel();&#xa;//    customPanel.setBounds(0, 0, 1340, 760);&#xa;//    getContentPane().add(customPanel);&#xa;//    customPanel.setLayout(null);"/>
       </AuxValues>
       <Constraints>
         <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">

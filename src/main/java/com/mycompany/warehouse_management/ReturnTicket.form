@@ -66,7 +66,11 @@
                                   <Component id="cancelLabel" min="-2" max="-2" attributes="0"/>
                                   <EmptySpace max="-2" attributes="0"/>
                                   <Component id="cancelToggleButton" min="-2" max="-2" attributes="0"/>
-                                  <EmptySpace min="-2" pref="654" max="-2" attributes="0"/>
+                                  <EmptySpace min="-2" pref="279" max="-2" attributes="0"/>
+                                  <Component id="validDateLabel" min="-2" pref="103" max="-2" attributes="0"/>
+                                  <EmptySpace max="-2" attributes="0"/>
+                                  <Component id="validDateFormattedTextField" max="32767" attributes="0"/>
+                                  <EmptySpace min="-2" pref="163" max="-2" attributes="0"/>
                               </Group>
                           </Group>
                       </Group>
@@ -82,27 +86,18 @@
                               <Component id="nbrsTextField" pref="100" max="32767" attributes="0"/>
                           </Group>
                           <EmptySpace min="-2" pref="35" max="-2" attributes="0"/>
-                          <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                              <Group type="102" attributes="0">
-                                  <Component id="warehousecodeLabel" min="-2" max="-2" attributes="0"/>
-                                  <EmptySpace type="separate" max="-2" attributes="0"/>
-                                  <Component id="warehousecodeTextField" min="-2" pref="100" max="-2" attributes="0"/>
-                              </Group>
-                              <Group type="102" attributes="0">
-                                  <Component id="validDateLabel" min="-2" pref="103" max="-2" attributes="0"/>
-                                  <EmptySpace type="separate" max="-2" attributes="0"/>
-                                  <Component id="validDateFormattedTextField" max="32767" attributes="0"/>
-                              </Group>
-                          </Group>
+                          <Component id="warehousecodeLabel" min="-2" max="-2" attributes="0"/>
+                          <EmptySpace type="separate" max="-2" attributes="0"/>
+                          <Component id="warehousecodeTextField" min="-2" pref="100" max="-2" attributes="0"/>
                       </Group>
                   </Group>
                   <EmptySpace pref="48" max="32767" attributes="0"/>
               </Group>
               <Group type="102" alignment="0" attributes="0">
                   <Component id="logoLabel" min="-2" max="-2" attributes="0"/>
-                  <EmptySpace min="-2" pref="257" max="-2" attributes="0"/>
-                  <Component id="exitTicketLabel" min="-2" max="-2" attributes="0"/>
                   <EmptySpace max="32767" attributes="0"/>
+                  <Component id="exitTicketLabel" min="-2" max="-2" attributes="0"/>
+                  <EmptySpace min="-2" pref="300" max="-2" attributes="0"/>
                   <Component id="printButton" min="-2" pref="103" max="-2" attributes="0"/>
                   <EmptySpace type="separate" max="-2" attributes="0"/>
                   <Component id="cancelButton" min="-2" pref="87" max="-2" attributes="0"/>
@@ -131,11 +126,9 @@
                               <Group type="102" alignment="0" attributes="0">
                                   <EmptySpace max="-2" attributes="0"/>
                                   <Group type="103" groupAlignment="3" attributes="0">
+                                      <Component id="printButton" alignment="3" min="-2" pref="40" max="-2" attributes="0"/>
+                                      <Component id="cancelButton" alignment="3" min="-2" pref="40" max="-2" attributes="0"/>
                                       <Component id="exitTicketLabel" alignment="3" min="-2" max="-2" attributes="0"/>
-                                      <Group type="103" alignment="3" groupAlignment="3" attributes="0">
-                                          <Component id="printButton" alignment="3" min="-2" pref="40" max="-2" attributes="0"/>
-                                          <Component id="cancelButton" alignment="3" min="-2" pref="40" max="-2" attributes="0"/>
-                                      </Group>
                                   </Group>
                               </Group>
                               <Component id="logoLabel" alignment="0" min="-2" max="-2" attributes="0"/>
@@ -145,20 +138,23 @@
                               <Component id="warehousecodeTextField" alignment="3" min="-2" pref="30" max="-2" attributes="0"/>
                               <Component id="warehousecodeLabel" alignment="3" min="-2" max="-2" attributes="0"/>
                           </Group>
-                          <EmptySpace type="separate" max="-2" attributes="0"/>
-                          <Group type="103" groupAlignment="3" attributes="0">
-                              <Component id="validDateFormattedTextField" alignment="3" min="-2" pref="30" max="-2" attributes="0"/>
-                              <Component id="validDateLabel" alignment="3" min="-2" pref="30" max="-2" attributes="0"/>
-                          </Group>
                       </Group>
                   </Group>
-                  <EmptySpace min="-2" pref="5" max="-2" attributes="0"/>
+                  <EmptySpace min="-2" pref="12" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Group type="102" attributes="0">
-                          <EmptySpace min="-2" pref="13" max="-2" attributes="0"/>
-                          <Group type="103" groupAlignment="3" attributes="0">
-                              <Component id="cancelToggleButton" alignment="3" min="-2" max="-2" attributes="0"/>
-                              <Component id="cancelLabel" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Group type="103" groupAlignment="0" attributes="0">
+                              <Group type="102" attributes="0">
+                                  <EmptySpace min="-2" pref="13" max="-2" attributes="0"/>
+                                  <Group type="103" groupAlignment="3" attributes="0">
+                                      <Component id="cancelToggleButton" alignment="3" min="-2" max="-2" attributes="0"/>
+                                      <Component id="cancelLabel" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  </Group>
+                              </Group>
+                              <Group type="103" alignment="0" groupAlignment="3" attributes="0">
+                                  <Component id="validDateFormattedTextField" alignment="3" min="-2" pref="30" max="-2" attributes="0"/>
+                                  <Component id="validDateLabel" alignment="3" min="-2" pref="30" max="-2" attributes="0"/>
+                              </Group>
                           </Group>
                           <EmptySpace min="-2" pref="22" max="-2" attributes="0"/>
                           <Component id="jScrollPane1" min="-2" pref="347" max="-2" attributes="0"/>

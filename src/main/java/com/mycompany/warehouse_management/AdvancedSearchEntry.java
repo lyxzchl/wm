@@ -26,16 +26,16 @@ import javax.swing.table.DefaultTableModel;
  */
 
 
-public class AdvancedSearch extends javax.swing.JFrame {
+public class AdvancedSearchEntry extends javax.swing.JFrame {
 
     /**
      * Creates new form AdvancedSearch
      */
-    public AdvancedSearch() {
+    public AdvancedSearchEntry() {
     try {
         UIManager.setLookAndFeel(new FlatDarkLaf());
     } catch (Exception ex) {
-        Logger.getLogger(AdvancedSearch.class.getName()).log(Level.SEVERE, null, ex);
+        Logger.getLogger(AdvancedSearchEntry.class.getName()).log(Level.SEVERE, null, ex);
     }
     initComponents();
     int windowWidth = 1130; // Adjust the desired width
@@ -87,8 +87,8 @@ public class AdvancedSearch extends javax.swing.JFrame {
                     dormant,
                     actif
                 );
-                // Open the ArticleSheet interface and pass the selected article
-                ArticleSheet articleSheet = new ArticleSheet(selectedArticle);
+                // Open the ArticleSheetEntry interface and pass the selected article
+                ArticleSheetEntry articleSheet = new ArticleSheetEntry(selectedArticle);
                 articleSheet.setVisible(true);
                 dispose();
             }
@@ -673,7 +673,7 @@ private boolean getBooleanValue(JTable table, int row, int column) {
             // Set the count in the text field
             articleCountTextField.setText(Integer.toString(articleCount));
         } catch (SQLException ex) {
-            Logger.getLogger(AdvancedSearch.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(AdvancedSearchEntry.class.getName()).log(Level.SEVERE, null, ex);
         }
         
 
@@ -683,7 +683,7 @@ private boolean getBooleanValue(JTable table, int row, int column) {
         // TODO add your handling code here:
         dispose();
         
-        DashboardConsult db = new DashboardConsult();
+        DashboardEntry db = new DashboardEntry();
         db.setVisible(true);
     }//GEN-LAST:event_backButtonActionPerformed
 
@@ -752,19 +752,22 @@ private boolean getBooleanValue(JTable table, int row, int column) {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(AdvancedSearch.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(AdvancedSearchEntry.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(AdvancedSearch.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(AdvancedSearchEntry.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(AdvancedSearch.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(AdvancedSearchEntry.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(AdvancedSearch.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(AdvancedSearchEntry.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(() -> {
-            new AdvancedSearch().setVisible(true);
+            new AdvancedSearchEntry().setVisible(true);
         });
     }
 

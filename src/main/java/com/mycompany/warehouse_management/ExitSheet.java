@@ -481,7 +481,7 @@ private boolean getBooleanValue(JTable table, int row, int column) {
         // TODO add your handling code here:
         dispose();
         
-        DashboardConsult db = new DashboardConsult();
+        DashboardEntry db = new DashboardEntry();
         db.setVisible(true);
     }//GEN-LAST:event_backButtonActionPerformed
 

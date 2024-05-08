@@ -29,7 +29,7 @@ public class StockSheet extends javax.swing.JFrame {
         
         
     } catch (Exception ex) {
-        Logger.getLogger(AdvancedSearch.class.getName()).log(Level.SEVERE, null, ex);
+        Logger.getLogger(AdvancedSearchConsult.class.getName()).log(Level.SEVERE, null, ex);
     }
         initComponents();
         int windowWidth = 1130; // Adjust the desired width

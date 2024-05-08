@@ -30,7 +30,7 @@ public class LoginInterface extends javax.swing.JFrame {
         
         
     } catch (Exception ex) {
-        Logger.getLogger(AdvancedSearch.class.getName()).log(Level.SEVERE, null, ex);
+        Logger.getLogger(AdvancedSearchConsult.class.getName()).log(Level.SEVERE, null, ex);
     }
         initComponents();
         int windowWidth = 1130; // Adjust the desired width
@@ -108,9 +108,9 @@ public class LoginInterface extends javax.swing.JFrame {
             }
         });
 
-        continueButton.setBackground(new java.awt.Color(102, 102, 255));
+        continueButton.setBackground(new java.awt.Color(0, 51, 102));
         continueButton.setFont(new java.awt.Font("POI Aeronaut Trial", 1, 14)); // NOI18N
-        continueButton.setForeground(new java.awt.Color(153, 153, 153));
+        continueButton.setForeground(new java.awt.Color(255, 255, 255));
         continueButton.setText("Continue");
         continueButton.setBorder(null);
         continueButton.addMouseListener(new java.awt.event.MouseAdapter() {

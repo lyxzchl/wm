@@ -36,7 +36,7 @@ public class DashboardAdmin extends javax.swing.JFrame {
         
         
     } catch (Exception ex) {
-        Logger.getLogger(AdvancedSearch.class.getName()).log(Level.SEVERE, null, ex);
+        Logger.getLogger(AdvancedSearchConsult.class.getName()).log(Level.SEVERE, null, ex);
     }
         initComponents();
         int windowWidth = 1130; // Adjust the desired width
@@ -44,8 +44,7 @@ public class DashboardAdmin extends javax.swing.JFrame {
         setSize(windowWidth, windowHeight);
         setResizable(false); // Prevent resizing
         setLocationRelativeTo(null); // Center the window
-        DataBaseUtils.populateArticleTableWithoutSearch(articleTable);
-        DataBaseUtils.populateMoveTable(movesTable);
+        DataBaseUtils.populateUsersTable(movesTable);
     }
 
     
@@ -68,9 +67,6 @@ public class DashboardAdmin extends javax.swing.JFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         movesTable = new javax.swing.JTable();
         movesLabel = new javax.swing.JLabel();
-        jScrollPane3 = new javax.swing.JScrollPane();
-        articleTable = new javax.swing.JTable();
-        articlesLabel = new javax.swing.JLabel();
         newMove = new javax.swing.JToggleButton();
         dashboardLabel = new javax.swing.JLabel();
         welcomeLabel = new javax.swing.JLabel();
@@ -168,7 +164,7 @@ public class DashboardAdmin extends javax.swing.JFrame {
         jScrollPane1.setViewportView(movesTable);
 
         getContentPane().add(jScrollPane1);
-        jScrollPane1.setBounds(20, 180, 370, 170);
+        jScrollPane1.setBounds(20, 180, 520, 170);
 
         movesLabel.setBackground(new java.awt.Color(255, 255, 255));
         movesLabel.setFont(new java.awt.Font("POI Aeronaut Trial", 1, 18)); // NOI18N
@@ -176,37 +172,6 @@ public class DashboardAdmin extends javax.swing.JFrame {
         movesLabel.setText("User Accounts");
         getContentPane().add(movesLabel);
         movesLabel.setBounds(30, 144, 130, 20);
-
-        articleTable.setForeground(new java.awt.Color(153, 204, 255));
-        articleTable.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
-            },
-            new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
-            }
-        ));
-        articleTable.setGridColor(new java.awt.Color(51, 102, 255));
-        articleTable.setSelectionBackground(new java.awt.Color(102, 153, 255));
-        articleTable.setSelectionForeground(new java.awt.Color(102, 102, 255));
-        articleTable.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                articleTableMouseClicked(evt);
-            }
-        });
-        jScrollPane3.setViewportView(articleTable);
-
-        getContentPane().add(jScrollPane3);
-        jScrollPane3.setBounds(20, 400, 370, 150);
-
-        articlesLabel.setFont(new java.awt.Font("POI Aeronaut Trial", 1, 18)); // NOI18N
-        articlesLabel.setForeground(new java.awt.Color(255, 255, 255));
-        articlesLabel.setText("Articles");
-        getContentPane().add(articlesLabel);
-        articlesLabel.setBounds(20, 360, 60, 30);
 
         newMove.setBackground(new java.awt.Color(51, 51, 51));
         newMove.setFont(new java.awt.Font("POI Aeronaut Trial", 1, 14)); // NOI18N
@@ -272,13 +237,13 @@ public class DashboardAdmin extends javax.swing.JFrame {
         getContentPane().add(backgroundImageLabel);
         backgroundImageLabel.setBounds(0, 0, 1340, 760);
         // Remove the backgroundImageLabel
-        getContentPane().remove(backgroundImageLabel);
-
-        // Create and add the CustomPanel
-        customPanel = new CustomPanel();
-        customPanel.setBounds(0, 0, 1340, 760);
-        getContentPane().add(customPanel);
-        customPanel.setLayout(null);
+        //    getContentPane().remove(backgroundImageLabel);
+        //
+        //    // Create and add the CustomPanel
+        //    customPanel = new CustomPanel();
+        //    customPanel.setBounds(0, 0, 1340, 760);
+        //    getContentPane().add(customPanel);
+        //    customPanel.setLayout(null);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -305,10 +270,6 @@ public class DashboardAdmin extends javax.swing.JFrame {
         AccountSettings as = new AccountSettings();
         as.setVisible(true);
     }//GEN-LAST:event_accountSettingsButtonActionPerformed
-
-    private void articleTableMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_articleTableMouseClicked
-        // TODO add your handling code here:
-    }//GEN-LAST:event_articleTableMouseClicked
 
     private void accountSettingsButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_accountSettingsButton1ActionPerformed
         // TODO add your handling code here:
@@ -354,8 +315,6 @@ public class DashboardAdmin extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JToggleButton accountSettingsButton;
     private javax.swing.JToggleButton accountSettingsButton1;
-    private javax.swing.JTable articleTable;
-    private javax.swing.JLabel articlesLabel;
     private javax.swing.JLabel backgroundImageLabel;
     private javax.swing.JLabel dashboardLabel;
     private javax.swing.JLabel dashboardLogo;
@@ -363,7 +322,6 @@ public class DashboardAdmin extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPopupMenu jPopupMenu2;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JLabel logoLabel1;
     private javax.swing.JLabel movesLabel;
     private javax.swing.JTable movesTable;

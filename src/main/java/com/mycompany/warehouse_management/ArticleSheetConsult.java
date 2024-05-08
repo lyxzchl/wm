@@ -31,7 +31,7 @@ public class ArticleSheetConsult extends javax.swing.JFrame {
         
         
     } catch (Exception ex) {
-        Logger.getLogger(AdvancedSearch.class.getName()).log(Level.SEVERE, null, ex);
+        Logger.getLogger(AdvancedSearchConsult.class.getName()).log(Level.SEVERE, null, ex);
     }
         initComponents();
         int windowWidth = 1130; // Adjust the desired width
@@ -47,7 +47,7 @@ public class ArticleSheetConsult extends javax.swing.JFrame {
         
         
     } catch (Exception ex) {
-        Logger.getLogger(AdvancedSearch.class.getName()).log(Level.SEVERE, null, ex);
+        Logger.getLogger(AdvancedSearchConsult.class.getName()).log(Level.SEVERE, null, ex);
     }
         initComponents();
         int windowWidth = 1130; // Adjust the desired width
@@ -874,7 +874,7 @@ public class ArticleSheetConsult extends javax.swing.JFrame {
     private void gotoSeachButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_gotoSeachButtonActionPerformed
         // TODO add your handling code here:
         dispose();
-        AdvancedSearch as = new AdvancedSearch();
+        AdvancedSearchConsult as = new AdvancedSearchConsult();
         as.setVisible(true);
     }//GEN-LAST:event_gotoSeachButtonActionPerformed
     private void clearTextFields() {

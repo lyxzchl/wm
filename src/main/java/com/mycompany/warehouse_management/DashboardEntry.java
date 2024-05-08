@@ -36,7 +36,7 @@ public class DashboardEntry extends javax.swing.JFrame {
         
         
     } catch (Exception ex) {
-        Logger.getLogger(AdvancedSearch.class.getName()).log(Level.SEVERE, null, ex);
+        Logger.getLogger(AdvancedSearchConsult.class.getName()).log(Level.SEVERE, null, ex);
     }
         initComponents();
         int windowWidth = 1130; // Adjust the desired width
@@ -329,13 +329,13 @@ public class DashboardEntry extends javax.swing.JFrame {
         getContentPane().add(backgroundImageLabel);
         backgroundImageLabel.setBounds(0, 0, 1340, 760);
         // Remove the backgroundImageLabel
-        getContentPane().remove(backgroundImageLabel);
+        //    getContentPane().remove(backgroundImageLabel);
 
         // Create and add the CustomPanel
-        customPanel = new CustomPanel();
-        customPanel.setBounds(0, 0, 1340, 760);
-        getContentPane().add(customPanel);
-        customPanel.setLayout(null);
+        //    customPanel = new CustomPanel();
+        //    customPanel.setBounds(0, 0, 1340, 760);
+        //    getContentPane().add(customPanel);
+        //    customPanel.setLayout(null);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -351,7 +351,7 @@ public class DashboardEntry extends javax.swing.JFrame {
         // TODO add your handling code here:
         dispose();
 
-        AdvancedSearch advs = new AdvancedSearch();
+        AdvancedSearchConsult advs = new AdvancedSearchConsult();
         advs.setVisible(true);
     }//GEN-LAST:event_advancedSearchButtonActionPerformed
 
