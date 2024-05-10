@@ -36,11 +36,11 @@ public class DashboardEntry extends javax.swing.JFrame {
         
         
     } catch (Exception ex) {
-        Logger.getLogger(AdvancedSearchConsult.class.getName()).log(Level.SEVERE, null, ex);
+        Logger.getLogger(AdvancedSearch.class.getName()).log(Level.SEVERE, null, ex);
     }
         initComponents();
-        int windowWidth = 1130; // Adjust the desired width
-        int windowHeight = 659; // Adjust the desired height
+        int windowWidth = 1280; // Adjust the desired width
+        int windowHeight = 720; // Adjust the desired height
         setSize(windowWidth, windowHeight);
         setResizable(false); // Prevent resizing
         setLocationRelativeTo(null);
@@ -223,7 +223,7 @@ public class DashboardEntry extends javax.swing.JFrame {
         );
 
         getContentPane().add(jPanel2);
-        jPanel2.setBounds(890, 30, 230, 590);
+        jPanel2.setBounds(1000, 40, 230, 590);
 
         movesTable.setForeground(new java.awt.Color(153, 204, 255));
         movesTable.setModel(new javax.swing.table.DefaultTableModel(
@@ -243,14 +243,14 @@ public class DashboardEntry extends javax.swing.JFrame {
         jScrollPane1.setViewportView(movesTable);
 
         getContentPane().add(jScrollPane1);
-        jScrollPane1.setBounds(20, 120, 410, 180);
+        jScrollPane1.setBounds(30, 140, 420, 170);
 
         movesLabel.setBackground(new java.awt.Color(255, 255, 255));
         movesLabel.setFont(new java.awt.Font("POI Aeronaut Trial", 1, 18)); // NOI18N
         movesLabel.setForeground(new java.awt.Color(255, 255, 255));
         movesLabel.setText("Movements");
         getContentPane().add(movesLabel);
-        movesLabel.setBounds(30, 90, 100, 20);
+        movesLabel.setBounds(30, 90, 140, 20);
 
         articleTable.setForeground(new java.awt.Color(153, 204, 255));
         articleTable.setModel(new javax.swing.table.DefaultTableModel(
@@ -275,13 +275,13 @@ public class DashboardEntry extends javax.swing.JFrame {
         jScrollPane3.setViewportView(articleTable);
 
         getContentPane().add(jScrollPane3);
-        jScrollPane3.setBounds(20, 340, 420, 160);
+        jScrollPane3.setBounds(30, 360, 420, 180);
 
         articlesLabel.setFont(new java.awt.Font("POI Aeronaut Trial", 1, 18)); // NOI18N
         articlesLabel.setForeground(new java.awt.Color(255, 255, 255));
         articlesLabel.setText("Articles");
         getContentPane().add(articlesLabel);
-        articlesLabel.setBounds(30, 310, 60, 30);
+        articlesLabel.setBounds(30, 320, 100, 30);
 
         dashboardLabel.setBackground(new java.awt.Color(255, 255, 255));
         dashboardLabel.setFont(new java.awt.Font("POI Aeronaut Trial", 1, 36)); // NOI18N
@@ -295,7 +295,7 @@ public class DashboardEntry extends javax.swing.JFrame {
         welcomeLabel.setForeground(new java.awt.Color(255, 255, 255));
         welcomeLabel.setText("Welcome");
         getContentPane().add(welcomeLabel);
-        welcomeLabel.setBounds(390, 10, 170, 40);
+        welcomeLabel.setBounds(600, 10, 170, 40);
 
         logoLabel1.setBackground(new java.awt.Color(255, 255, 255));
         logoLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/output-onlinepngtools(1).png"))); // NOI18N
@@ -304,7 +304,7 @@ public class DashboardEntry extends javax.swing.JFrame {
 
         dashboardLogo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/dashboard_icon.png"))); // NOI18N
         getContentPane().add(dashboardLogo);
-        dashboardLogo.setBounds(10, 10, 30, 30);
+        dashboardLogo.setBounds(10, 20, 30, 30);
 
         totalArticlesLabel.setFont(new java.awt.Font("POI Aeronaut Trial", 0, 16)); // NOI18N
         int totalArticles = DataBaseUtils.getTotalArticles();
@@ -329,13 +329,13 @@ public class DashboardEntry extends javax.swing.JFrame {
         getContentPane().add(backgroundImageLabel);
         backgroundImageLabel.setBounds(0, 0, 1340, 760);
         // Remove the backgroundImageLabel
-        //    getContentPane().remove(backgroundImageLabel);
+        getContentPane().remove(backgroundImageLabel);
 
         // Create and add the CustomPanel
-        //    customPanel = new CustomPanel();
-        //    customPanel.setBounds(0, 0, 1340, 760);
-        //    getContentPane().add(customPanel);
-        //    customPanel.setLayout(null);
+        customPanel = new CustomPanel();
+        customPanel.setBounds(0, 0, 1340, 760);
+        getContentPane().add(customPanel);
+        customPanel.setLayout(null);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -351,7 +351,7 @@ public class DashboardEntry extends javax.swing.JFrame {
         // TODO add your handling code here:
         dispose();
 
-        AdvancedSearchConsult advs = new AdvancedSearchConsult();
+        AdvancedSearch advs = new AdvancedSearch();
         advs.setVisible(true);
     }//GEN-LAST:event_advancedSearchButtonActionPerformed
 
@@ -365,7 +365,7 @@ public class DashboardEntry extends javax.swing.JFrame {
     private void exitTicketButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_exitTicketButtonActionPerformed
         // TODO add your handling code here:
         dispose();
-        ExitTicket et = new ExitTicket();
+        ExitSheet et = new ExitSheet();
         et.setVisible(true);
     }//GEN-LAST:event_exitTicketButtonActionPerformed
 

@@ -19,36 +19,36 @@ import javax.swing.UIManager;
  *
  * @author lyeschl
  */
-public class ArticleSheetEntry extends javax.swing.JFrame {
+public class ArticleSheet extends javax.swing.JFrame {
     private Article article;
     /**
      * Creates new form Article
      */
-    public ArticleSheetEntry() {
+    public ArticleSheet() {
         try {
         UIManager.setLookAndFeel(new FlatDarkLaf());
 
         
         
     } catch (Exception ex) {
-        Logger.getLogger(AdvancedSearchConsult.class.getName()).log(Level.SEVERE, null, ex);
+        Logger.getLogger(AdvancedSearch.class.getName()).log(Level.SEVERE, null, ex);
     }
         initComponents();
         // You can initialize the text fields with default values or leave them empty
-        int windowWidth = 1130; // Adjust the desired width
-        int windowHeight = 659; // Adjust the desired height
+        int windowWidth = 1280; // Adjust the desired width
+        int windowHeight = 720; // Adjust the desired height
         setSize(windowWidth, windowHeight);
         setResizable(false); // Prevent resizing
         setLocationRelativeTo(null);
     }
-    public ArticleSheetEntry(Article article) {
+    public ArticleSheet(Article article) {
                try {
         UIManager.setLookAndFeel(new FlatDarkLaf());
 
         
         
     } catch (Exception ex) {
-        Logger.getLogger(AdvancedSearchConsult.class.getName()).log(Level.SEVERE, null, ex);
+        Logger.getLogger(AdvancedSearch.class.getName()).log(Level.SEVERE, null, ex);
     }
         initComponents();
         Toolkit toolkit = Toolkit.getDefaultToolkit();
@@ -91,6 +91,7 @@ public class ArticleSheetEntry extends javax.swing.JFrame {
     private void initComponents() {
 
         jCheckBoxMenuItem1 = new javax.swing.JCheckBoxMenuItem();
+        checkbox1 = new java.awt.Checkbox();
         mainPanel = new javax.swing.JPanel();
         classLabel = new javax.swing.JLabel();
         articleCodeLabel = new javax.swing.JLabel();
@@ -141,17 +142,19 @@ public class ArticleSheetEntry extends javax.swing.JFrame {
         jCheckBoxMenuItem1.setSelected(true);
         jCheckBoxMenuItem1.setText("jCheckBoxMenuItem1");
 
+        checkbox1.setLabel("checkbox1");
+
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(null);
 
         mainPanel.setBackground(new java.awt.Color(51, 51, 51));
 
         classLabel.setFont(new java.awt.Font("POI Aeronaut Trial", 0, 14)); // NOI18N
-        classLabel.setForeground(new java.awt.Color(255, 255, 255));
+        classLabel.setForeground(new java.awt.Color(153, 153, 153));
         classLabel.setText("Class");
 
         articleCodeLabel.setFont(new java.awt.Font("POI Aeronaut Trial", 0, 14)); // NOI18N
-        articleCodeLabel.setForeground(new java.awt.Color(255, 255, 255));
+        articleCodeLabel.setForeground(new java.awt.Color(153, 153, 153));
         articleCodeLabel.setText("Article Code");
 
         classTextField.setBackground(new java.awt.Color(102, 102, 102));
@@ -175,7 +178,7 @@ public class ArticleSheetEntry extends javax.swing.JFrame {
         });
 
         desigLabel.setFont(new java.awt.Font("POI Aeronaut Trial", 0, 14)); // NOI18N
-        desigLabel.setForeground(new java.awt.Color(255, 255, 255));
+        desigLabel.setForeground(new java.awt.Color(153, 153, 153));
         desigLabel.setText("Designation");
 
         observTextField.setBackground(new java.awt.Color(102, 102, 102));
@@ -186,7 +189,7 @@ public class ArticleSheetEntry extends javax.swing.JFrame {
         jScrollPane1.setViewportView(observTextField);
 
         measureULabel.setFont(new java.awt.Font("POI Aeronaut Trial", 0, 14)); // NOI18N
-        measureULabel.setForeground(new java.awt.Color(255, 255, 255));
+        measureULabel.setForeground(new java.awt.Color(153, 153, 153));
         measureULabel.setText("Mesure Unit");
 
         mesureUTextField.setBackground(new java.awt.Color(102, 102, 102));
@@ -200,7 +203,7 @@ public class ArticleSheetEntry extends javax.swing.JFrame {
         });
 
         shelfLabel.setFont(new java.awt.Font("POI Aeronaut Trial", 0, 14)); // NOI18N
-        shelfLabel.setForeground(new java.awt.Color(255, 255, 255));
+        shelfLabel.setForeground(new java.awt.Color(153, 153, 153));
         shelfLabel.setText("Shelf");
 
         shelfTextField.setBackground(new java.awt.Color(102, 102, 102));
@@ -214,11 +217,11 @@ public class ArticleSheetEntry extends javax.swing.JFrame {
         });
 
         observLabel.setFont(new java.awt.Font("POI Aeronaut Trial", 0, 14)); // NOI18N
-        observLabel.setForeground(new java.awt.Color(255, 255, 255));
+        observLabel.setForeground(new java.awt.Color(153, 153, 153));
         observLabel.setText("Observation");
 
         deadLabel.setFont(new java.awt.Font("POI Aeronaut Trial", 0, 14)); // NOI18N
-        deadLabel.setForeground(new java.awt.Color(255, 255, 255));
+        deadLabel.setForeground(new java.awt.Color(153, 153, 153));
         deadLabel.setText("Dead");
 
         deadToggleButton.setBackground(new java.awt.Color(102, 102, 102));
@@ -232,7 +235,7 @@ public class ArticleSheetEntry extends javax.swing.JFrame {
         });
 
         dormantLabel.setFont(new java.awt.Font("POI Aeronaut Trial", 0, 14)); // NOI18N
-        dormantLabel.setForeground(new java.awt.Color(255, 255, 255));
+        dormantLabel.setForeground(new java.awt.Color(153, 153, 153));
         dormantLabel.setText("Dormant");
 
         dormantToggleButton.setBackground(new java.awt.Color(102, 102, 102));
@@ -246,7 +249,7 @@ public class ArticleSheetEntry extends javax.swing.JFrame {
         });
 
         activeLabel.setFont(new java.awt.Font("POI Aeronaut Trial", 0, 14)); // NOI18N
-        activeLabel.setForeground(new java.awt.Color(255, 255, 255));
+        activeLabel.setForeground(new java.awt.Color(153, 153, 153));
         activeLabel.setText("Active");
 
         activeToggleButton.setBackground(new java.awt.Color(102, 102, 102));
@@ -260,13 +263,13 @@ public class ArticleSheetEntry extends javax.swing.JFrame {
         });
 
         aisleLabel.setFont(new java.awt.Font("POI Aeronaut Trial", 0, 14)); // NOI18N
-        aisleLabel.setForeground(new java.awt.Color(255, 255, 255));
+        aisleLabel.setForeground(new java.awt.Color(153, 153, 153));
         aisleLabel.setText("Aisle");
 
         jSeparator1.setBackground(new java.awt.Color(0, 0, 0));
 
         stockQLabel.setFont(new java.awt.Font("POI Aeronaut Trial", 0, 14)); // NOI18N
-        stockQLabel.setForeground(new java.awt.Color(255, 255, 255));
+        stockQLabel.setForeground(new java.awt.Color(153, 153, 153));
         stockQLabel.setText("Stock Quantity");
 
         stockQTextField.setBackground(new java.awt.Color(102, 102, 102));
@@ -283,7 +286,7 @@ public class ArticleSheetEntry extends javax.swing.JFrame {
         jSeparator2.setOrientation(javax.swing.SwingConstants.VERTICAL);
 
         valueLabel.setFont(new java.awt.Font("POI Aeronaut Trial", 0, 14)); // NOI18N
-        valueLabel.setForeground(new java.awt.Color(255, 255, 255));
+        valueLabel.setForeground(new java.awt.Color(153, 153, 153));
         valueLabel.setText("value");
 
         valueTextField.setBackground(new java.awt.Color(102, 102, 102));
@@ -297,7 +300,7 @@ public class ArticleSheetEntry extends javax.swing.JFrame {
         });
 
         stockMinLabel.setFont(new java.awt.Font("POI Aeronaut Trial", 0, 14)); // NOI18N
-        stockMinLabel.setForeground(new java.awt.Color(255, 255, 255));
+        stockMinLabel.setForeground(new java.awt.Color(153, 153, 153));
         stockMinLabel.setText("Stock Min");
 
         stockMinTextField.setBackground(new java.awt.Color(102, 102, 102));
@@ -321,11 +324,11 @@ public class ArticleSheetEntry extends javax.swing.JFrame {
         });
 
         stockMaxLabel.setFont(new java.awt.Font("POI Aeronaut Trial", 0, 14)); // NOI18N
-        stockMaxLabel.setForeground(new java.awt.Color(255, 255, 255));
+        stockMaxLabel.setForeground(new java.awt.Color(153, 153, 153));
         stockMaxLabel.setText("Stock Max");
 
         stockSecLabel.setFont(new java.awt.Font("POI Aeronaut Trial", 0, 14)); // NOI18N
-        stockSecLabel.setForeground(new java.awt.Color(255, 255, 255));
+        stockSecLabel.setForeground(new java.awt.Color(153, 153, 153));
         stockSecLabel.setText("Stock Secure");
 
         stockSecTextField.setBackground(new java.awt.Color(102, 102, 102));
@@ -391,7 +394,7 @@ public class ArticleSheetEntry extends javax.swing.JFrame {
         });
 
         cancelButton.setBackground(new java.awt.Color(255, 102, 0));
-        cancelButton.setFont(new java.awt.Font("POI Aeronaut Trial", 0, 16)); // NOI18N
+        cancelButton.setFont(new java.awt.Font("POI Aeronaut Trial", 1, 16)); // NOI18N
         cancelButton.setForeground(new java.awt.Color(255, 255, 255));
         cancelButton.setText("Cancel");
         cancelButton.setBorder(null);
@@ -402,7 +405,7 @@ public class ArticleSheetEntry extends javax.swing.JFrame {
         });
 
         saveButton.setBackground(new java.awt.Color(0, 51, 102));
-        saveButton.setFont(new java.awt.Font("POI Aeronaut Trial", 0, 16)); // NOI18N
+        saveButton.setFont(new java.awt.Font("POI Aeronaut Trial", 1, 16)); // NOI18N
         saveButton.setForeground(new java.awt.Color(255, 255, 255));
         saveButton.setText("Save");
         saveButton.setBorder(null);
@@ -435,8 +438,10 @@ public class ArticleSheetEntry extends javax.swing.JFrame {
         desigTextField.setBorder(null);
         jScrollPane3.setViewportView(desigTextField);
 
-        gotoSeachButton.setFont(new java.awt.Font("POI Aeronaut Trial", 0, 16)); // NOI18N
+        gotoSeachButton.setBackground(new java.awt.Color(0, 51, 102));
+        gotoSeachButton.setFont(new java.awt.Font("POI Aeronaut Trial", 1, 16)); // NOI18N
         gotoSeachButton.setText("Search");
+        gotoSeachButton.setBorder(null);
         gotoSeachButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 gotoSeachButtonActionPerformed(evt);
@@ -456,34 +461,34 @@ public class ArticleSheetEntry extends javax.swing.JFrame {
                                 .addGroup(mainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                                     .addGroup(mainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                         .addGroup(mainPanelLayout.createSequentialGroup()
-                                            .addGroup(mainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                                .addGroup(mainPanelLayout.createSequentialGroup()
-                                                    .addGap(25, 25, 25)
-                                                    .addComponent(valueLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                                                .addComponent(stockQLabel))
-                                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                            .addGroup(mainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                                .addComponent(stockQTextField, javax.swing.GroupLayout.DEFAULT_SIZE, 66, Short.MAX_VALUE)
-                                                .addComponent(valueTextField))
-                                            .addGap(18, 18, 18)
-                                            .addComponent(jSeparator2, javax.swing.GroupLayout.PREFERRED_SIZE, 19, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addGap(18, 18, 18)
                                             .addGroup(mainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                                                 .addGroup(mainPanelLayout.createSequentialGroup()
                                                     .addGroup(mainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                                        .addComponent(stockQLabel)
+                                                        .addGroup(mainPanelLayout.createSequentialGroup()
+                                                            .addComponent(valueLabel)
+                                                            .addGap(0, 0, 0)))
+                                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                                    .addGroup(mainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                                        .addComponent(stockQTextField, javax.swing.GroupLayout.DEFAULT_SIZE, 66, Short.MAX_VALUE)
+                                                        .addComponent(valueTextField))
+                                                    .addGap(18, 18, 18)
+                                                    .addComponent(jSeparator2, javax.swing.GroupLayout.PREFERRED_SIZE, 19, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                    .addGap(18, 18, 18)
+                                                    .addGroup(mainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                                                         .addComponent(stockMinLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 76, javax.swing.GroupLayout.PREFERRED_SIZE)
                                                         .addComponent(stockMaxLabel, javax.swing.GroupLayout.Alignment.LEADING))
-                                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                                    .addGap(18, 18, 18)
                                                     .addGroup(mainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                                         .addComponent(stockMinTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                        .addComponent(stockMaxTextField, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                                        .addComponent(stockMaxTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)))
                                                 .addGroup(mainPanelLayout.createSequentialGroup()
                                                     .addComponent(stockSecLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                                    .addGap(18, 18, 18)
                                                     .addComponent(stockSecTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                                            .addGap(108, 108, 108)
+                                            .addGap(139, 139, 139)
                                             .addComponent(measureULabel)
-                                            .addGap(30, 30, 30)
+                                            .addGap(29, 29, 29)
                                             .addComponent(mesureUTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE))
                                         .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 822, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addComponent(jSeparator3, javax.swing.GroupLayout.PREFERRED_SIZE, 822, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -499,72 +504,74 @@ public class ArticleSheetEntry extends javax.swing.JFrame {
                                         .addGap(72, 72, 72)
                                         .addComponent(changeButton)
                                         .addGap(298, 298, 298)))
-                                .addGap(0, 0, Short.MAX_VALUE))
+                                .addGap(0, 83, Short.MAX_VALUE))
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, mainPanelLayout.createSequentialGroup()
                                 .addGap(0, 0, Short.MAX_VALUE)
                                 .addComponent(sheetLogo)
                                 .addGap(18, 18, 18)
                                 .addComponent(articleSheetLabel)
                                 .addGap(205, 205, 205)))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED, 76, Short.MAX_VALUE)
-                        .addComponent(saveButton, javax.swing.GroupLayout.PREFERRED_SIZE, 72, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(34, 34, 34)
-                        .addComponent(cancelButton, javax.swing.GroupLayout.PREFERRED_SIZE, 68, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(20, 20, 20))
-                    .addGroup(mainPanelLayout.createSequentialGroup()
-                        .addGroup(mainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(classLabel)
-                            .addComponent(articleCodeLabel)
-                            .addComponent(desigLabel)
-                            .addComponent(shelfLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(18, 18, 18)
                         .addGroup(mainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(mainPanelLayout.createSequentialGroup()
-                                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(observLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 267, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(64, 64, 64))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 144, Short.MAX_VALUE)
+                                .addComponent(saveButton, javax.swing.GroupLayout.PREFERRED_SIZE, 72, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(28, 28, 28)
+                                .addComponent(cancelButton, javax.swing.GroupLayout.PREFERRED_SIZE, 68, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(40, 40, 40))
                             .addGroup(mainPanelLayout.createSequentialGroup()
-                                .addGroup(mainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(articleCodeTextField, javax.swing.GroupLayout.DEFAULT_SIZE, 92, Short.MAX_VALUE)
-                                    .addComponent(shelfTextField))
-                                .addGroup(mainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(mainPanelLayout.createSequentialGroup()
-                                        .addGap(222, 222, 222)
-                                        .addComponent(aisleLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(aisleTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 82, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                        .addComponent(deadLabel))
-                                    .addGroup(mainPanelLayout.createSequentialGroup()
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                        .addGroup(mainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                            .addComponent(dormantLabel)
-                                            .addComponent(activeLabel))))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addGroup(mainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addGap(17, 17, 17)
+                                .addGroup(mainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(activeLabel)
+                                    .addComponent(dormantLabel)
+                                    .addComponent(deadLabel))
+                                .addGap(38, 38, 38)
+                                .addGroup(mainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                                     .addComponent(dormantToggleButton, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(activeToggleButton, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(deadToggleButton, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGap(85, 85, 85))
-                            .addGroup(mainPanelLayout.createSequentialGroup()
-                                .addComponent(classTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
                     .addGroup(javax.swing.GroupLayout.Alignment.LEADING, mainPanelLayout.createSequentialGroup()
-                        .addGap(4, 4, 4)
-                        .addComponent(gotoSeachButton)
-                        .addGap(0, 0, Short.MAX_VALUE))))
+                        .addGap(2, 2, 2)
+                        .addGroup(mainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(mainPanelLayout.createSequentialGroup()
+                                .addComponent(articleCodeLabel)
+                                .addGap(0, 0, Short.MAX_VALUE))
+                            .addGroup(mainPanelLayout.createSequentialGroup()
+                                .addGroup(mainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(desigLabel)
+                                    .addComponent(shelfLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(gotoSeachButton, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGap(18, 18, 18)
+                                .addGroup(mainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(mainPanelLayout.createSequentialGroup()
+                                        .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .addComponent(observLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGap(64, 64, 64)
+                                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 267, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGap(115, 115, 115))
+                                    .addGroup(mainPanelLayout.createSequentialGroup()
+                                        .addGap(24, 24, 24)
+                                        .addGroup(mainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                            .addComponent(articleCodeTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addComponent(shelfTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                        .addGap(204, 204, 204)
+                                        .addGroup(mainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                            .addGroup(mainPanelLayout.createSequentialGroup()
+                                                .addComponent(classLabel)
+                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                                .addComponent(classTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                            .addGroup(mainPanelLayout.createSequentialGroup()
+                                                .addComponent(aisleLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                                .addComponent(aisleTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))))))
         );
         mainPanelLayout.setVerticalGroup(
             mainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(mainPanelLayout.createSequentialGroup()
                 .addGap(18, 18, 18)
                 .addGroup(mainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(mainPanelLayout.createSequentialGroup()
-                        .addComponent(gotoSeachButton)
-                        .addGap(0, 0, Short.MAX_VALUE))
                     .addGroup(mainPanelLayout.createSequentialGroup()
                         .addGroup(mainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(articleSheetLabel)
@@ -578,55 +585,48 @@ public class ArticleSheetEntry extends javax.swing.JFrame {
                                     .addComponent(observLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE))
                                 .addGroup(mainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addGroup(mainPanelLayout.createSequentialGroup()
-                                        .addGroup(mainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addGroup(mainPanelLayout.createSequentialGroup()
-                                                .addGap(74, 74, 74)
-                                                .addComponent(articleCodeLabel)
-                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, mainPanelLayout.createSequentialGroup()
-                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                                .addGroup(mainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                                    .addComponent(activeToggleButton, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                    .addComponent(activeLabel))
-                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)))
+                                        .addGap(49, 49, 49)
+                                        .addGroup(mainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                            .addComponent(classTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addComponent(classLabel)
+                                            .addComponent(articleCodeTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addComponent(articleCodeLabel))
+                                        .addGap(0, 0, Short.MAX_VALUE))
+                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, mainPanelLayout.createSequentialGroup()
+                                        .addGap(84, 84, 84)
                                         .addGroup(mainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                                             .addComponent(dormantToggleButton, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
                                             .addComponent(dormantLabel))
+                                        .addGap(18, 18, 18)
                                         .addGroup(mainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                             .addGroup(mainPanelLayout.createSequentialGroup()
-                                                .addGap(22, 22, 22)
-                                                .addComponent(shelfLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                            .addGroup(mainPanelLayout.createSequentialGroup()
-                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                                .addGap(0, 0, Short.MAX_VALUE)
                                                 .addGroup(mainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, mainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                                        .addComponent(shelfLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                        .addComponent(shelfTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, mainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                                        .addComponent(aisleTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                        .addComponent(aisleLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                                            .addGroup(mainPanelLayout.createSequentialGroup()
+                                                .addGroup(mainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                                                     .addComponent(deadToggleButton, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                    .addComponent(deadLabel)))))
-                                    .addGroup(mainPanelLayout.createSequentialGroup()
-                                        .addGap(18, 18, 18)
-                                        .addGroup(mainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                            .addComponent(classTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addComponent(classLabel))
-                                        .addGap(18, 18, 18)
-                                        .addComponent(articleCodeTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                        .addGroup(mainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addComponent(shelfTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addGroup(mainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                                .addComponent(aisleTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                .addComponent(aisleLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                                                    .addComponent(deadLabel))
+                                                .addGap(0, 0, Short.MAX_VALUE)))))
                                 .addGap(18, 18, 18)
                                 .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addGroup(mainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addGroup(mainPanelLayout.createSequentialGroup()
-                                        .addGroup(mainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                            .addComponent(mesureUTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addComponent(measureULabel)
-                                            .addComponent(stockQTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addComponent(stockQLabel)
-                                            .addComponent(stockMinTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addComponent(stockMinLabel))
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                        .addGroup(mainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addGroup(mainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                                .addComponent(mesureUTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                .addComponent(measureULabel)
+                                                .addComponent(stockQTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                .addComponent(stockQLabel)
+                                                .addComponent(stockMinLabel))
+                                            .addComponent(stockMinTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                        .addGap(18, 18, 18)
                                         .addGroup(mainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                             .addGroup(mainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                                                 .addComponent(valueTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -634,11 +634,12 @@ public class ArticleSheetEntry extends javax.swing.JFrame {
                                             .addGroup(mainPanelLayout.createSequentialGroup()
                                                 .addGroup(mainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                                                     .addComponent(stockMaxLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 15, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                    .addComponent(stockMaxTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                                .addGap(14, 14, 14)
+                                                    .addComponent(stockMaxTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                                .addGap(26, 26, 26)
                                                 .addGroup(mainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                                    .addComponent(stockSecTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                    .addComponent(stockSecLabel)))))
+                                                    .addComponent(stockSecTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                    .addComponent(stockSecLabel))))
+                                        .addGap(7, 7, 7))
                                     .addComponent(jSeparator2, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE))
                                 .addGap(5, 5, 5)
                                 .addComponent(jSeparator3, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -649,16 +650,23 @@ public class ArticleSheetEntry extends javax.swing.JFrame {
                                     .addComponent(changeButton, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(lastButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                     .addComponent(goToFirstButton)
-                                    .addComponent(saveButton, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(cancelButton, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                    .addComponent(saveButton, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(cancelButton, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGap(100, 100, 100))
                             .addGroup(mainPanelLayout.createSequentialGroup()
                                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addContainerGap(433, Short.MAX_VALUE))))))
+                                .addGap(33, 33, 33)
+                                .addGroup(mainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                    .addComponent(activeToggleButton, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(activeLabel))
+                                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                    .addGroup(mainPanelLayout.createSequentialGroup()
+                        .addComponent(gotoSeachButton, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, Short.MAX_VALUE))))
         );
 
         getContentPane().add(mainPanel);
-        mainPanel.setBounds(0, 0, 1130, 660);
+        mainPanel.setBounds(0, 0, 1280, 720);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -914,7 +922,7 @@ public class ArticleSheetEntry extends javax.swing.JFrame {
     private void cancelButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cancelButtonActionPerformed
         // TODO add your handling code here:
         dispose();
-        DashboardEntry db = new DashboardEntry();
+        DashboardConsult db = new DashboardConsult();
         db.setVisible(true);
     }//GEN-LAST:event_cancelButtonActionPerformed
 
@@ -925,7 +933,7 @@ public class ArticleSheetEntry extends javax.swing.JFrame {
     private void gotoSeachButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_gotoSeachButtonActionPerformed
         // TODO add your handling code here:
         dispose();
-        AdvancedSearchConsult as = new AdvancedSearchConsult();
+        AdvancedSearch as = new AdvancedSearch();
         as.setVisible(true);
     }//GEN-LAST:event_gotoSeachButtonActionPerformed
     private void clearTextFields() {
@@ -948,27 +956,21 @@ public class ArticleSheetEntry extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(ArticleSheetEntry.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(ArticleSheet.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(ArticleSheetEntry.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(ArticleSheet.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(ArticleSheetEntry.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(ArticleSheet.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(ArticleSheetEntry.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(ArticleSheet.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
         //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new ArticleSheetEntry().setVisible(true);
+                new ArticleSheet().setVisible(true);
             }
         });
     }
@@ -983,6 +985,7 @@ public class ArticleSheetEntry extends javax.swing.JFrame {
     private javax.swing.JLabel articleSheetLabel;
     private javax.swing.JButton cancelButton;
     private javax.swing.JButton changeButton;
+    private java.awt.Checkbox checkbox1;
     private javax.swing.JLabel classLabel;
     private javax.swing.JTextField classTextField;
     private javax.swing.JLabel deadLabel;

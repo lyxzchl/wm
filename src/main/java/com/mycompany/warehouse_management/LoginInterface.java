@@ -30,11 +30,11 @@ public class LoginInterface extends javax.swing.JFrame {
         
         
     } catch (Exception ex) {
-        Logger.getLogger(AdvancedSearchConsult.class.getName()).log(Level.SEVERE, null, ex);
+        Logger.getLogger(AdvancedSearch.class.getName()).log(Level.SEVERE, null, ex);
     }
         initComponents();
-        int windowWidth = 1130; // Adjust the desired width
-        int windowHeight = 659; // Adjust the desired height
+        int windowWidth = 1280; // Adjust the desired width
+        int windowHeight = 720; // Adjust the desired height
         setSize(windowWidth, windowHeight);
         setResizable(false); // Prevent resizing
         setLocationRelativeTo(null);
@@ -110,7 +110,7 @@ public class LoginInterface extends javax.swing.JFrame {
 
         continueButton.setBackground(new java.awt.Color(0, 51, 102));
         continueButton.setFont(new java.awt.Font("POI Aeronaut Trial", 1, 14)); // NOI18N
-        continueButton.setForeground(new java.awt.Color(255, 255, 255));
+        continueButton.setForeground(new java.awt.Color(153, 153, 153));
         continueButton.setText("Continue");
         continueButton.setBorder(null);
         continueButton.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -143,7 +143,7 @@ public class LoginInterface extends javax.swing.JFrame {
         loginPanelLayout.setHorizontalGroup(
             loginPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, loginPanelLayout.createSequentialGroup()
-                .addContainerGap(98, Short.MAX_VALUE)
+                .addContainerGap(88, Short.MAX_VALUE)
                 .addComponent(loginLabel)
                 .addGap(96, 96, 96))
             .addGroup(loginPanelLayout.createSequentialGroup()
@@ -170,7 +170,7 @@ public class LoginInterface extends javax.swing.JFrame {
                 .addComponent(passwordLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(passwordField, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 140, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 159, Short.MAX_VALUE)
                 .addComponent(continueButton, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(blockedButton, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -178,7 +178,7 @@ public class LoginInterface extends javax.swing.JFrame {
         );
 
         getContentPane().add(loginPanel);
-        loginPanel.setBounds(780, 40, 290, 550);
+        loginPanel.setBounds(950, 50, 290, 580);
 
         sloganLabel2.setFont(new java.awt.Font("URW Gothic", 1, 36)); // NOI18N
         sloganLabel2.setForeground(new java.awt.Color(255, 255, 255));
@@ -194,7 +194,7 @@ public class LoginInterface extends javax.swing.JFrame {
 
         logoLabel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/output-onlinepngtools(1).png"))); // NOI18N
         getContentPane().add(logoLabel);
-        logoLabel.setBounds(0, 590, 50, 65);
+        logoLabel.setBounds(10, 600, 50, 65);
 
         sloganLabel1.setFont(new java.awt.Font("URW Gothic", 1, 36)); // NOI18N
         sloganLabel1.setForeground(new java.awt.Color(255, 255, 255));
@@ -211,7 +211,7 @@ public class LoginInterface extends javax.swing.JFrame {
         backgroundImage.setIcon(new javax.swing.ImageIcon(getClass().getResource("/sunset-gradient-hd-wallpaper(1).png"))); // NOI18N
         backgroundImage.setText("jLabel1");
         getContentPane().add(backgroundImage);
-        backgroundImage.setBounds(0, 0, 1130, 660);
+        backgroundImage.setBounds(0, 0, 1280, 720);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents

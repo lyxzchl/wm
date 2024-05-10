@@ -26,20 +26,20 @@ import javax.swing.table.DefaultTableModel;
  */
 
 
-public class AdvancedSearchConsult extends javax.swing.JFrame {
+public class AdvancedSearch extends javax.swing.JFrame {
 
     /**
      * Creates new form AdvancedSearch
      */
-    public AdvancedSearchConsult() {
+    public AdvancedSearch() {
     try {
         UIManager.setLookAndFeel(new FlatDarkLaf());
     } catch (Exception ex) {
-        Logger.getLogger(AdvancedSearchConsult.class.getName()).log(Level.SEVERE, null, ex);
+        Logger.getLogger(AdvancedSearch.class.getName()).log(Level.SEVERE, null, ex);
     }
     initComponents();
-    int windowWidth = 1130; // Adjust the desired width
-        int windowHeight = 659; // Adjust the desired height
+    int windowWidth = 1280; // Adjust the desired width
+        int windowHeight = 720; // Adjust the desired height
         setSize(windowWidth, windowHeight);
         setResizable(false); // Prevent resizing
     setLocationRelativeTo(null);
@@ -87,8 +87,8 @@ public class AdvancedSearchConsult extends javax.swing.JFrame {
                     dormant,
                     actif
                 );
-                // Open the ArticleSheetEntry interface and pass the selected article
-                ArticleSheetEntry articleSheet = new ArticleSheetEntry(selectedArticle);
+                // Open the ArticleSheet interface and pass the selected article
+                ArticleSheet articleSheet = new ArticleSheet(selectedArticle);
                 articleSheet.setVisible(true);
                 dispose();
             }
@@ -306,8 +306,6 @@ private boolean getBooleanValue(JTable table, int row, int column) {
                 }
             });
 
-            searchLogoLabel.setIcon(new javax.swing.ImageIcon("/run/media/lyeschl/ssd/main/dox/study/l3si/pfe/thesis/images/icons/search_icon.png")); // NOI18N
-
             articleCount.setBackground(new java.awt.Color(0, 0, 0));
             articleCount.setFont(new java.awt.Font("POI Aeronaut Trial", 1, 14)); // NOI18N
             articleCount.setForeground(new java.awt.Color(153, 153, 153));
@@ -521,15 +519,15 @@ private boolean getBooleanValue(JTable table, int row, int column) {
                             .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                 .addComponent(deadRadio)
                                 .addComponent(casierRadio))))
-                    .addContainerGap(284, Short.MAX_VALUE))
+                    .addContainerGap(407, Short.MAX_VALUE))
                 .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                     .addGap(20, 20, 20)
                     .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                         .addComponent(jScrollPane2)
                         .addGroup(jPanel1Layout.createSequentialGroup()
                             .addComponent(backButton, javax.swing.GroupLayout.PREFERRED_SIZE, 124, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGap(203, 203, 203)
-                            .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 294, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGap(321, 321, 321)
+                            .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 349, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(logoLabel)))
                     .addGap(14, 14, 14))
@@ -539,10 +537,10 @@ private boolean getBooleanValue(JTable table, int row, int column) {
                 .addGroup(jPanel1Layout.createSequentialGroup()
                     .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                         .addGroup(jPanel1Layout.createSequentialGroup()
-                            .addGap(17, 17, 17)
-                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                .addComponent(jLabel1)
-                                .addComponent(backButton, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGap(14, 14, 14)
+                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                .addComponent(backButton, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(jLabel1))
                             .addGap(53, 53, 53)
                             .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                 .addGroup(jPanel1Layout.createSequentialGroup()
@@ -673,7 +671,7 @@ private boolean getBooleanValue(JTable table, int row, int column) {
             // Set the count in the text field
             articleCountTextField.setText(Integer.toString(articleCount));
         } catch (SQLException ex) {
-            Logger.getLogger(AdvancedSearchConsult.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(AdvancedSearch.class.getName()).log(Level.SEVERE, null, ex);
         }
         
 
@@ -752,22 +750,19 @@ private boolean getBooleanValue(JTable table, int row, int column) {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(AdvancedSearchConsult.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(AdvancedSearch.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(AdvancedSearchConsult.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(AdvancedSearch.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(AdvancedSearchConsult.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(AdvancedSearch.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(AdvancedSearchConsult.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(AdvancedSearch.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(() -> {
-            new AdvancedSearchConsult().setVisible(true);
+            new AdvancedSearch().setVisible(true);
         });
     }
 

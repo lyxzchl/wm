@@ -36,15 +36,16 @@ public class DashboardAdmin extends javax.swing.JFrame {
         
         
     } catch (Exception ex) {
-        Logger.getLogger(AdvancedSearchConsult.class.getName()).log(Level.SEVERE, null, ex);
+        Logger.getLogger(AdvancedSearch.class.getName()).log(Level.SEVERE, null, ex);
     }
         initComponents();
-        int windowWidth = 1130; // Adjust the desired width
-        int windowHeight = 659; // Adjust the desired height
+        int windowWidth = 1280; // Adjust the desired width
+        int windowHeight = 720; // Adjust the desired height
         setSize(windowWidth, windowHeight);
         setResizable(false); // Prevent resizing
         setLocationRelativeTo(null); // Center the window
-        DataBaseUtils.populateUsersTable(movesTable);
+        DataBaseUtils.populateArticleTableWithoutSearch(articleTable);
+        DataBaseUtils.populateMoveTable(movesTable);
     }
 
     
@@ -64,9 +65,13 @@ public class DashboardAdmin extends javax.swing.JFrame {
         jPanel2 = new javax.swing.JPanel();
         accountSettingsButton = new javax.swing.JToggleButton();
         accountSettingsButton1 = new javax.swing.JToggleButton();
+        marrButton = new javax.swing.JToggleButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         movesTable = new javax.swing.JTable();
         movesLabel = new javax.swing.JLabel();
+        jScrollPane3 = new javax.swing.JScrollPane();
+        articleTable = new javax.swing.JTable();
+        articlesLabel = new javax.swing.JLabel();
         newMove = new javax.swing.JToggleButton();
         dashboardLabel = new javax.swing.JLabel();
         welcomeLabel = new javax.swing.JLabel();
@@ -116,18 +121,32 @@ public class DashboardAdmin extends javax.swing.JFrame {
             }
         });
 
+        marrButton.setBackground(new java.awt.Color(51, 51, 51));
+        marrButton.setFont(new java.awt.Font("POI Aeronaut Trial", 1, 14)); // NOI18N
+        marrButton.setForeground(new java.awt.Color(153, 153, 153));
+        marrButton.setText("Manage Reactivation Requests");
+        marrButton.setBorder(javax.swing.BorderFactory.createMatteBorder(2, 2, 2, 2, new java.awt.Color(0, 51, 102)));
+        marrButton.setContentAreaFilled(false);
+        marrButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                marrButtonActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(accountSettingsButton, javax.swing.GroupLayout.DEFAULT_SIZE, 188, Short.MAX_VALUE)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(accountSettingsButton, javax.swing.GroupLayout.DEFAULT_SIZE, 198, Short.MAX_VALUE)
+                    .addComponent(marrButton, javax.swing.GroupLayout.DEFAULT_SIZE, 198, Short.MAX_VALUE))
                 .addContainerGap())
             .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(jPanel2Layout.createSequentialGroup()
                     .addContainerGap()
-                    .addComponent(accountSettingsButton1, javax.swing.GroupLayout.DEFAULT_SIZE, 188, Short.MAX_VALUE)
+                    .addComponent(accountSettingsButton1, javax.swing.GroupLayout.DEFAULT_SIZE, 198, Short.MAX_VALUE)
                     .addContainerGap()))
         );
         jPanel2Layout.setVerticalGroup(
@@ -135,7 +154,9 @@ public class DashboardAdmin extends javax.swing.JFrame {
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addGap(29, 29, 29)
                 .addComponent(accountSettingsButton, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(493, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(marrButton, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(449, Short.MAX_VALUE))
             .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
                     .addContainerGap(495, Short.MAX_VALUE)
@@ -144,7 +165,7 @@ public class DashboardAdmin extends javax.swing.JFrame {
         );
 
         getContentPane().add(jPanel2);
-        jPanel2.setBounds(910, 40, 200, 560);
+        jPanel2.setBounds(1030, 70, 210, 560);
 
         movesTable.setForeground(new java.awt.Color(153, 204, 255));
         movesTable.setModel(new javax.swing.table.DefaultTableModel(
@@ -164,7 +185,7 @@ public class DashboardAdmin extends javax.swing.JFrame {
         jScrollPane1.setViewportView(movesTable);
 
         getContentPane().add(jScrollPane1);
-        jScrollPane1.setBounds(20, 180, 520, 170);
+        jScrollPane1.setBounds(20, 180, 380, 170);
 
         movesLabel.setBackground(new java.awt.Color(255, 255, 255));
         movesLabel.setFont(new java.awt.Font("POI Aeronaut Trial", 1, 18)); // NOI18N
@@ -172,6 +193,37 @@ public class DashboardAdmin extends javax.swing.JFrame {
         movesLabel.setText("User Accounts");
         getContentPane().add(movesLabel);
         movesLabel.setBounds(30, 144, 130, 20);
+
+        articleTable.setForeground(new java.awt.Color(153, 204, 255));
+        articleTable.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "Title 1", "Title 2", "Title 3", "Title 4"
+            }
+        ));
+        articleTable.setGridColor(new java.awt.Color(51, 102, 255));
+        articleTable.setSelectionBackground(new java.awt.Color(102, 153, 255));
+        articleTable.setSelectionForeground(new java.awt.Color(102, 102, 255));
+        articleTable.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                articleTableMouseClicked(evt);
+            }
+        });
+        jScrollPane3.setViewportView(articleTable);
+
+        getContentPane().add(jScrollPane3);
+        jScrollPane3.setBounds(20, 400, 380, 150);
+
+        articlesLabel.setFont(new java.awt.Font("POI Aeronaut Trial", 1, 18)); // NOI18N
+        articlesLabel.setForeground(new java.awt.Color(255, 255, 255));
+        articlesLabel.setText("Articles");
+        getContentPane().add(articlesLabel);
+        articlesLabel.setBounds(20, 360, 60, 30);
 
         newMove.setBackground(new java.awt.Color(51, 51, 51));
         newMove.setFont(new java.awt.Font("POI Aeronaut Trial", 1, 14)); // NOI18N
@@ -203,7 +255,7 @@ public class DashboardAdmin extends javax.swing.JFrame {
         welcomeLabel.setForeground(new java.awt.Color(255, 255, 255));
         welcomeLabel.setText("Welcome");
         getContentPane().add(welcomeLabel);
-        welcomeLabel.setBounds(390, 10, 170, 40);
+        welcomeLabel.setBounds(520, 10, 170, 40);
 
         logoLabel1.setBackground(new java.awt.Color(255, 255, 255));
         logoLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/output-onlinepngtools(1).png"))); // NOI18N
@@ -224,26 +276,26 @@ public class DashboardAdmin extends javax.swing.JFrame {
         totalExitsLabel.setFont(new java.awt.Font("POI Aeronaut Trial", 0, 16)); // NOI18N
         totalExitsLabel.setText("Total Active Accounts: " + totalExits);
         getContentPane().add(totalExitsLabel);
-        totalExitsLabel.setBounds(530, 60, 160, 30);
+        totalExitsLabel.setBounds(560, 60, 160, 30);
 
         int totalReturns = DataBaseUtils.getTotalReturns();
         totalReturnsLabel.setFont(new java.awt.Font("POI Aeronaut Trial", 0, 16)); // NOI18N
         totalReturnsLabel.setText("Total Inactive Accounts: " + totalReturns);
         getContentPane().add(totalReturnsLabel);
-        totalReturnsLabel.setBounds(710, 60, 170, 30);
+        totalReturnsLabel.setBounds(730, 60, 170, 30);
 
         backgroundImageLabel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/sunset-gradient-hd-wallpaper(1).png"))); // NOI18N
         backgroundImageLabel.setText("jLabel1");
         getContentPane().add(backgroundImageLabel);
         backgroundImageLabel.setBounds(0, 0, 1340, 760);
         // Remove the backgroundImageLabel
-        //    getContentPane().remove(backgroundImageLabel);
-        //
-        //    // Create and add the CustomPanel
-        //    customPanel = new CustomPanel();
-        //    customPanel.setBounds(0, 0, 1340, 760);
-        //    getContentPane().add(customPanel);
-        //    customPanel.setLayout(null);
+        getContentPane().remove(backgroundImageLabel);
+
+        // Create and add the CustomPanel
+        customPanel = new CustomPanel();
+        customPanel.setBounds(0, 0, 1340, 760);
+        getContentPane().add(customPanel);
+        customPanel.setLayout(null);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -267,13 +319,24 @@ public class DashboardAdmin extends javax.swing.JFrame {
     private void accountSettingsButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_accountSettingsButtonActionPerformed
         // TODO add your handling code here:
         dispose();
-        AccountSettings as = new AccountSettings();
-        as.setVisible(true);
+        ManageUsersInterface mui = new ManageUsersInterface();
+        mui.setVisible(true);
     }//GEN-LAST:event_accountSettingsButtonActionPerformed
+
+    private void articleTableMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_articleTableMouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_articleTableMouseClicked
 
     private void accountSettingsButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_accountSettingsButton1ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_accountSettingsButton1ActionPerformed
+
+    private void marrButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_marrButtonActionPerformed
+        // TODO add your handling code here:
+        dispose();
+        ManageAccountReactivationRequestsInterface marri = new ManageAccountReactivationRequestsInterface();
+        marri.setVisible(true);
+    }//GEN-LAST:event_marrButtonActionPerformed
 
     /**
      * @param args the command line arguments
@@ -315,6 +378,8 @@ public class DashboardAdmin extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JToggleButton accountSettingsButton;
     private javax.swing.JToggleButton accountSettingsButton1;
+    private javax.swing.JTable articleTable;
+    private javax.swing.JLabel articlesLabel;
     private javax.swing.JLabel backgroundImageLabel;
     private javax.swing.JLabel dashboardLabel;
     private javax.swing.JLabel dashboardLogo;
@@ -322,7 +387,9 @@ public class DashboardAdmin extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPopupMenu jPopupMenu2;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JLabel logoLabel1;
+    private javax.swing.JToggleButton marrButton;
     private javax.swing.JLabel movesLabel;
     private javax.swing.JTable movesTable;
     private javax.swing.JToggleButton newMove;
